@@ -181,7 +181,7 @@ footer{border-top:1px solid rgba(153,191,255,.14);padding-top:22px;line-height:1
  </style></head><body>
 
 <!-- ======= FIRE INTRO v2: paste this ONE block right after your opening <body> tag ======= -->
- <script id="fire-intro">
+<script id="fire-intro">
 (function(){
  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
  const B=document.body,cv=document.createElement("canvas"),skip=document.createElement("button");
@@ -249,35 +249,33 @@ footer{border-top:1px solid rgba(153,191,255,.14);padding-top:22px;line-height:1
  const SER='"IM Fell English",Georgia,"Times New Roman",serif';
  function paint(){
   const x=tc.getContext("2d"),w=tc.width,hh=tc.height;
-  /* clean parchment: soft gradient, a few faint stains, light grain */
-  let g=x.createRadialGradient(w*.5,hh*.45,0,w*.5,hh*.5,Math.hypot(w,hh)*.62);
-  g.addColorStop(0,"#f0e2bd");g.addColorStop(.65,"#e0c993");g.addColorStop(1,"#bf9a60");x.fillStyle=g;x.fillRect(0,0,w,hh);
-  for(let i=0;i<5;i++){const cx=rnd(0,w),cy=rnd(0,hh),r=rnd(.15,.35)*Math.max(w,hh);g=x.createRadialGradient(cx,cy,0,cx,cy,r);g.addColorStop(0,`rgba(120,80,30,${rnd(.03,.07)})`);g.addColorStop(1,"rgba(120,80,30,0)");x.fillStyle=g;x.fillRect(0,0,w,hh)}
-  x.lineWidth=Math.max(1,dpr*.5);
-  for(let i=0;i<160;i++){x.strokeStyle=`rgba(100,65,25,${rnd(.015,.04)})`;const a=rnd(0,6.28),l=rnd(8,30)*dpr,px=rnd(0,w),py=rnd(0,hh);x.beginPath();x.moveTo(px,py);x.lineTo(px+Math.cos(a)*l,py+Math.sin(a)*l);x.stroke()}
-  for(let i=0;i<2200;i++){x.fillStyle=`rgba(80,45,10,${rnd(0,.035)})`;x.fillRect(rnd(0,w),rnd(0,hh),dpr*rnd(1,2),dpr*rnd(1,2))}
-  g=x.createRadialGradient(w/2,hh/2,Math.min(w,hh)*.35,w/2,hh/2,Math.hypot(w,hh)*.58);g.addColorStop(0,"rgba(60,35,10,0)");g.addColorStop(1,"rgba(60,35,10,.38)");x.fillStyle=g;x.fillRect(0,0,w,hh);
+  let g=x.createRadialGradient(w*.5,hh*.48,0,w*.5,hh*.5,Math.hypot(w,hh)*.6);
+  g.addColorStop(0,"#ecd9ae");g.addColorStop(.6,"#d4b27a");g.addColorStop(1,"#8f6535");x.fillStyle=g;x.fillRect(0,0,w,hh);
+  for(let i=0;i<14;i++){const cx=rnd(0,w),cy=rnd(0,hh),r=rnd(.08,.3)*Math.max(w,hh);g=x.createRadialGradient(cx,cy,0,cx,cy,r);g.addColorStop(0,`rgba(${90+rnd(0,40)|0},55,15,${rnd(.05,.14)})`);g.addColorStop(1,"rgba(90,55,15,0)");x.fillStyle=g;x.fillRect(0,0,w,hh)}
+  x.lineWidth=Math.max(1,dpr*.6);
+  for(let i=0;i<1400;i++){x.strokeStyle=`rgba(${70+rnd(0,40)|0},${40+rnd(0,25)|0},15,${rnd(.03,.1)})`;const a=rnd(0,6.28),l=rnd(6,40)*dpr,px=rnd(0,w),py=rnd(0,hh);x.beginPath();x.moveTo(px,py);x.lineTo(px+Math.cos(a)*l,py+Math.sin(a)*l);x.stroke()}
+  for(let i=0;i<5000;i++){x.fillStyle=`rgba(60,30,8,${rnd(0,.07)})`;x.fillRect(rnd(0,w),rnd(0,hh),dpr*rnd(1,2.5),dpr*rnd(1,2.5))}
+  x.strokeStyle="rgba(70,40,12,.16)";x.lineWidth=dpr*1.5;x.beginPath();x.moveTo(w*.5,0);x.lineTo(w*.5+rnd(-6,6),hh);x.moveTo(0,hh*.5);x.lineTo(w,hh*.5+rnd(-6,6));x.stroke();
+  g=x.createRadialGradient(w/2,hh/2,Math.min(w,hh)*.3,w/2,hh/2,Math.hypot(w,hh)*.55);g.addColorStop(0,"rgba(40,20,5,0)");g.addColorStop(1,"rgba(40,20,5,.55)");x.fillStyle=g;x.fillRect(0,0,w,hh);
   /* message */
-  const LG=(()=>{let l="";try{l=new URLSearchParams(location.search).get("lang")||localStorage.getItem("or-lang")||""}catch(e){}l=(l||navigator.language||"en").slice(0,2).toLowerCase();return["en","es","fr","de","zh","hi","ar"].includes(l)?l:"en"})();
-  const IL={en:["TO  THE  NEXT  CREW","We burned 129 fires in freefall.","Not one of them in the air you will breathe.","Your Moon base will hold 30% oxygen or more.","Our flames never saw more than 22.2%.","This chart shows what we learned,","and where the evidence runs out.","Touch the paper to set it alight."],
-  es:["A LA PRÓXIMA TRIPULACIÓN","Quemamos 129 fuegos en caída libre.","Ninguno en el aire que ustedes respirarán.","Su base lunar tendrá un 30 % de oxígeno o más.","Nuestras llamas nunca vieron más del 22,2 %.","Este panel muestra lo que aprendimos,","y dónde se acaba la evidencia.","Toca el papel para prenderle fuego."],
-  fr:["À LA PROCHAINE ÉQUIPE","Nous avons brûlé 129 feux en apesanteur.","Aucun dans l’air que vous respirerez.","Votre base lunaire aura 30 % d’oxygène ou plus.","Nos flammes n’ont jamais dépassé 22,2 %.","Ce tableau montre ce que nous savons,","et où s’arrêtent les preuves.","Touchez le papier pour l’enflammer."],
-  de:["AN DIE NÄCHSTE CREW","Wir haben 129 Feuer in der Schwerelosigkeit entzündet.","Keines in der Luft, die ihr atmen werdet.","Eure Mondbasis hat 30 % Sauerstoff oder mehr.","Unsere Flammen sahen nie mehr als 22,2 %.","Dieses Dashboard zeigt, was wir gelernt haben,","und wo die Belege enden.","Berühre das Papier, um es zu entzünden."],
-  zh:["致下一批航天员","我们在失重环境中点燃了129场火。","没有一场发生在你们将呼吸的空气里。","你们的月球基地将含30%以上的氧气。","我们的火焰从未接触超过22.2%。","这个仪表盘展示了我们所知，","以及证据的尽头。","轻触纸张，点燃它。"],
-  hi:["अगले दल के नाम","हमने भारहीनता में 129 आग जलाईं।","उनमें से एक भी उस हवा में नहीं, जिसमें आप सांस लेंगे।","आपके चंद्र अड्डे में 30% या अधिक ऑक्सीजन होगी।","हमारी लपटों ने 22.2% से अधिक कभी नहीं देखा।","यह डैशबोर्ड बताता है कि हमने क्या सीखा,","और प्रमाण कहाँ खत्म होते हैं।","कागज़ को छूकर उसे जला दें।"],
-  ar:["إلى الطاقم القادم","أحرقنا 129 حريقًا في انعدام الجاذبية.","ولا واحد منها في الهواء الذي ستتنفسونه.","ستحتوي قاعدتكم القمرية على 30% أكسجين أو أكثر.","لم ترَ لهبنا أكثر من 22.2%.","تعرض هذه اللوحة ما تعلمناه،","وأين تنتهي الأدلة.","المس الورقة لإشعالها."]}[LG];
-  const L=[["Oxygen Runway",2.1,"t"],[IL[1],1,"b"],[IL[2],1,"b"],[IL[3],1,"b"],[IL[4],1,"b"],[IL[5],1,"b"],[IL[6],1,"b"],[IL[7],.85,"e"]];
-  let fs=Math.min(w/17,hh/22);x.textAlign="center";x.textBaseline="middle";
-  const wid=()=>{let m=0;L.forEach(l=>{x.font=`${l[2]=="e"?"italic ":""}${fs*l[1]}px ${SER}`;m=Math.max(m,x.measureText(l[0]).width)});return m};
-  for(let k=0;k<14&&wid()>w*.82;k++)fs*=.93;
-  const lh=1.6,sr=fs*.8,S=[["t",0,fs*2.5],["rule",-1,fs*1.9],["b",1,lh*fs],["b",2,lh*fs],["gap",-1,fs*.95],["b",3,lh*fs],["b",4,lh*fs],["gap",-1,fs*.95],["b",5,lh*fs],["b",6,lh*fs],["gap",-1,fs*1.3],["e",7,fs*1.5],["gap",-1,fs*1.2],["seal",-1,sr*2]];
-  const tot=S.reduce((q,r)=>q+r[2],0);let y=Math.max(fs*.6,(hh-tot)/2);
-  S.forEach(([k,i,hgt])=>{const cy=y+hgt/2;
-   if(k=="t"||k=="b"||k=="e"){x.font=`${k=="e"?"italic ":""}${fs*L[i][1]}px ${SER}`;x.fillStyle=k=="e"?"#8a2a0c":"#2b1708";x.shadowColor="rgba(60,25,5,.18)";x.shadowBlur=dpr;x.fillText(L[i][0],w/2,cy);x.shadowBlur=0}
-   else if(k=="rule"){const hw=fs*2.4;x.strokeStyle="rgba(107,69,32,.5)";x.lineWidth=dpr*1.2;x.beginPath();x.moveTo(w/2-hw,cy);x.lineTo(w/2-fs*.4,cy);x.moveTo(w/2+fs*.4,cy);x.lineTo(w/2+hw,cy);x.stroke();x.fillStyle="rgba(107,69,32,.6)";x.beginPath();x.moveTo(w/2,cy-fs*.22);x.lineTo(w/2+fs*.22,cy);x.lineTo(w/2,cy+fs*.22);x.lineTo(w/2-fs*.22,cy);x.fill()}
-   else if(k=="seal"){x.fillStyle="#7a1d0c";x.beginPath();for(let q=0;q<24;q++){const a=q/24*6.283,r=sr*(.92+.08*Math.sin(q*5));x.lineTo(w/2+Math.cos(a)*r,cy+Math.sin(a)*r)}x.fill();
-    x.strokeStyle="rgba(255,170,120,.45)";x.lineWidth=dpr*1.5;x.beginPath();x.arc(w/2,cy,sr*.62,0,6.283);x.stroke();x.fillStyle="rgba(255,190,140,.8)";x.font=`${sr*.85}px ${SER}`;x.fillText("O₂",w/2,cy+sr*.04)}
-   y+=hgt});
+  const L=[["Oxygen Runway",1.9,"t"],["",0,"s"],
+   ["We burned 129 fires in freefall.",1,"b"],["Not one of them in the air you will breathe.",1,"b"],["",0,"s"],
+   ["Your Moon base will hold 30% oxygen or more.",1,"b"],["Our flames never saw more than 22.2%.",1,"b"],["",0,"s"],
+   ["This chart shows what we learned,",1,"b"],["and where the evidence runs out.",1,"b"],["",0,"s"],["Touch the paper to set it alight.",.85,"e"]];
+  let fs=Math.min(w/17,hh/20);x.textAlign="center";x.textBaseline="middle";
+  const wid=s=>{let m=0;L.forEach(l=>{x.font=`${l[2]=="t"?"":l[2]=="e"?"italic ":""}${fs*l[1]}px ${SER}`;m=Math.max(m,x.measureText(l[0]).width)});return m};
+  for(let k=0;k<12&&wid()>w*.8;k++)fs*=.93;
+  const lh=1.55,tot=L.reduce((s,l)=>s+(l[2]=="s"?.6:l[1]*lh)*fs,0);let y=hh/2-tot/2+fs;
+  L.forEach(l=>{const sz=l[2]=="s"?.6*fs:l[1]*fs*lh;if(l[2]!="s"){
+   x.font=`${l[2]=="e"?"italic ":""}${fs*l[1]}px ${SER}`;
+   x.fillStyle=l[2]=="e"?"#8a2a0c":l[2]=="k"?"#6b4520":"#2b1708";x.shadowColor="rgba(60,25,5,.25)";x.shadowBlur=dpr*1.5;
+   if(l[2]=="k"&&x.letterSpacing!==undefined)x.letterSpacing=dpr*3+"px";x.fillText(l[0],w/2,y);if(x.letterSpacing!==undefined)x.letterSpacing="0px"}
+   y+=sz});
+  x.shadowBlur=0;
+  /* wax-red seal */
+  const sr=fs*1.1,sx=w/2,sy=Math.min(hh-sr*1.3,y+sr*.4);x.fillStyle="#7a1d0c";x.beginPath();for(let i=0;i<24;i++){const a=i/24*6.283,r=sr*(.9+.1*Math.sin(i*5));x.lineTo(sx+Math.cos(a)*r,sy+Math.sin(a)*r)}x.fill();
+  x.strokeStyle="rgba(255,170,120,.5)";x.lineWidth=dpr*2;x.beginPath();x.arc(sx,sy,sr*.6,0,6.283);x.stroke();
+  x.fillStyle="rgba(255,190,140,.75)";x.font=`${sr*.8}px ${SER}`;x.fillText("O₂",sx,sy+sr*.04);
   gl.bindTexture(gl.TEXTURE_2D,tx);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,tc);
   [[gl.TEXTURE_MIN_FILTER,gl.LINEAR],[gl.TEXTURE_MAG_FILTER,gl.LINEAR],[gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE],[gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE]].forEach(a=>gl.texParameteri(gl.TEXTURE_2D,a[0],a[1]))}
  function size(){dpr=Math.min(devicePixelRatio||1,1.5);W=cv.width=Math.round(innerWidth*dpr);H=cv.height=Math.round(innerHeight*dpr);tc.width=W;tc.height=H;gl.viewport(0,0,W,H);paint()}
@@ -308,7 +306,6 @@ footer{border-top:1px solid rgba(153,191,255,.14);padding-top:22px;line-height:1
 })();
 </script>
 <!-- ======= END FIRE INTRO v2 ======= -->
- 
 
 <canvas id="sky"></canvas><div id="prog"></div>
  
@@ -914,5 +911,4 @@ chips();draw();rows();pick(T[0].id);greet();
 <!-- TIME EXPLORER -->
 <script src="time-explorer.js"></script> 
   <script src="fire-cursor.js"></script>
-  <script src="i18n.js"></script>
  </body></html>
