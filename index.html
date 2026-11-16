@@ -178,7 +178,138 @@ footer{border-top:1px solid rgba(153,191,255,.14);padding-top:22px;line-height:1
 @media(max-width:560px){.w{padding-left:16px;padding-right:16px;padding-top:82px}.hero{gap:24px}.hero-kicker{font-size:8px;letter-spacing:.13em}.signal-strip{padding:16px 12px;margin-bottom:60px}.signal-metric{padding:8px}.signal-label{font-size:8px}.signal-intro strong{font-size:17px}.hero-scroll{margin-top:22px}.dialbox{padding:18px 12px 14px}.dialbox::before{left:15px}.dialbox::after{right:15px;font-size:8px}h2{margin-top:58px}}
 @media(prefers-reduced-motion:reduce){.kicker-pulse,.scroll-line::after,.signal-sweep,nav b::before{animation:none!important}}
 
-</style></head><body><canvas id="sky"></canvas><div id="prog"></div><div id="toast" role="status" aria-live="polite"></div>
+ </style></head><body>
+
+<!-- ======= FIRE INTRO v2: paste this ONE block right after your opening <body> tag ======= -->
+<script id="fire-intro">
+(function(){
+ if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+ const B=document.body,cv=document.createElement("canvas"),skip=document.createElement("button");
+ const st=document.createElement("style");
+ st.textContent="#burn{position:fixed;inset:0;width:100%;height:100%;z-index:1000;display:block;cursor:pointer;background:#24180c;touch-action:manipulation}#burn.out{pointer-events:none}#burnskip{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:1001;font:700 12px 'Hanken Grotesk',system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#e9d2a8;background:rgba(20,12,4,.55);border:1px solid rgba(255,170,110,.35);border-radius:99px;padding:8px 14px;cursor:pointer;transition:opacity .4s}body.burning{overflow:hidden}";
+ document.head.append(st);
+ const lk=document.createElement("link");lk.rel="stylesheet";lk.href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap";document.head.append(lk);
+ cv.id="burn";cv.setAttribute("aria-hidden","true");skip.id="burnskip";skip.textContent="Skip";skip.setAttribute("aria-label","Skip intro");
+ B.prepend(skip);B.prepend(cv);B.classList.add("burning");
+ const done=()=>{cv.remove();skip.remove();st.remove();B.classList.remove("burning")};
+ const gl=cv.getContext("webgl",{premultipliedAlpha:true,alpha:true,antialias:false});
+ if(!gl){done();return}
+
+ const VS="attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}";
+ const FS=`precision highp float;
+ uniform vec2 res,o;uniform float t,prog,maxR;uniform sampler2D tex;
+ float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+ float nz(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
+ float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*nz(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v;}
+ vec3 fc(float x){
+  vec3 c=mix(vec3(.3,.03,0.),vec3(1.,.38,.04),smoothstep(0.,.45,x));
+  c=mix(c,vec3(1.,.8,.25),smoothstep(.45,.95,x));
+  c=mix(c,vec3(1.,.97,.8),smoothstep(.95,1.6,x));
+  return c*smoothstep(0.,.1,x);}
+ void main(){
+  vec2 uv=gl_FragCoord.xy/res;float asp=res.x/res.y;
+  vec2 p=(uv-o)*vec2(asp,1.);float d=length(p);
+  float n=fbm(p*3.+vec2(3.1,1.7));
+  float n2=fbm(vec2(p.x*6.,p.y*6.-t*2.1)+n*2.);
+  float n3=fbm(vec2(p.x*18.,p.y*18.)+7.);
+  float R=prog*maxR;
+  float b=d-R+(n-.5)*.66*min(1.,prog*9.)+(n3-.5)*.05;
+  vec3 paper=texture2D(tex,uv).rgb;
+  /* torn, charred paper edge */
+  float chr=smoothstep(.075,.0,b),ember=smoothstep(.03,.0,b);
+  paper=mix(paper,vec3(.28,.14,.05),smoothstep(.16,.03,b)*.7);
+  paper=mix(paper,vec3(.015,.008,.003),chr);
+  paper+=vec3(1.,.3,.04)*ember*(.5+.9*n3)*.9;
+  float cov=smoothstep(-.004,.006,b);
+  /* flames lick upward from the burnt edge into the hole */
+  float up=clamp(normalize(p+1e-4).y*.5+.65,.35,1.25);
+  float ext=(.035+.3*n2*n2*1.6)*up;
+  float hb=pow(clamp(1.+b/ext,0.,1.),1.4)*1.5*(.6+.7*n2);
+  float rim=exp(-abs(b)*46.)*(.5+1.*n3);
+  float pre=exp(-d*22.)*(1.-smoothstep(0.,.05,prog))*(.65+.35*sin(t*10.));
+  float hu=rim*1.2+pre*1.5;
+  vec3 fb=fc(hb+rim*.9);float ab=clamp(hb*1.15+rim,0.,1.);
+  /* smoke drifting off the front */
+  float sm=smoothstep(.45,.85,fbm(vec2(p.x*4.2,p.y*4.2-t*.5)+n*1.5))*exp(-max(-b,0.)*2.6)*smoothstep(0.,.1,-b)*.42*smoothstep(0.,.08,prog);
+  vec3 smc=vec3(.55,.58,.66)*sm;
+  vec3 rgb=paper*cov+fc(hu)*cov*clamp(hu,0.,1.)+(1.-cov)*(fb*ab+smc*(1.-ab));
+  float a=clamp(cov+(1.-cov)*(ab+sm*(1.-ab)),0.,1.);
+  gl_FragColor=vec4(min(rgb,vec3(a)),a);}`;
+ const sh=(ty,s)=>{const x=gl.createShader(ty);gl.shaderSource(x,s);gl.compileShader(x);return x};
+ const pg=gl.createProgram();gl.attachShader(pg,sh(gl.VERTEX_SHADER,VS));gl.attachShader(pg,sh(gl.FRAGMENT_SHADER,FS));gl.linkProgram(pg);
+ if(!gl.getProgramParameter(pg,gl.LINK_STATUS)){done();return}
+ gl.useProgram(pg);
+ gl.bindBuffer(gl.ARRAY_BUFFER,gl.createBuffer());gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+ const al=gl.getAttribLocation(pg,"a");gl.enableVertexAttribArray(al);gl.vertexAttribPointer(al,2,gl.FLOAT,false,0,0);
+ const U=n=>gl.getUniformLocation(pg,n),uRes=U("res"),uO=U("o"),uT=U("t"),uP=U("prog"),uM=U("maxR");
+ gl.enable(gl.BLEND);gl.blendFunc(gl.ONE,gl.ONE_MINUS_SRC_ALPHA);
+
+ /* ---------- the ancient paper + message ---------- */
+ const tx=gl.createTexture(),tc=document.createElement("canvas");let W,H,dpr,mx,rnd=(a,b)=>a+Math.random()*(b-a);
+ const SER='"IM Fell English",Georgia,"Times New Roman",serif';
+ function paint(){
+  const x=tc.getContext("2d"),w=tc.width,hh=tc.height;
+  let g=x.createRadialGradient(w*.5,hh*.48,0,w*.5,hh*.5,Math.hypot(w,hh)*.6);
+  g.addColorStop(0,"#ecd9ae");g.addColorStop(.6,"#d4b27a");g.addColorStop(1,"#8f6535");x.fillStyle=g;x.fillRect(0,0,w,hh);
+  for(let i=0;i<14;i++){const cx=rnd(0,w),cy=rnd(0,hh),r=rnd(.08,.3)*Math.max(w,hh);g=x.createRadialGradient(cx,cy,0,cx,cy,r);g.addColorStop(0,`rgba(${90+rnd(0,40)|0},55,15,${rnd(.05,.14)})`);g.addColorStop(1,"rgba(90,55,15,0)");x.fillStyle=g;x.fillRect(0,0,w,hh)}
+  x.lineWidth=Math.max(1,dpr*.6);
+  for(let i=0;i<1400;i++){x.strokeStyle=`rgba(${70+rnd(0,40)|0},${40+rnd(0,25)|0},15,${rnd(.03,.1)})`;const a=rnd(0,6.28),l=rnd(6,40)*dpr,px=rnd(0,w),py=rnd(0,hh);x.beginPath();x.moveTo(px,py);x.lineTo(px+Math.cos(a)*l,py+Math.sin(a)*l);x.stroke()}
+  for(let i=0;i<5000;i++){x.fillStyle=`rgba(60,30,8,${rnd(0,.07)})`;x.fillRect(rnd(0,w),rnd(0,hh),dpr*rnd(1,2.5),dpr*rnd(1,2.5))}
+  x.strokeStyle="rgba(70,40,12,.16)";x.lineWidth=dpr*1.5;x.beginPath();x.moveTo(w*.5,0);x.lineTo(w*.5+rnd(-6,6),hh);x.moveTo(0,hh*.5);x.lineTo(w,hh*.5+rnd(-6,6));x.stroke();
+  g=x.createRadialGradient(w/2,hh/2,Math.min(w,hh)*.3,w/2,hh/2,Math.hypot(w,hh)*.55);g.addColorStop(0,"rgba(40,20,5,0)");g.addColorStop(1,"rgba(40,20,5,.55)");x.fillStyle=g;x.fillRect(0,0,w,hh);
+  /* message */
+  const L=[["TO  THE  NEXT  CREW",.5,"k"],["Oxygen Runway",1.9,"t"],["",0,"s"],
+   ["We burned 129 fires in freefall.",1,"b"],["Not one of them in the air you will breathe.",1,"b"],["",0,"s"],
+   ["Your Moon base will hold 30% oxygen or more.",1,"b"],["Our flames never saw more than 22.2%.",1,"b"],["",0,"s"],
+   ["This chart shows what we learned,",1,"b"],["and where the evidence runs out.",1,"b"],["",0,"s"],["Touch the paper to set it alight.",.85,"e"]];
+  let fs=Math.min(w/17,hh/20);x.textAlign="center";x.textBaseline="middle";
+  const wid=s=>{let m=0;L.forEach(l=>{x.font=`${l[2]=="t"?"":l[2]=="e"?"italic ":""}${fs*l[1]}px ${SER}`;m=Math.max(m,x.measureText(l[0]).width)});return m};
+  for(let k=0;k<12&&wid()>w*.8;k++)fs*=.93;
+  const lh=1.55,tot=L.reduce((s,l)=>s+(l[2]=="s"?.6:l[1]*lh)*fs,0);let y=hh/2-tot/2+fs;
+  L.forEach(l=>{const sz=l[2]=="s"?.6*fs:l[1]*fs*lh;if(l[2]!="s"){
+   x.font=`${l[2]=="e"?"italic ":""}${fs*l[1]}px ${SER}`;
+   x.fillStyle=l[2]=="e"?"#8a2a0c":l[2]=="k"?"#6b4520":"#2b1708";x.shadowColor="rgba(60,25,5,.25)";x.shadowBlur=dpr*1.5;
+   if(l[2]=="k"&&x.letterSpacing!==undefined)x.letterSpacing=dpr*3+"px";x.fillText(l[0],w/2,y);if(x.letterSpacing!==undefined)x.letterSpacing="0px"}
+   y+=sz});
+  x.shadowBlur=0;
+  /* wax-red seal */
+  const sr=fs*1.1,sx=w/2,sy=Math.min(hh-sr*1.3,y+sr*.4);x.fillStyle="#7a1d0c";x.beginPath();for(let i=0;i<24;i++){const a=i/24*6.283,r=sr*(.9+.1*Math.sin(i*5));x.lineTo(sx+Math.cos(a)*r,sy+Math.sin(a)*r)}x.fill();
+  x.strokeStyle="rgba(255,170,120,.5)";x.lineWidth=dpr*2;x.beginPath();x.arc(sx,sy,sr*.6,0,6.283);x.stroke();
+  x.fillStyle="rgba(255,190,140,.75)";x.font=`${sr*.8}px ${SER}`;x.fillText("O₂",sx,sy+sr*.04);
+  gl.bindTexture(gl.TEXTURE_2D,tx);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,tc);
+  [[gl.TEXTURE_MIN_FILTER,gl.LINEAR],[gl.TEXTURE_MAG_FILTER,gl.LINEAR],[gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE],[gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE]].forEach(a=>gl.texParameteri(gl.TEXTURE_2D,a[0],a[1]))}
+ function size(){dpr=Math.min(devicePixelRatio||1,1.5);W=cv.width=Math.round(innerWidth*dpr);H=cv.height=Math.round(innerHeight*dpr);tc.width=W;tc.height=H;gl.viewport(0,0,W,H);paint()}
+ size();let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(size,150)});
+
+ /* ---------- timing ---------- */
+ let ox=.5,oy=.5,lit=false,tl=0,fin=false,mr=1.5,first=true;
+ const DUR=5200,AUTO=5000,start=performance.now();
+ function ignite(e){if(lit)return;lit=true;tl=performance.now();
+  if(e&&e.clientX!=null){ox=e.clientX/innerWidth;oy=1-e.clientY/innerHeight}
+  const a=innerWidth/innerHeight;mr=Math.max(Math.hypot(ox*a,oy),Math.hypot((1-ox)*a,oy),Math.hypot(ox*a,1-oy),Math.hypot((1-ox)*a,1-oy))+.5;skip.style.opacity=0}
+ cv.addEventListener("pointerdown",ignite);
+ addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" ")ignite()},{once:true});
+ skip.onclick=()=>{fin=true;done()};
+ function end(){if(fin)return;fin=true;cv.classList.add("out");done();try{if(typeof boost!=="undefined")boost=8}catch(e){}}
+ function frame(now){
+  if(fin)return;
+  if(!lit&&now-start>AUTO)ignite();
+  const x=lit?Math.min(1,(now-tl)/DUR):0,p=x*x*(3-2*x)*.5+x*.5;
+  gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.uniform2f(uRes,W,H);gl.uniform2f(uO,ox,oy);gl.uniform1f(uT,(now-start)/1000);gl.uniform1f(uP,p);gl.uniform1f(uM,mr);
+  gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+  if(first){first=false;cv.style.background="none"}
+  if(x>=1)return end();
+  requestAnimationFrame(frame)}
+ const fl=document.fonts&&document.fonts.load?Promise.race([document.fonts.load('18px "IM Fell English"'),document.fonts.load('italic 18px "IM Fell English"'),new Promise(r=>setTimeout(r,1200))]):Promise.resolve();
+ fl.then(()=>{paint();requestAnimationFrame(frame)}).catch(()=>requestAnimationFrame(frame));
+})();
+</script>
+<!-- ======= END FIRE INTRO v2 ======= -->
+
+<canvas id="sky"></canvas><div id="prog"></div>
+ 
+ <div id="toast" role="status" aria-live="polite"></div>
 <nav aria-label="Sections"><b>Oxygen Runway</b><a href="#about" data-s="about">About</a><a href="#dial-s" data-s="dial-s">Dial</a><a href="#explore" data-s="explore">Explore</a><a href="#coverage" data-s="coverage">Coverage</a><a href="#briefing" data-s="briefing">My briefing</a><a href="#ask" data-s="ask">Ask the data</a></nav>
 <div class="w">
 <section class="hero" id="dial-s"><div class="hero-copy"><div class="hero-kicker"><span class="kicker-pulse"></span> NASA SPACE APPS 2026 <i></i> FLAME IN FREEFALL</div><h1 id="h1"></h1>
