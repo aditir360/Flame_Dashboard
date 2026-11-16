@@ -1,116 +1,492 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Oxygen Runway · BASS-II flammability tests</title>
+<meta name="description" content="Explore 129 NASA BASS-II microgravity fire tests and see how little of the evidence reaches Moon base oxygen levels.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%230b0a1a'/%3E%3Cpath d='M16 5c3 5 7 7 7 12a7 7 0 0 1-14 0c0-3 2-4 3-7 1 2 2 2 2 2 0-3 1-5 2-7z' fill='%23ff6a3d'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0b0a1a;--panel:rgba(255,255,255,.055);--line:rgba(255,255,255,.12);--tx:#f6f3ff;--mu:#a59fc4;--ac:#6fd3ff;--em:#ff6a3d;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-*,*::before,*::after{box-sizing:inherit}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}html{scroll-padding-top:84px;scroll-behavior:smooth}
 body{margin:0;color:var(--tx);font:400 16px/1.55 "Hanken Grotesk",system-ui,sans-serif;-webkit-font-smoothing:antialiased;background:radial-gradient(900px 600px at 85% -5%,rgba(255,106,61,.28),transparent 60%),radial-gradient(900px 700px at 0% 30%,rgba(111,211,255,.16),transparent 60%),radial-gradient(1000px 800px at 60% 100%,rgba(120,70,255,.25),transparent 60%),#0b0a1a;background-attachment:fixed}
-.w{max-width:1200px;margin:0 auto;padding:0 24px 64px}
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;min-height:78vh;padding:40px 0}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+::selection{background:rgba(111,211,255,.35)}
+.w{max-width:1200px;margin:0 auto;padding:64px 24px 64px;position:relative;z-index:1}
+#sky{position:fixed;inset:0;z-index:0;pointer-events:none}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#6fd3ff,#9ef0d6,#ff6a3d);z-index:30;transition:width .1s linear}
+nav{position:fixed;top:0;left:0;right:0;z-index:20;padding:calc(10px + env(safe-area-inset-top,0px)) 24px 10px;display:flex;gap:4px;align-items:center;backdrop-filter:blur(16px);background:rgba(11,10,26,.6);border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav b{font-weight:800;letter-spacing:-.02em;margin-right:auto;white-space:nowrap;display:flex;align-items:center;gap:8px}
+nav b::before{content:"";width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffd166,#ff6a3d);box-shadow:0 0 12px #ff6a3d}
+nav a{color:var(--mu);text-decoration:none;font-size:14px;padding:6px 12px;border-radius:99px;white-space:nowrap;transition:color .2s,background .2s}
+nav a:hover{color:var(--tx);background:rgba(255,255,255,.08)}nav a.on{color:#0b0a1a;background:var(--tx)}
+@media(max-width:640px){nav{padding-left:14px;padding-right:14px}nav b{display:none}}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;min-height:80vh;padding:32px 0}
 @media(max-width:900px){.hero{grid-template-columns:1fr;min-height:0}}
 h1{font-weight:800;font-size:clamp(42px,6.5vw,86px);line-height:.98;letter-spacing:-.045em;margin:0 0 22px}
-.lede{color:var(--mu);font-size:clamp(17px,2vw,21px);max-width:46ch;margin:0 0 28px}.lede b{color:var(--tx);font-weight:500}
+.lede{color:var(--mu);font-size:clamp(17px,2vw,21px);max-width:46ch;margin:0 0 26px}.lede b{color:var(--tx);font-weight:500}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 30px}
 .hs{display:grid;grid-template-columns:repeat(2,auto);gap:18px 36px;justify-content:start}
 .hs div{font-size:13.5px;color:var(--mu)}.hs b{display:block;font-size:26px;font-weight:800;color:var(--tx);letter-spacing:-.02em}
-.dialbox{background:var(--panel);border:1px solid var(--line);border-radius:28px;padding:22px 18px 18px;backdrop-filter:blur(14px)}
+.dialbox{background:var(--panel);border:1px solid var(--line);border-radius:28px;padding:22px 18px 18px;backdrop-filter:blur(14px);box-shadow:0 30px 80px rgba(0,0,0,.35)}
 svg{width:100%;height:auto;display:block;overflow:visible}svg text{font:500 12px "Hanken Grotesk",sans-serif;fill:var(--mu)}
 .read{text-align:center;color:var(--mu);font-size:15px;margin:6px 0 10px;min-height:48px}.read b{color:var(--ac);font-size:24px;font-weight:800;margin-right:4px}
 input[type=range]{width:100%;accent-color:#6fd3ff}
-.pr{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap}
-.pill,.chip{font:500 13.5px "Hanken Grotesk",sans-serif;color:var(--tx);background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:99px;padding:7px 14px;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
-.chip i{width:10px;height:10px;border-radius:50%}.chip[aria-pressed=false]{opacity:.35}
+.pr{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap;align-items:center}
+.pill,.chip{font:500 13.5px "Hanken Grotesk",sans-serif;color:var(--tx);background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:99px;padding:7px 14px;cursor:pointer;display:inline-flex;gap:8px;align-items:center;transition:transform .15s,border-color .2s,background .2s,opacity .2s}
+.pill:hover,.chip:hover{border-color:var(--mu);background:rgba(255,255,255,.1)}.pill:active,.chip:active{transform:scale(.96)}
+.chip i{width:10px;height:10px;border-radius:50%}.chip em{font-style:normal;color:var(--mu);font-size:12px}.chip[aria-pressed=false]{opacity:.35}
 .chip.seg[aria-pressed=true]{background:var(--tx);color:#0b0a1a;border-color:var(--tx)}.chip.seg[aria-pressed=false]{opacity:1;color:var(--mu)}
-.pill:hover,.chip:hover{border-color:var(--mu)}:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
-h2{font-weight:800;font-size:clamp(28px,4vw,44px);letter-spacing:-.035em;line-height:1.05;margin:48px 0 10px;max-width:20ch}
-.sub{color:var(--mu);max-width:56ch;margin:0 0 22px}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:6px}
+h2{font-weight:800;font-size:clamp(28px,4vw,44px);letter-spacing:-.035em;line-height:1.05;margin:56px 0 10px;max-width:20ch}
+.sub{color:var(--mu);max-width:58ch;margin:0 0 22px}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:24px;backdrop-filter:blur(14px);overflow:hidden}
 .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:16px 18px}.sp{flex:1}.bar small{color:var(--mu);font-size:13px}
-.chartwrap{position:relative;padding:4px 10px 12px}.dot{cursor:pointer;transition:r .12s}.dot:hover,.dot:focus{r:9}
-#tip{position:absolute;pointer-events:none;background:#07060f;border:1px solid var(--line);border-radius:10px;padding:8px 11px;font-size:13px;opacity:0;transform:translate(-50%,-115%);white-space:nowrap;z-index:3}
+.bar .ti{max-width:280px;padding:8px 12px;font-size:14px}
+.cellpill{display:none}.cellpill.on{display:inline-flex;background:rgba(255,106,61,.18);border-color:rgba(255,106,61,.6)}
+.chartwrap{position:relative;padding:4px 10px 12px}.dot{cursor:pointer;transition:r .12s}.dot:hover,.dot:focus{r:9;outline:none}
+#tip{position:absolute;pointer-events:none;background:#07060f;border:1px solid var(--line);border-radius:10px;padding:8px 11px;font-size:13px;opacity:0;transform:translate(-50%,-115%);white-space:nowrap;z-index:3;transition:opacity .12s}
 .stat{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}.stat div{padding:14px 18px;border-right:1px solid var(--line)}.stat div:last-child{border:0}
 .stat b{display:block;font-size:24px;font-weight:800;letter-spacing:-.02em}.stat span{font-size:13px;color:var(--mu)}
 .cols{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-top:16px}@media(max-width:900px){.cols{grid-template-columns:1fr}}
-.hd{padding:18px 20px 8px;font-weight:700}.detail{padding:0 20px 20px}.detail h3{font-size:34px;letter-spacing:-.03em;margin:4px 0 2px;font-weight:800}
+.hd{padding:16px 20px 8px;font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.hd .sp{flex:1}
+.detail{padding:0 20px 20px}.detail h3{font-size:34px;letter-spacing:-.03em;margin:4px 0 2px;font-weight:800}
 .kv{display:grid;grid-template-columns:120px 1fr;gap:7px 14px;font-size:14px;margin:14px 0}.kv dt{color:var(--mu)}.kv dd{margin:0}
 .note{font-size:13px;color:#ffb089;margin:6px 0}.src{font-size:12.5px;color:var(--mu);border-top:1px solid var(--line);padding-top:10px;margin-top:12px}
-.tw{max-height:430px;overflow:auto}table{width:100%;border-collapse:collapse;font-size:13.5px}
-th{position:sticky;top:0;background:#17142b;text-align:left;color:var(--mu);font-weight:500;padding:9px 14px;cursor:pointer;white-space:nowrap}td{padding:9px 14px;border-top:1px solid var(--line);white-space:nowrap}
-tr.r{cursor:pointer}tr.r:hover td,tr.r.s td{background:rgba(111,211,255,.1)}
-footer{margin-top:40px;color:var(--mu);font-size:13px;max-width:82ch}
-#sky{position:fixed;inset:0;z-index:0;pointer-events:none}
-.w{position:relative;z-index:1}
-nav{position:fixed;top:0;left:0;right:0;z-index:10;padding:calc(10px + env(safe-area-inset-top,0px)) 24px 10px;display:flex;gap:6px;align-items:center;backdrop-filter:blur(16px);background:rgba(11,10,26,.55);border-bottom:1px solid var(--line)}
-nav b{font-weight:800;letter-spacing:-.02em;margin-right:auto}nav a{color:var(--mu);text-decoration:none;font-size:14px;padding:6px 11px;border-radius:99px}nav a:hover{color:var(--tx);background:rgba(255,255,255,.08)}
-@media(max-width:760px){nav a{display:none}nav a.k{display:inline}}
-.w{padding-top:64px}
+.dnav{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.sc{position:relative;height:8px;border-radius:99px;background:rgba(255,255,255,.1);margin:14px 0 22px}.sc .mz{position:absolute;top:0;bottom:0;border-radius:99px;background:rgba(255,106,61,.5)}
+.sc .mk{position:absolute;top:-5px;width:4px;height:18px;border-radius:3px;background:#6fd3ff;box-shadow:0 0 10px #6fd3ff;transform:translateX(-50%)}.sc .mk.t{background:#ff6a3d;box-shadow:0 0 10px #ff6a3d}
+.sc .rg{position:absolute;top:0;bottom:0;border-radius:99px;background:rgba(111,211,255,.55)}.sc.big{height:12px}
+.scl{display:flex;justify-content:space-between;font-size:11.5px;color:var(--mu);margin-top:-14px;margin-bottom:6px}
+.tw{max-height:430px;overflow:auto;position:relative}table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{position:sticky;top:0;background:#17142b;text-align:left;color:var(--mu);font-weight:500;padding:9px 14px;cursor:pointer;white-space:nowrap;user-select:none}th:hover{color:var(--tx)}
+td{padding:9px 14px;border-top:1px solid var(--line);white-space:nowrap}
+tr.r{cursor:pointer}tr.r:hover td,tr.r.s td{background:rgba(111,211,255,.1)}tr.r:focus-visible{outline-offset:-2px}
+.empty{padding:40px 20px;text-align:center;color:var(--mu)}
+footer{margin-top:48px;color:var(--mu);font-size:13px;max-width:82ch}
 .about{padding:44px 0 8px}.about h2{margin-top:0;max-width:22ch}
 .ag{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}@media(max-width:900px){.ag{grid-template-columns:1fr}}
-.ag>div{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:22px;backdrop-filter:blur(14px)}.ag h3{margin:0 0 8px;font-size:19px;letter-spacing:-.02em}.ag p{margin:0;color:var(--mu);font-size:15px}.ag b{color:var(--tx);font-weight:700}
-.hm{display:grid;gap:4px;padding:16px 18px 6px;overflow-x:auto;min-width:640px}.hl{font-size:12px;color:var(--mu);text-align:center}.hl.mo{color:#ff8a5c;font-weight:700}.hr{font-size:13.5px;align-self:center}
-.hc{height:34px;border-radius:7px;border:1px dashed rgba(255,255,255,.1);display:grid;place-items:center;font-size:12.5px;font-weight:700}.hc.mo{border-color:rgba(255,106,61,.55);background:rgba(255,106,61,.07)}
-.hmw{overflow-x:auto}.hmn{padding:6px 20px 16px;font-size:13px;color:var(--mu)}
+.ag>div{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:22px;backdrop-filter:blur(14px);transition:transform .25s,border-color .25s}.ag>div:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.25)}
+.ag h3{margin:0 0 8px;font-size:19px;letter-spacing:-.02em}.ag p{margin:0;color:var(--mu);font-size:15px}.ag b{color:var(--tx);font-weight:700}
+.hmw{overflow-x:auto}.hm{display:grid;gap:4px;padding:16px 18px 6px;min-width:680px}.hl{font-size:12px;color:var(--mu);text-align:center}.hl.mo{color:#ff8a5c;font-weight:700}.hr{font-size:13.5px;align-self:center}
+.hc{height:34px;border-radius:7px;border:1px dashed rgba(255,255,255,.1);display:grid;place-items:center;font:700 12.5px "Hanken Grotesk",sans-serif;padding:0;background:none;color:var(--mu);transition:transform .12s,box-shadow .12s}.hc.mo{border-color:rgba(255,106,61,.55);background:rgba(255,106,61,.07)}
+.hc.f{border:0;cursor:pointer}.hc.f:hover{transform:scale(1.12);box-shadow:0 0 0 2px #fff;z-index:2;position:relative}.hc.act{box-shadow:0 0 0 2px #ff6a3d}
+.hmn{padding:6px 20px 16px;font-size:13px;color:var(--mu)}
 .fm{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:20px}@media(max-width:900px){.fm{grid-template-columns:1fr 1fr}}@media(max-width:520px){.fm{grid-template-columns:1fr}}
 .fm label{display:block;font-size:13px;color:var(--mu);margin-bottom:6px}
-select,input[type=number],textarea,.ti{width:100%;font:500 15px "Hanken Grotesk",sans-serif;color:var(--tx);background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+select,input[type=number],textarea,.ti{width:100%;font:500 15px "Hanken Grotesk",sans-serif;color:var(--tx);background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:12px;padding:10px 12px;transition:border-color .2s,background .2s}
+select:hover,.ti:hover{border-color:var(--mu)}.ti:focus,select:focus,input[type=number]:focus{border-color:var(--ac);outline:none;background:rgba(255,255,255,.1)}
 select option{background:#17142b}
-.btn{font:700 15px "Hanken Grotesk",sans-serif;color:#0b0a1a;background:linear-gradient(90deg,#6fd3ff,#9ef0d6);border:0;border-radius:99px;padding:11px 22px;cursor:pointer}.btn.g{background:rgba(255,255,255,.08);color:var(--tx);border:1px solid var(--line)}.btn:disabled{opacity:.5}
-.rp{padding:4px 22px 24px}.rp h3{font-size:26px;letter-spacing:-.03em;margin:14px 0 6px}.rp h4{margin:18px 0 6px;font-size:15px}.rp p{color:#d8d3ee;max-width:70ch;margin:6px 0}.rp .big{font-size:clamp(22px,3vw,32px);font-weight:800;letter-spacing:-.03em;line-height:1.15;max-width:30ch}
-.rp table{margin:6px 0}.ai{border-left:3px solid #6fd3ff;padding:2px 0 2px 14px;margin:12px 0;color:#e8e4fa;white-space:pre-wrap;max-width:70ch}
+.btn{font:700 15px "Hanken Grotesk",sans-serif;color:#0b0a1a;background:linear-gradient(90deg,#6fd3ff,#9ef0d6);border:0;border-radius:99px;padding:11px 22px;cursor:pointer;transition:transform .15s,box-shadow .2s,opacity .2s;display:inline-block;text-decoration:none}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(111,211,255,.3)}.btn:active{transform:scale(.97)}
+.btn.g{background:rgba(255,255,255,.08);color:var(--tx);border:1px solid var(--line)}.btn.g:hover{box-shadow:none;background:rgba(255,255,255,.14)}.btn.sm{padding:6px 14px;font-size:13px}.btn:disabled{opacity:.5;cursor:default;transform:none;box-shadow:none}
+.rp{padding:4px 22px 24px}.rp:empty{display:none}.rp h3{font-size:26px;letter-spacing:-.03em;margin:14px 0 6px}.rp h4{margin:20px 0 6px;font-size:15px}.rp p{color:#d8d3ee;max-width:70ch;margin:6px 0}.rp .big{font-size:clamp(22px,3vw,32px);font-weight:800;letter-spacing:-.03em;line-height:1.15;max-width:30ch}
+.kp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}.kp div{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:16px;padding:12px 14px}.kp b{display:block;font-size:26px;font-weight:800;letter-spacing:-.02em}.kp span{font-size:12.5px;color:var(--mu)}
+.ml{display:flex;justify-content:space-between;font-size:12.5px;color:var(--mu);margin-top:-12px;gap:10px;flex-wrap:wrap}
+.ai{border-left:3px solid #6fd3ff;padding:2px 0 2px 14px;margin:12px 0;color:#e8e4fa;max-width:70ch;min-height:20px}.ai p{margin:0 0 10px}
 .ra{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.chat{display:grid;grid-template-rows:auto 1fr auto}.cl{min-height:260px;max-height:460px;overflow:auto;padding:16px 20px;display:flex;flex-direction:column;gap:12px}
-.m{max-width:78ch;padding:11px 15px;border-radius:16px;font-size:15px}.m.u{align-self:flex-end;background:#6fd3ff;color:#0b0a1a;border-bottom-right-radius:4px}.m.a{background:rgba(255,255,255,.08);border-bottom-left-radius:4px}
-.cc{display:flex;gap:8px;flex-wrap:wrap;padding:0 20px 8px}.ci{display:flex;gap:10px;padding:14px 20px 18px;border-top:1px solid var(--line)}
-
+.chat{display:grid;grid-template-rows:auto 1fr auto auto}
+.ch{display:flex;align-items:center;gap:10px;padding:14px 20px;border-bottom:1px solid var(--line);font-weight:700}.ch small{font-weight:400;color:var(--mu);font-size:12.5px}.ch .live{width:8px;height:8px;border-radius:50%;background:#5eead4;box-shadow:0 0 10px #5eead4}
+.cl{min-height:300px;max-height:540px;overflow:auto;padding:16px 20px;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth}
+.m{max-width:min(82ch,92%);padding:11px 15px;border-radius:18px;font-size:15px;animation:pop .3s ease}.m.u{align-self:flex-end;background:linear-gradient(90deg,#6fd3ff,#9ef0d6);color:#0b0a1a;border-bottom-right-radius:4px;font-weight:500}.m.a{background:rgba(255,255,255,.08);border-bottom-left-radius:4px}
+.who{font-size:11px;color:var(--mu);margin-bottom:3px;letter-spacing:.08em;text-transform:uppercase}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.dots i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--mu);margin:0 2px;animation:bl 1s infinite}.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes bl{0%,80%,100%{opacity:.25;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+.tc{font:700 12px "Hanken Grotesk",sans-serif;color:#07060f;background:linear-gradient(90deg,#6fd3ff,#9ef0d6);border:0;border-radius:99px;padding:1px 9px;margin:0 1px;cursor:pointer;transition:transform .12s}.tc:hover{transform:translateY(-1px) scale(1.05)}
+.viz{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);animation:pop .4s ease}
+.vb{display:grid;grid-template-columns:minmax(70px,150px) 1fr 76px;gap:10px;align-items:center;font-size:12.5px;margin:6px 0}.vb span:first-child{color:var(--mu);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.vb span:last-child{text-align:right;font-weight:700}
+.vt{height:10px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}.vf{height:100%;border-radius:99px;width:0;transition:width .9s cubic-bezier(.2,.9,.2,1)}
+.vx{overflow-x:auto}.vx table{font-size:12.5px}.vx th{position:static;background:none;cursor:default;padding:6px 10px}.vx td{padding:6px 10px;white-space:normal;min-width:80px}.vx td:first-child{color:var(--mu);white-space:nowrap}
+.fu{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;animation:pop .4s ease}.fu .pill{font-size:12.5px;padding:5px 12px}
+.cc{display:flex;gap:8px;flex-wrap:wrap;padding:0 20px 10px;align-items:center}.cc small{color:var(--mu)}.cc.hide{display:none}
+.ci{display:flex;gap:10px;padding:14px 20px 18px;border-top:1px solid var(--line)}
 .od{display:inline-block;height:1em;line-height:1em;overflow:hidden;vertical-align:bottom}.oc{display:flex;flex-direction:column;transition:transform 1.5s cubic-bezier(.2,.9,.2,1)}.oc i{font-style:normal;height:1em;line-height:1em;display:block}
 #rn .oc{transition-duration:.7s}
 .dw{position:relative}.dw canvas{position:absolute;left:50%;top:78.9%;width:74%;transform:translate(-50%,-50%);pointer-events:none}.dw svg{position:relative;cursor:grab;touch-action:none;user-select:none}.dw svg:active{cursor:grabbing}.dd{cursor:pointer}
 #dtip{position:absolute;pointer-events:none;background:#07060f;border:1px solid var(--line);border-radius:10px;padding:7px 10px;font-size:13px;opacity:0;transform:translate(-50%,-125%);white-space:nowrap;z-index:3}
 #dsel a{color:var(--ac)}
-</style></head><body><canvas id="sky"></canvas>
-<nav><b>Oxygen Runway</b><a href="#about">About</a><a href="#dial-s">Dial</a><a href="#explore">Explore</a><a href="#coverage">Coverage</a><a href="#briefing" class="k">My briefing</a><a href="#ask" class="k">Ask the data</a></nav><div class="w">
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}.rv.in{opacity:1;transform:none}
+#toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);opacity:0;pointer-events:none;background:#17142b;border:1px solid var(--line);border-radius:99px;padding:10px 12px 10px 18px;display:flex;gap:12px;align-items:center;font-size:14px;z-index:40;box-shadow:0 16px 40px rgba(0,0,0,.5);transition:opacity .25s,transform .25s}
+#toast.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}#toast button{font:700 13px "Hanken Grotesk",sans-serif;background:var(--tx);color:#0b0a1a;border:0;border-radius:99px;padding:5px 12px;cursor:pointer}
+@media print{body{background:#fff}body *{visibility:hidden}#rp,#rp *{visibility:visible}#rp{position:absolute;left:0;top:0;width:100%;color:#111}#rp p,#rp .ai{color:#222}#rp td,#rp th{color:#111;background:none}#rp .ra{display:none}}
+</style></head><body><canvas id="sky"></canvas><div id="prog"></div><div id="toast" role="status" aria-live="polite"></div>
+<nav aria-label="Sections"><b>Oxygen Runway</b><a href="#about" data-s="about">About</a><a href="#dial-s" data-s="dial-s">Dial</a><a href="#explore" data-s="explore">Explore</a><a href="#coverage" data-s="coverage">Coverage</a><a href="#briefing" data-s="briefing">My briefing</a><a href="#ask" data-s="ask">Ask the data</a></nav>
+<div class="w">
 <section class="hero" id="dial-s"><div><h1 id="h1"></h1>
-<p class="lede">The Moon base is expected to run at <b>30% oxygen or more</b>. Each dot on the dial is a real test from NASA’s BASS-II table (PSI-25). Turn the dial and see how much evidence exists near that air.</p><div class="hs" id="hs"></div></div>
-<div class="dialbox"><div class="dw"><canvas id="fl" width="440" height="440"></canvas><svg id="dl" viewBox="0 0 600 380" role="img" aria-label="Dial of BASS-II tests by starting oxygen. Drag to change oxygen."></svg><div id="dtip"></div></div><div class="read" id="dsel" style="min-height:0;margin:0 0 6px;font-size:13px">Drag the dial, hover the dots, click one to open that test.</div>
-<div class="read" id="rd"><b id="rn"></b><span id="rt"></span></div><input type="range" id="cab" min="12" max="34" step="0.1" value="20.9" aria-label="Cabin oxygen percent">
-<div class="pr"><button class="pill" data-c="20.9">Earth air</button><button class="pill" data-c="30">Moon base</button><span style="color:var(--mu);font-size:13px;align-self:center">Spacesuits run 100%, far off this dial</span></div></div></section>
+<p class="lede">The Moon base is expected to run at <b>30% oxygen or more</b>. Each dot on the dial is a real test from NASA’s BASS-II table (PSI-25). Turn the dial and see how much evidence exists near that air.</p>
+<div class="cta"><a class="btn" href="#explore">Explore the tests</a><a class="btn g" href="#ask">Ask the analyst</a></div><div class="hs" id="hs"></div></div>
+<div class="dialbox"><div class="dw"><canvas id="fl" width="440" height="440"></canvas><svg id="dl" viewBox="0 0 600 380" tabindex="0" role="slider" aria-valuemin="12" aria-valuemax="34" aria-valuenow="20.9" aria-label="Cabin oxygen percent. Use arrow keys to change, or drag."></svg><div id="dtip"></div></div>
+<div class="read" id="dsel" style="min-height:0;margin:0 0 6px;font-size:13px">Drag the dial, use arrow keys, hover the dots, click one to open that test.</div>
+<div class="read" id="rd" aria-live="polite"><b id="rn"></b><span id="rt"></span></div><input type="range" id="cab" min="12" max="34" step="0.1" value="20.9" aria-label="Cabin oxygen percent">
+<div class="pr"><button class="pill" data-c="20.9">Earth air</button><button class="pill" id="pmax">Highest tested</button><button class="pill" data-c="30">Moon base</button><span style="color:var(--mu);font-size:13px">Spacesuits run 100%, far off this dial</span></div></div></section>
+
 <section class="about" id="about"><h2>An atlas of fire in freefall, built for the people who’ll live with it.</h2>
 <p class="sub" style="max-width:64ch">Oxygen Runway turns NASA’s BASS-II fire experiments from the International Space Station into something you can explore, question and take away.</p>
 <div class="ag"><div><h3>What this is</h3><p>An interactive view of <b>129 real tests</b> from NASA’s Physical Sciences Informatics database (PSI-25), where solid fuels burned in microgravity. Filter them, compare them, ask questions of the data, and build a personal briefing.</p></div>
 <div><h3>Why we made it</h3><p>Fire is truly among the most dangerous events on a spacecraft, and flames behave very differently without gravity. The Moon base is expected to hold <b>30% oxygen or more</b>, which makes materials far easier to ignite. We wanted anyone to see what is known, and what isn’t.</p></div>
 <div><h3>What we found</h3><p id="afind"></p></div></div>
-<p class="sub" style="margin:16px 0 0;font-size:13px">Built for the 2026 NASA Space Apps Challenge, “Flame in Freefall.”</p></section><h2 id="explore">Every test, filterable</h2><p class="sub">Click a dot or a row for the full record. The blue line is the dial’s oxygen setting.</p>
-<div class="panel"><div class="bar" id="fams"></div><div class="bar" style="padding-top:0"><small>Researcher</small><span id="pis" style="display:contents"></span><span class="sp"></span><small>Show</small><span id="ym" style="display:contents"></span></div>
+<p class="sub" style="margin:16px 0 0;font-size:13px">Built for the 2026 NASA Space Apps Challenge, “Flame in Freefall.”</p></section>
+
+<h2 id="explore">Every test, filterable</h2><p class="sub">Click a dot or a row for the full record. The blue line is the dial’s oxygen setting.</p>
+<div class="panel"><div class="bar" id="fams"></div>
+<div class="bar" style="padding-top:0"><small>Researcher</small><span id="pis" style="display:contents"></span><span class="sp"></span><small>Show</small><span id="ym" style="display:contents"></span></div>
+<div class="bar" style="padding-top:0"><input class="ti" id="sq" type="search" placeholder="Search tests, fuels, researchers…" aria-label="Search tests"><button class="chip cellpill" id="cellpill" title="Clear coverage cell filter"></button><span class="sp"></span><button class="btn g sm" id="rst">Reset filters</button><button class="btn g sm" id="csv">Download CSV</button></div>
 <div class="chartwrap"><svg id="ch" viewBox="0 0 1000 440" role="img" aria-label="Scatter of BASS-II tests"></svg><div id="tip"></div></div><div class="stat" id="stat"></div></div>
-<div class="cols"><div class="panel"><div class="hd">Tests <span id="cnt" style="color:var(--mu);font-weight:400"></span></div><div class="tw"><table><thead><tr id="th"></tr></thead><tbody id="tb"></tbody></table></div></div>
+<div class="cols"><div class="panel"><div class="hd">Tests <span id="cnt" style="color:var(--mu);font-weight:400"></span></div><div class="tw" id="tw"><table><thead><tr id="th"></tr></thead><tbody id="tb"></tbody></table></div></div>
 <div class="panel"><div class="hd">Test detail</div><div class="detail" id="dt"></div></div></div>
-<h2 id="coverage">Where the evidence is, and isn’t</h2><p class="sub">Tests per fuel group and oxygen band. The orange columns are Moon base air. Empty cells are gaps.</p>
+
+<h2 id="coverage">Where the evidence is, and isn’t</h2><p class="sub">Tests per fuel group and oxygen band. The orange columns are Moon base air. Empty cells are gaps. Click a filled cell to filter every view to it.</p>
 <div class="panel"><div class="hmw" id="hm"></div><div class="hmn">Follows the filters above.</div></div>
+
 <h2 id="briefing">Build your own briefing</h2><p class="sub">Pick a habitat and your role. We pull the closest real tests, show the gaps, and give you a report to keep.</p>
 <div class="panel"><div class="fm"><div><label for="rh">Habitat</label><select id="rh"><option value="orbit">Orbiting spacecraft (air)</option><option value="moon" selected>Moon base or rover (30% O₂)</option><option value="cust">Custom oxygen</option></select></div>
 <div id="rcw" style="display:none"><label for="ro">Oxygen %</label><input type="number" id="ro" min="10" max="100" step="0.1" value="35"></div>
 <div><label for="rr">You are</label><select id="rr"><option value="student">A student</option><option value="researcher">A researcher</option><option value="engineer">An engineer</option><option value="curious">Just curious</option></select></div>
 <div><label for="rf">Fuel focus</label><select id="rf"><option value="">Any fuel</option></select></div>
 <div style="align-self:end"><button class="btn" id="rb">Build my briefing</button></div></div><div class="rp" id="rp"></div></div>
-<h2 id="ask">Ask the data</h2><p class="sub">An AI assistant that has read all 129 rows. It answers only from the table and tells you when the table can’t say.</p>
-<div class="panel chat"><div class="cl" id="cl"></div><div class="cc" id="cc"></div><div class="ci"><input class="ti" id="cq" placeholder="Ask about fuels, oxygen, CO, specific tests…" aria-label="Question"><button class="btn" id="cs">Ask</button></div></div>
+
+<h2 id="ask">Ask the data</h2><p class="sub">A data analyst that has read all 129 rows. It runs entirely in your browser, answers only from the table, and tells you when the table can’t say.</p>
+<div class="panel chat"><div class="ch"><span class="live"></span>Data analyst <small>Local · answers from the table only</small><span class="sp" style="flex:1"></span><button class="btn g sm" id="clr">Clear chat</button></div>
+<div class="cl" id="cl" aria-live="polite"></div><div class="cc" id="cc"><small>Try:</small></div>
+<div class="ci"><input class="ti" id="cq" placeholder="Ask about fuels, oxygen, CO, or a test like B13…" aria-label="Question" autocomplete="off"><button class="btn" id="cs">Ask</button></div></div>
 <footer><p>Data: NASA Physical Sciences Informatics, investigation PSI-25, BASS-II experimental table (129 tests, aboard the International Space Station). Every figure is read directly from that table. Fuel groups are ours, based on the sample description. The table has no burn-out, blowoff or never-ignited outcome, so none is shown, except where its air-display column mentions extinction or blowoff. Not an official NASA product.</p></footer></div>
-<script>const DATA={"t":[["B1",0,0,"100 micron PMMA film 2 cm wide",2,"62","5",57.0,22.2,22.2,0.44,0.44,0.0,6.0,"2/19/2014",[]],["B2",0,0,"200 micron PMMA film 2 cm wide",2,"62","5",null,22.2,null,0.44,null,6.0,null,"2/19/2014",["Final O₂ reading of 1.6% looks like a sensor or entry error, so it is excluded from drawdown."]],["B3",0,0,"100 micron film 2 cm wide",2,"47","2",253.0,22.2,21.8,0.43,0.49,12.0,19.0,"2/19/2014",[]],["B4",0,0,"300 micron PMMA film 2 cm wide",2,"61","5",137.0,22.2,22.2,0.44,0.51,-1.0,10.0,"2/19/2014",[]],["B5",0,0,"200 micron 2 cm wide",2,"59","5",206.0,22.2,21.9,0.43,0.43,0.0,12.0,"2/19/2014",[]],["B6",0,0,"2 cm 0.1 mm PMMA film",2,"0.9 1.3 2.75","3 5 approaching 10",80.0,21.0,20.9,0.33,0.41,0.0,0.3,"7/7/2014",[]],["B7",0,0,"400 micron film 2 cm wide",2,"47","2",84.0,22.2,22.1,0.45,0.51,1.0,17.0,"2/19/2014",[]],["B8",0,0,"2 cm 0.2 mm PMMA film",0,"1.4 incr to 10.0","10 max",226.0,21.0,20.5,0.33,0.58,0.0,131.0,"7/7/2014",[]],["B9",0,0,"2 cm 0.1 mm PMMA film",2,"0.6 0.35","2 <1",45.0,21.0,20.9,0.33,0.35,0.0,10.0,"7/7/2014",[]],["B10",0,0,"1 cm 0.2 mm PMMA film",2,"1.7 (52) 1.25 0.9 0.6 0.4 0.35","5 4 3 2 1",123.0,21.0,20.8,0.33,0.44,0.0,23.0,"7/7/2014",[]],["B11",0,0,"2 cm 0.2 mm PMMA film",2,"2.5 (59) 1.3 0.7 0.5 0.35","5 3 1 <1",131.0,21.0,20.7,0.33,0.47,0.0,46.0,"7/7/2014",[]],["B12",0,0,"300 micron film 2 cm wide",2,"46.5","2",160.0,22.2,22.1,0.51,0.56,17.0,33.0,"2/19/2014",[]],["B13",0,0,"2 cm 0.4 mm thick film",2,"3.5 (68) 1.7 1.25 0.9 0.6 0.4 0.35","10 5 4 3 2 1",311.0,21.0,20.5,0.33,0.65,0.0,61.0,"7/7/2014",[]],["B14",0,0,"1 cm wide 200 micron thick PMMA",2,"pot 0.9 0.5 and down","5 3 2 ext",44.0,15.0,null,0.0,null,0.2,null,"7/2/2014",["Air-display column notes extinction."]],["B15",0,0,"2 cm 0.1 mm PMMA film",0,"1.4 (50) incr to 10.0 pot","10 max",122.0,21.0,20.8,0.33,0.43,0.0,22.0,"7/7/2014",[]],["B16",0,0,"2 cm 100 micron thick PMMA",2,"44 (pot 0.68)","3 0.5 pot 0.4 pot",94.0,17.3,17.2,0.47,0.51,103.0,119.0,"7/2/2014",[]],["B17",0,0,"1 cm wide 200 micron thick PMMA",2,"pot 1.2 (48) 0.9 0.4","5 3 pot 0.4",190.0,17.5,17.4,0.2,0.34,0.0,47.0,"7/2/2014",[]],["B18",0,0,"1 cm wide 200 micron thick PMMA",0,"pot 1.02 (47) incr to 7.0","10 blowoff",152.0,17.4,17.4,0.34,0.42,47.0,78.0,"7/2/2014",["Air-display column notes blowoff."]],["B19",0,0,"2 cm 100 micron thick PMMA",0,"47 (pot 1.05) incr to pot 6.0","10 blowoff",95.0,17.3,17.2,0.51,0.57,119.0,131.0,"7/2/2014",["Air-display column notes blowoff."]],["B20",0,0,"2 cm 100 micron thick PMMA",2,"48 pot 0.9 0.5","5 3 pot 0.5",111.0,17.4,17.4,0.42,0.47,78.0,103.0,"7/2/2014",[]],["B21",0,0,"1 cm wide 200 micron thick PMMA",1,"53 and down","5 down to ext",88.0,20.8,20.6,0.36,0.44,-1.0,18.0,"8/4/2014",["Air-display column notes extinction."]],["B22",0,0,"1 cm wide 200 micron thick PMMA",1,"53 42 41 40.5","5 2 0",77.0,20.7,20.5,0.41,0.47,-1.0,10.0,"8/4/2014",[]],["F1",1,4,"Nomex natural (nomex III)",2,"82","9.5",208.0,22.2,22.2,0.46,0.45,0.0,2.0,"2/19/2014",[]],["F2",1,4,"Nomex natural (nomex III)",2,"92","15",72.0,21.0,21.0,0.37,0.39,105.0,82.0,"7/28/2014",[]],["F3",1,4,"Nomex natural (nomex III)",1,"61","8",46.0,21.7,null,0.36,null,2.0,null,"8/1/2014",[]],["F4",1,6,"Japan Wax candle",2,"see notes","3 ign",270.0,17.4,17.4,0.38,0.48,22.0,56.0,"6/24/2014",[]],["M1",3,1,"1 mm thick PMMA 1 sided 2 cm",2,"58 54","10 8",304.0,22.2,21.9,0.45,0.61,0.0,60.0,"2/20/2014",[]],["M2",3,1,"3 mm thick PMMA 1 sided 2 cm wide",0,"116 (pot 9.3) 89 80 84","20 15 13 14",262.0,22.2,21.2,0.46,1.33,12.0,325.0,"2/20/2014",[]],["M3",3,1,"2 cm wide 5 mm thick 1 sided PMMA",2,"3.0 3.1 3.2 6.4 5.5 5.4","10 20 18",223.0,20.8,19.7,0.33,1.18,11.0,300.0,"7/11/2014",[]],["M4",3,1,"5 mm thick PMMA 2 cm wide",1,"52 47 43","5 4 3",262.0,21.8,19.8,0.42,2.15,2.0,561.0,"7/31/2014",[]],["M5",3,1,"3 mm thick PMMA 2 sided 2 cm thick",0,"","20 13 10 8 5",null,22.2,19.0,0.44,3.22,9.0,null,"2/20/2014",[]],["M6",3,1,"1 mm thick PMMA 2 cm wide",1,"68 52 47 43 42 41","10 5 3 0",269.0,21.8,20.7,0.38,1.27,1.0,345.0,"7/31/2014",[]],["M7",3,1,"1 cm wide PMMA 1 mm thick",2,"2.6 1.3 0.8 0.7 0.6 0.5; 60 49 45 44 43 42","10 6 5 4.5 4 3",217.0,18.9,18.4,1.42,1.84,398.0,612.0,"7/11/2014",[]],["M8",3,1,"1 cm wide PMMA 2 mm thick",2,"3.3 1.6 1.0 decr","10 5>7 5 decr",292.0,19.1,18.2,0.44,1.28,52.0,467.0,"7/11/2014",[]],["M9",3,1,"1 cm wide PMMA 3 mm thick",2,"3.3 4.8;66 79","10 14",156.0,18.0,17.6,0.26,0.54,0.0,191.0,"7/11/2014",[]],["M10",3,1,"4 mm thick 1 cm wide PMMA slab",2,"75 105 94/91 72/69 63/61 (4.4 8.0 6.6/6.3 4.0/3.7 3/0/2.7)","10 17 14 10 8",209.0,20.1,18.6,0.36,1.59,-1.0,536.0,"7/23/2014",[]],["M11",3,1,"1 cm wide PMMA 5 mm thick",2,"3.9 6.5 4.6 3.3 2.9 2.8; 62.5 93 77 66 63 62","10 20 15 12",247.0,20.0,18.5,0.58,1.68,46.0,577.0,"7/11/2014",[]],["M12",3,1,"2 mm thick PMMA 2 cm wide",1,"41 42 41","<1",271.0,21.7,20.4,0.42,1.42,15.0,443.0,"7/31/2014",[]],["M13",3,1,"4 mm thick PMMA 2 cm wide",1,"52 47 43","6 5 4",258.0,20.8,19.0,0.36,1.75,0.0,487.0,"7/31/2014",[]],["M14",3,1,"2mm thick PMMA 1 sided 2 cm wide",2,"pot 2.4 1.87 (54)","10 ~8",259.0,22.2,21.6,0.45,0.98,0.0,198.0,"2/20/2014",[]],["M15",3,1,"2 cm 4 mm 1 sided PMMA slab",2,"ignited 10 adjusted down then up to 20 down in incrments to 15","10 8 7 8 10 20 18 16 15",153.0,21.0,20.0,0.37,1.1,1.0,220.0,"7/7/2014",[]],["M16",3,1,"1 mm thick PMMA 2 cm wide",2,"73 57 59 48 45 43 75 (4.2 2.2 2.4 1.2 0.8 0.5 4.4)","10 6 3 2 1 10",299.0,19.2,18.7,0.95,1.75,118.0,421.0,"7/23/2014",[]],["M17",3,1,"2 cm wide PMMA 2 mm thick",2,"Fan pot 3.7 1.7 1.5 1.3 0.8 0.6 0.5 0.3ext","10 5 3 0ext",309.0,18.8,17.1,0.35,1.7,4.0,485.0,"7/15/2014",[]],["M18",3,1,"2 cm wide PMMA 3 mm thick",2,"Fan pot 3.5 5 (brief) 3 5 2.2","10 15 (brief) 10 8",178.0,17.9,16.8,0.32,1.31,0.0,335.0,"7/15/2014",[]],["M19",3,1,"4 mm thick 2 cm 2ide PMMA slab",2,"75 105 94 75 77 79 59 61 57 55 53 (4.4 8.0 6.6 4.4 4.6 4.8 2.5 2.7 2.2 2.0 1.8)","10 17 14 10 7 5",201.0,19.0,17.4,0.35,1.6,3.0,357.0,"7/23/2014",[]],["M20",3,1,"5 mm thick PMMA 2 cm wide",1,"67 58","10 8",168.0,18.0,17.4,0.3,0.75,0.0,157.0,"8/1/2014",[]],["O1",4,2,"1/4\" clear rod",2,"89 62 50 41","20 10 5 2 1",62.0,22.2,21.7,0.44,0.85,-1.0,51.0,"2/18/2014",[]],["O2",4,2,"1/4\" clear rod",2,".54 pot 0.45 pot","0",287.0,22.2,21.9,0.44,0.59,-1.0,23.0,"2/18/2014",[]],["O3a",4,2,"1/4\" clear rod",2,"","5 3",85.0,18.0,18.0,0.25,0.28,16.0,22.0,"6/13/2014",[]],["O3b",4,2,"1/4\" clear rod",2,"","5 3 2 1 low",306.0,18.0,17.7,0.28,0.53,22.0,116.0,"6/13/2014",[]],["O4",4,2,"3/8\"clear rod",2,"5 0.7 0.5 0.4 0.36 ext","5 down to ext",249.0,14.8,13.6,0.72,1.72,290.0,null,"7/8/2014",["Air-display column notes extinction."]],["O5a",4,2,"1/2\" clear PMMA rod",2,"1.3 2.7 1.3 0.7 0.45. 4.0","5 10 5 2 0 (49 62 49 44 42)",164.0,15.1,14.2,0.25,1.05,-2.0,496.0,"7/21/2014",[]],["O5b",4,2,"1/2\" clear PMMA rod",2,"1.3","49 5 cm/s",2.0,14.2,14.1,1.05,1.14,496.0,590.0,"7/21/2014",[]],["O6",4,2,"1/4\" clear rod",2,"5 .36 .32 .31 .305 out .275","see fan",241.0,16.7,16.0,0.32,0.74,1.0,232.0,"6/26/2014",[]],["O7",4,2,"1/4\" clear rod",2,"5 .36 .32 ..305 blowoff fan max 10","",254.0,16.0,15.5,0.74,1.27,232.0,512.0,"6/26/2014",[]],["O8a",4,2,"1/4\" clear rod",2,"5 .36 .32 .31 extinguished","",133.0,15.7,15.3,1.23,1.44,436.0,536.0,"6/26/2014",[]],["O8b",4,2,"1/4\" clear rod",2,"5 .36 .32 .31 blowoff fan pot 6.0","",152.0,15.5,15.2,1.44,1.74,536.0,660.0,"6/26/2014",[]],["O9",4,2,"1/4\" clear rod",2,"5 .36 .32 blowoff pt 4.0","",154.0,15.0,14.8,1.74,1.96,660.0,794.0,"6/26/2014",[]],["O10",4,2,"1/4\" clear rod",2,"49 44 41 122 (1.3 0.7 0.4 0.36 0.32 10)","5 2 0 max",172.0,16.7,16.1,1.61,2.1,94.0,287.0,"7/22/2014",[]],["O11",4,2,"1/4\" black rod",2,"ign 5 0.36 0.32 0.31 0.305 blowoff 6.0","5 down then blowoff",271.0,15.4,14.8,0.27,0.72,2.0,290.0,"7/8/2014",["Air-display column notes blowoff."]],["O12",4,2,"3/8\" clear rod",2,"pots 1.4 3 0.9 0.7","no ign at any flow",52.0,13.6,13.5,1.72,1.71,null,null,"7/8/2014",[]],["O13a",4,2,"1/2\" clear PMMA rod",2,"1.3 0.7 0.45 0.36 0.32 0.31","49 44 42 41 41 40.5 (5 2 0)",199.0,15.9,14.6,0.91,1.85,389.0,950.0,"7/21/2014",[]],["O13b",4,2,"1/2\" clear PMMA rod",2,"1.3 0.9","7 4? (49 ?)",6.0,14.6,14.4,1.85,2.09,950.0,null,"7/21/2014",[]],["O14",4,2,"1/4\" black rod",1,"52 and down","5 down to ext",279.0,16.3,15.3,0.29,0.86,4.0,352.0,"8/1/2014",["Air-display column notes extinction."]],["O15a",4,2,"3/8\" clear rod",2,"57.5 47 42 41 (2.3 1.0 0.5 0.35 0.32)","5 0",124.0,17.1,16.7,0.27,0.62,0.0,176.0,"7/28/2014",[]],["O15b",4,2,"3/8\" clear rod",2,"57.5 42 41 40 (2.3 0.5 0.35 0.34 0.33 0.32 0.31 0.30 0.29 0.28 0.27)","5 0",316.0,16.7,15.6,0.62,1.63,176.0,751.0,"7/28/2014",[]],["O16",4,2,"3/8\"clear rod",2,"60 (2.6)","5",null,14.5,14.5,0.27,0.32,2.0,33.0,"7/29/2014",[]],["O17",4,2,"1/4\" clear rod",2,"49 46.5 44 42 41 72 decr (1.3 1.0 0.7 0.5 0.4 4.0 decr )","3 0 11",174.0,15.1,14.3,0.31,0.9,2.0,377.0,"7/22/2014",[]],["O18",4,2,"1/4\" clear rod",2,"57 51 47 72 51 72 51 47 (2.3 1.5 1.0 4.0 1.5 4.0 1.5 1.0)","5 2 0 11 2 11 2 0",176.0,15.2,14.5,1.45,1.94,523.0,816.0,"7/28/2014",[]],["O19",4,2,"1/4\" clear rod",1,"52 and down","5 down to ext",266.0,15.3,14.6,0.86,1.51,352.0,686.0,"8/1/2014",["Air-display column notes extinction."]],["O20",4,2,"1/4\" clear rod",0,"49 (1.3 pot) pots 7 8 9 10","5 8 incr to max 38.5",null,16.5,15.9,0.2,0.57,-3.0,57.0,"2/26/2016",[]],["O21",4,2,"3/8\" clear rod",0,"46 (pot 0.8) pot 7 10","incr to 28",null,15.9,15.4,0.53,0.95,52.0,187.0,"2/26/2016",[]],["O22",4,2,"1/2\" clear rod",0,"49 (pot 1.1) blowoff pot 5 out at fan 87","4 incr to 26.5",null,15.4,14.9,0.92,1.33,185.0,322.0,"2/26/2016",[]],["P1",2,2,"1/4\" black rod",2,"","5 2 slow decr to ext",307.0,17.7,17.5,0.27,0.44,1.0,14.0,"6/16/2014",["Air-display column notes extinction."]],["P2",2,2,"1/4\" black rod",2,"","5 2.5 2 (pot .9 .5 .35. .33)",303.0,17.4,17.2,0.44,0.66,14.0,26.0,"6/16/2014",[]],["P3a",2,2,"1/4\" clear rod",2,"","5 2.5 (1.15 .5 .35 .33. .32 .315 .31 .3)",304.0,17.7,17.4,0.27,0.51,2.0,33.0,"6/16/2014",[]],["P3b",2,2,"1/4 clear rod",2,"","5 very low (0.85 0.32 0.31 0.305 0.30 0.295)",303.0,17.4,16.8,0.51,null,33.0,79.0,"6/16/2014",[]],["P4",2,2,"3/8\" black rod",2,"48 41","5 pots 0.4 0.36 0.32 0.308 .3 off",297.0,18.5,17.1,0.62,1.8,64.0,493.0,"7/3/2014",[]],["P5",2,2,"0.5\" black rod",2,"Fan pot 1.5 (5cm/s) 0.9 0.4 0.36 0.32 0.308 0.3 0.29 0.28 0 ext","5 down to ext",313.0,19.3,17.6,0.32,1.67,0.0,525.0,"7/14/2014",["Air-display column notes extinction."]],["P6",2,2,"1/4\" black rod",2,"48 41","5 pots 0.4 0.36 0.32 0.31 off",162.0,18.9,18.5,0.3,0.62,0.0,64.0,"7/3/2014",[]],["P8",2,2,"3/8\" black rod",2,"48 62 75","5 would not stay lit 10 15 ibid",66.0,16.4,16.3,0.72,0.81,44.0,69.0,"7/3/2014",[]],["P9",2,2,"0.5\" black rod",2,"Fan pot 1.5 (5cm/s) 0.9 0.4 0.36 0.32 0.3 0.28 ext","5 down to ext",148.0,17.6,17.1,1.67,2.1,525.0,535.0,"7/14/2014",["Air-display column notes extinction."]],["P10",2,2,"1/4\" black rod",2,"48 41","5 pots 0.4 0.36 0.32 0.31 0.30 extinguished",221.0,17.0,16.4,0.29,0.72,2.0,44.0,"7/3/2014",[]],["P12",2,2,"3/8\" black rod",2,"60 52 48 44.5 42 41.5 41 (2.6 1.6 1.2 .75 .5 .4 .36 0.34)","5 3 2 1 0.5 lower",273.0,17.5,16.8,0.29,0.95,2.0,57.0,"7/29/2014",[]],["P13a",2,2,"0.5\" black rod",2,"Fan pot 1.1 (5cm/s) 0.4 0.36 0.32 0.3 0.28 0.26 0 ext","5 down to ext",255.0,20.7,19.1,0.36,1.63,38.0,450.0,"7/14/2014",["Air-display column notes extinction."]],["P13b",2,2,"0.5\" black rod",2,"Fan pot 1.3 (5cm/s) 0.4 0.36 0.32 ext","5 down to ext",94.0,20.6,20.2,0.41,0.62,5.0,72.0,"7/14/2014",["Air-display column notes extinction."]],["P14",2,2,"1/4 blac rod",2,"46 41","5 low (.85 .4 .32)",162.0,18.4,18.0,0.34,0.62,3.0,90.0,"6/23/2014",[]],["P15",2,2,"1/4 black rod",2,"46 41","5 (0.36)",170.0,18.0,17.5,0.62,1.11,90.0,108.0,"6/23/2014",[]],["P16",2,2,"1/4\" black rod",2,"49 62 44 41.5 41 (pots 1.3 2.8 0.7 0.4 0.36 0.32)","5 8 2 low",129.0,18.2,17.4,0.3,0.92,0.0,56.0,"7/22/2014",[]],["P17",2,2,"1/4\" black rod",2,"60 52 48 233 48 41 (2.6 1.6 1.2 10 1.2 0.36 0.34)","5 3 2 22 2 low",186.0,16.8,16.5,0.95,1.34,57.0,68.0,"7/29/2014",[]],["P18",2,2,"1/4\" black rod",2,"55 47 etc (pot 1 2 1 2 etc)","2 0 2 0 etc",280.0,20.0,19.0,0.34,1.2,1.0,26.0,"7/30/2014",[]],["P19",2,2,"1/4\" black rod",2,"49 62 44 41.5 122 41 (pots 1.3 2.8 0.7 0.4 0.36 10. 0.32)","5 8 2 max 0",279.0,17.5,16.7,0.9,1.61,54.0,94.0,"7/22/2014",[]],["P20",2,2,"1/4\" black rod",2,"55 47 etc (pot 1 2 1 2 etc)","2 0 2 0 etc",311.0,19.0,18.2,0.34,1.05,2.0,78.0,"7/30/2014",[]],["P21a",2,2,"1/4 black rod",2,"46","5",57.0,16.3,16.3,0.96,1.0,86.0,94.0,"6/23/2014",[]],["P21b",2,2,"1/4\" black rod",2,"46","5",14.0,16.3,16.3,1.0,1.03,94.0,98.0,"6/23/2014",[]],["P22a",2,2,"3/8\" black rod",2,"5 0.36 0.32 ext after some time","5 down to ext",83.0,20.8,null,0.32,null,4.0,null,"7/8/2014",["Final O₂ reading of 0.6% looks like a sensor or entry error, so it is excluded from drawdown.","Air-display column notes extinction."]],["P22b",2,2,"3/8\" black rod",2,"5 p.36 0.34 0.33 0.32 0.31 ext","5 down to ext",155.0,20.0,null,null,1.09,null,239.0,"7/8/2014",["Final O₂ reading of 39.1% looks like a sensor or entry error, so it is excluded from drawdown.","Air-display column notes extinction."]],["P23",2,2,"3/8\" black rod",2,"55 47 etc (pot 1 2 1 2 etc)","2 0 2 0 etc",242.0,18.2,17.0,1.05,2.08,78.0,159.0,"7/30/2014",[]],["P24",2,2,"3/8\" black rod",2,"55 47 etc (pot 1 2 1 2 etc)","2 0 2 0 etc",308.0,19.0,17.5,1.2,2.24,26.0,260.0,"7/30/2014",[]],["P25",2,2,"3/8\" clear rod",2,"5 p.36 0.34 0.33 0.32 0.31 ext","5 down to ext",246.0,20.9,20.2,0.38,1.0,43.0,205.0,"7/8/2014",["Air-display column notes extinction."]],["T1",5,3,"2 cm SIBAL",2,"80","10",85.0,18.5,18.5,0.35,0.41,0.0,40.0,"2/14/2014",[]],["T2",5,3,"2 cm SIBAL",2,"80 59 55","9 5 4",100.0,18.5,18.5,0.41,0.45,40.0,78.0,"2/14/2014",[]],["T3",5,5,"4 cm spherical section",2,"63","10",166.0,17.2,16.8,0.42,0.7,45.0,113.0,"6/27/2014",[]],["T4",5,3,"2 cm SIBAL",2,"80 46","9 1",97.0,18.7,18.7,0.44,0.45,59.0,72.0,"2/14/2014",[]],["T5",5,3,"2 cm SIBAL",2,"2.72 0.50 0.42","10 2 1",100.0,18.8,18.9,0.2,0.25,2.0,41.0,"4/10/2014",[]],["T6",5,3,"2 cm SIBAL",2,"","5 2 1 <1",117.0,18.8,18.8,0.24,0.28,39.0,77.0,"4/10/2014",[]],["T7",5,5,"4 cm spherical section",2,"3.4 67","10 5 3 1 decr",299.0,17.3,17.1,0.32,0.59,49.0,140.0,"7/9/2014",[]],["T9",5,3,"2 cm SIBAL",2,"pot 2.5","10",48.0,16.4,16.4,0.3,0.31,0.0,9.0,"6/24/2018",[]],["T10",5,3,"2 cm SIBAL",2,"pot 1.1","5",43.0,16.4,16.5,0.31,0.33,9.0,14.0,"6/24/2014",[]],["T11",5,3,"2 cm SIBAL",2,"48","5",109.0,17.1,17.0,0.35,0.39,1.0,45.0,"6/27/2014",[]],["T12",5,3,"2 cm SIBAL",2,"pot 1.1","5",39.0,16.8,16.9,0.7,0.7,113.0,117.0,"6/27/2014",[]],["T13",5,3,"2 cm SIBAL",2,"","5 1",55.0,17.5,17.6,0.19,0.2,2.0,12.0,"4/10/2014",[]],["T14",5,3,"2 cm SIBAL",2,"","5 3",119.0,16.9,16.9,0.7,0.72,117.0,152.0,"6/27/2014",[]],["T15",5,3,"2 cm SIBAL",0,"80122","9 29",46.0,18.7,18.7,0.45,0.51,72.0,102.0,"2/14/2014",[]],["T16",5,3,"2 cm SIBAL",2,"","5 3",100.0,17.6,17.5,0.21,0.21,17.0,41.0,"4/10/2014",[]],["T17",5,3,"2 cm SIBAL",0,"","6 53",83.0,16.9,16.9,0.72,0.75,152.0,190.0,"6/27/2014",[]],["T18",5,3,"2 cm SIBAL",2,"","5 2",49.0,17.4,17.4,0.36,0.38,2.0,22.0,"6/24/2018",[]],["T19",5,3,"1 cm SIBAL",2,"68.5 pot 3.6","11",73.0,17.2,17.2,0.29,0.31,1.0,20.0,"7/9/2014",[]],["T20",5,3,"1 cm SIBAL",2,"3.6 0.9","11 3",117.0,17.2,17.2,0.31,0.31,20.0,34.0,"7/9/2014",[]],["T21",5,3,"1 cm SIBAL",0,"1.6 pot 52","11 max(47)",151.0,17.2,17.2,0.31,0.32,34.0,45.0,"7/9/2014",[]],["T22",5,3,"1 cm SIBAL",2,"3.4 1.7","10 5",38.0,17.1,17.0,0.59,0.62,140.0,162.0,"7/9/2014",[]],["T23",5,3,"2 cm Sibal moved igniter",2,"3.3 66","10",203.0,17.2,17.3,0.32,0.32,45.0,49.0,"7/9/2014",[]],["T24",5,3,"1 cm SIBAL top side ign",2,"3.3 66","10",130.0,18.2,18.2,0.51,0.53,85.0,107.0,"7/9/2014",[]],["T25",5,3,"2 cm SIBAL",1,"53 45","5 2.5",75.0,20.8,20.7,0.36,0.39,-1.0,17.0,"8/4/2014",[]],["T26",5,3,"2 cm SIBAL",1,"53 45","5 2.5",87.0,20.8,20.7,0.36,0.43,-1.0,24.0,"8/4/2014",[]],["T27",5,3,"1 cm SIBAL",1,"53 45","5 2",58.0,20.7,20.6,0.41,0.42,-1.0,9.0,"8/4/2014",[]],["T28a",5,3,"1 cm SIBAL",1,"53","5",19.0,20.7,null,0.41,null,-1.0,null,"8/4/2014",["Final O₂ reading of 0.9% looks like a sensor or entry error, so it is excluded from drawdown."]],["T28b",5,3,"1 cm SIBAL",1,"53","5",27.0,20.7,null,null,0.42,null,2.0,"8/4/2014",["Final O₂ reading of 40.4% looks like a sensor or entry error, so it is excluded from drawdown."]],["T29",5,3,"1 cm SIBAL",1,"53 43","5 2(?)",60.0,20.7,20.5,0.41,0.44,-1.0,10.0,"8/4/2014",[]]],"f":["PMMA film","PMMA slab","Rod (clear or black)","SIBAL fabric","Nomex","Spherical section","Candle"],"p":["Bhattacharjee","Ferkul","Fernandez-Pello","Miller","Olson","T'ien"]};
+
+<script id="core">
+const DATA={"t":[["B1",0,0,"100 micron PMMA film 2 cm wide",2,"62","5",57.0,22.2,22.2,0.44,0.44,0.0,6.0,"2/19/2014",[]],["B2",0,0,"200 micron PMMA film 2 cm wide",2,"62","5",null,22.2,null,0.44,null,6.0,null,"2/19/2014",["Final O₂ reading of 1.6% looks like a sensor or entry error, so it is excluded from drawdown."]],["B3",0,0,"100 micron film 2 cm wide",2,"47","2",253.0,22.2,21.8,0.43,0.49,12.0,19.0,"2/19/2014",[]],["B4",0,0,"300 micron PMMA film 2 cm wide",2,"61","5",137.0,22.2,22.2,0.44,0.51,-1.0,10.0,"2/19/2014",[]],["B5",0,0,"200 micron 2 cm wide",2,"59","5",206.0,22.2,21.9,0.43,0.43,0.0,12.0,"2/19/2014",[]],["B6",0,0,"2 cm 0.1 mm PMMA film",2,"0.9 1.3 2.75","3 5 approaching 10",80.0,21.0,20.9,0.33,0.41,0.0,0.3,"7/7/2014",[]],["B7",0,0,"400 micron film 2 cm wide",2,"47","2",84.0,22.2,22.1,0.45,0.51,1.0,17.0,"2/19/2014",[]],["B8",0,0,"2 cm 0.2 mm PMMA film",0,"1.4 incr to 10.0","10 max",226.0,21.0,20.5,0.33,0.58,0.0,131.0,"7/7/2014",[]],["B9",0,0,"2 cm 0.1 mm PMMA film",2,"0.6 0.35","2 <1",45.0,21.0,20.9,0.33,0.35,0.0,10.0,"7/7/2014",[]],["B10",0,0,"1 cm 0.2 mm PMMA film",2,"1.7 (52) 1.25 0.9 0.6 0.4 0.35","5 4 3 2 1",123.0,21.0,20.8,0.33,0.44,0.0,23.0,"7/7/2014",[]],["B11",0,0,"2 cm 0.2 mm PMMA film",2,"2.5 (59) 1.3 0.7 0.5 0.35","5 3 1 <1",131.0,21.0,20.7,0.33,0.47,0.0,46.0,"7/7/2014",[]],["B12",0,0,"300 micron film 2 cm wide",2,"46.5","2",160.0,22.2,22.1,0.51,0.56,17.0,33.0,"2/19/2014",[]],["B13",0,0,"2 cm 0.4 mm thick film",2,"3.5 (68) 1.7 1.25 0.9 0.6 0.4 0.35","10 5 4 3 2 1",311.0,21.0,20.5,0.33,0.65,0.0,61.0,"7/7/2014",[]],["B14",0,0,"1 cm wide 200 micron thick PMMA",2,"pot 0.9 0.5 and down","5 3 2 ext",44.0,15.0,null,0.0,null,0.2,null,"7/2/2014",["Air-display column notes extinction."]],["B15",0,0,"2 cm 0.1 mm PMMA film",0,"1.4 (50) incr to 10.0 pot","10 max",122.0,21.0,20.8,0.33,0.43,0.0,22.0,"7/7/2014",[]],["B16",0,0,"2 cm 100 micron thick PMMA",2,"44 (pot 0.68)","3 0.5 pot 0.4 pot",94.0,17.3,17.2,0.47,0.51,103.0,119.0,"7/2/2014",[]],["B17",0,0,"1 cm wide 200 micron thick PMMA",2,"pot 1.2 (48) 0.9 0.4","5 3 pot 0.4",190.0,17.5,17.4,0.2,0.34,0.0,47.0,"7/2/2014",[]],["B18",0,0,"1 cm wide 200 micron thick PMMA",0,"pot 1.02 (47) incr to 7.0","10 blowoff",152.0,17.4,17.4,0.34,0.42,47.0,78.0,"7/2/2014",["Air-display column notes blowoff."]],["B19",0,0,"2 cm 100 micron thick PMMA",0,"47 (pot 1.05) incr to pot 6.0","10 blowoff",95.0,17.3,17.2,0.51,0.57,119.0,131.0,"7/2/2014",["Air-display column notes blowoff."]],["B20",0,0,"2 cm 100 micron thick PMMA",2,"48 pot 0.9 0.5","5 3 pot 0.5",111.0,17.4,17.4,0.42,0.47,78.0,103.0,"7/2/2014",[]],["B21",0,0,"1 cm wide 200 micron thick PMMA",1,"53 and down","5 down to ext",88.0,20.8,20.6,0.36,0.44,-1.0,18.0,"8/4/2014",["Air-display column notes extinction."]],["B22",0,0,"1 cm wide 200 micron thick PMMA",1,"53 42 41 40.5","5 2 0",77.0,20.7,20.5,0.41,0.47,-1.0,10.0,"8/4/2014",[]],["F1",1,4,"Nomex natural (nomex III)",2,"82","9.5",208.0,22.2,22.2,0.46,0.45,0.0,2.0,"2/19/2014",[]],["F2",1,4,"Nomex natural (nomex III)",2,"92","15",72.0,21.0,21.0,0.37,0.39,105.0,82.0,"7/28/2014",[]],["F3",1,4,"Nomex natural (nomex III)",1,"61","8",46.0,21.7,null,0.36,null,2.0,null,"8/1/2014",[]],["F4",1,6,"Japan Wax candle",2,"see notes","3 ign",270.0,17.4,17.4,0.38,0.48,22.0,56.0,"6/24/2014",[]],["M1",3,1,"1 mm thick PMMA 1 sided 2 cm",2,"58 54","10 8",304.0,22.2,21.9,0.45,0.61,0.0,60.0,"2/20/2014",[]],["M2",3,1,"3 mm thick PMMA 1 sided 2 cm wide",0,"116 (pot 9.3) 89 80 84","20 15 13 14",262.0,22.2,21.2,0.46,1.33,12.0,325.0,"2/20/2014",[]],["M3",3,1,"2 cm wide 5 mm thick 1 sided PMMA",2,"3.0 3.1 3.2 6.4 5.5 5.4","10 20 18",223.0,20.8,19.7,0.33,1.18,11.0,300.0,"7/11/2014",[]],["M4",3,1,"5 mm thick PMMA 2 cm wide",1,"52 47 43","5 4 3",262.0,21.8,19.8,0.42,2.15,2.0,561.0,"7/31/2014",[]],["M5",3,1,"3 mm thick PMMA 2 sided 2 cm thick",0,"","20 13 10 8 5",null,22.2,19.0,0.44,3.22,9.0,null,"2/20/2014",[]],["M6",3,1,"1 mm thick PMMA 2 cm wide",1,"68 52 47 43 42 41","10 5 3 0",269.0,21.8,20.7,0.38,1.27,1.0,345.0,"7/31/2014",[]],["M7",3,1,"1 cm wide PMMA 1 mm thick",2,"2.6 1.3 0.8 0.7 0.6 0.5; 60 49 45 44 43 42","10 6 5 4.5 4 3",217.0,18.9,18.4,1.42,1.84,398.0,612.0,"7/11/2014",[]],["M8",3,1,"1 cm wide PMMA 2 mm thick",2,"3.3 1.6 1.0 decr","10 5>7 5 decr",292.0,19.1,18.2,0.44,1.28,52.0,467.0,"7/11/2014",[]],["M9",3,1,"1 cm wide PMMA 3 mm thick",2,"3.3 4.8;66 79","10 14",156.0,18.0,17.6,0.26,0.54,0.0,191.0,"7/11/2014",[]],["M10",3,1,"4 mm thick 1 cm wide PMMA slab",2,"75 105 94/91 72/69 63/61 (4.4 8.0 6.6/6.3 4.0/3.7 3/0/2.7)","10 17 14 10 8",209.0,20.1,18.6,0.36,1.59,-1.0,536.0,"7/23/2014",[]],["M11",3,1,"1 cm wide PMMA 5 mm thick",2,"3.9 6.5 4.6 3.3 2.9 2.8; 62.5 93 77 66 63 62","10 20 15 12",247.0,20.0,18.5,0.58,1.68,46.0,577.0,"7/11/2014",[]],["M12",3,1,"2 mm thick PMMA 2 cm wide",1,"41 42 41","<1",271.0,21.7,20.4,0.42,1.42,15.0,443.0,"7/31/2014",[]],["M13",3,1,"4 mm thick PMMA 2 cm wide",1,"52 47 43","6 5 4",258.0,20.8,19.0,0.36,1.75,0.0,487.0,"7/31/2014",[]],["M14",3,1,"2mm thick PMMA 1 sided 2 cm wide",2,"pot 2.4 1.87 (54)","10 ~8",259.0,22.2,21.6,0.45,0.98,0.0,198.0,"2/20/2014",[]],["M15",3,1,"2 cm 4 mm 1 sided PMMA slab",2,"ignited 10 adjusted down then up to 20 down in incrments to 15","10 8 7 8 10 20 18 16 15",153.0,21.0,20.0,0.37,1.1,1.0,220.0,"7/7/2014",[]],["M16",3,1,"1 mm thick PMMA 2 cm wide",2,"73 57 59 48 45 43 75 (4.2 2.2 2.4 1.2 0.8 0.5 4.4)","10 6 3 2 1 10",299.0,19.2,18.7,0.95,1.75,118.0,421.0,"7/23/2014",[]],["M17",3,1,"2 cm wide PMMA 2 mm thick",2,"Fan pot 3.7 1.7 1.5 1.3 0.8 0.6 0.5 0.3ext","10 5 3 0ext",309.0,18.8,17.1,0.35,1.7,4.0,485.0,"7/15/2014",[]],["M18",3,1,"2 cm wide PMMA 3 mm thick",2,"Fan pot 3.5 5 (brief) 3 5 2.2","10 15 (brief) 10 8",178.0,17.9,16.8,0.32,1.31,0.0,335.0,"7/15/2014",[]],["M19",3,1,"4 mm thick 2 cm 2ide PMMA slab",2,"75 105 94 75 77 79 59 61 57 55 53 (4.4 8.0 6.6 4.4 4.6 4.8 2.5 2.7 2.2 2.0 1.8)","10 17 14 10 7 5",201.0,19.0,17.4,0.35,1.6,3.0,357.0,"7/23/2014",[]],["M20",3,1,"5 mm thick PMMA 2 cm wide",1,"67 58","10 8",168.0,18.0,17.4,0.3,0.75,0.0,157.0,"8/1/2014",[]],["O1",4,2,"1/4\" clear rod",2,"89 62 50 41","20 10 5 2 1",62.0,22.2,21.7,0.44,0.85,-1.0,51.0,"2/18/2014",[]],["O2",4,2,"1/4\" clear rod",2,".54 pot 0.45 pot","0",287.0,22.2,21.9,0.44,0.59,-1.0,23.0,"2/18/2014",[]],["O3a",4,2,"1/4\" clear rod",2,"","5 3",85.0,18.0,18.0,0.25,0.28,16.0,22.0,"6/13/2014",[]],["O3b",4,2,"1/4\" clear rod",2,"","5 3 2 1 low",306.0,18.0,17.7,0.28,0.53,22.0,116.0,"6/13/2014",[]],["O4",4,2,"3/8\"clear rod",2,"5 0.7 0.5 0.4 0.36 ext","5 down to ext",249.0,14.8,13.6,0.72,1.72,290.0,null,"7/8/2014",["Air-display column notes extinction."]],["O5a",4,2,"1/2\" clear PMMA rod",2,"1.3 2.7 1.3 0.7 0.45. 4.0","5 10 5 2 0 (49 62 49 44 42)",164.0,15.1,14.2,0.25,1.05,-2.0,496.0,"7/21/2014",[]],["O5b",4,2,"1/2\" clear PMMA rod",2,"1.3","49 5 cm/s",2.0,14.2,14.1,1.05,1.14,496.0,590.0,"7/21/2014",[]],["O6",4,2,"1/4\" clear rod",2,"5 .36 .32 .31 .305 out .275","see fan",241.0,16.7,16.0,0.32,0.74,1.0,232.0,"6/26/2014",[]],["O7",4,2,"1/4\" clear rod",2,"5 .36 .32 ..305 blowoff fan max 10","",254.0,16.0,15.5,0.74,1.27,232.0,512.0,"6/26/2014",[]],["O8a",4,2,"1/4\" clear rod",2,"5 .36 .32 .31 extinguished","",133.0,15.7,15.3,1.23,1.44,436.0,536.0,"6/26/2014",[]],["O8b",4,2,"1/4\" clear rod",2,"5 .36 .32 .31 blowoff fan pot 6.0","",152.0,15.5,15.2,1.44,1.74,536.0,660.0,"6/26/2014",[]],["O9",4,2,"1/4\" clear rod",2,"5 .36 .32 blowoff pt 4.0","",154.0,15.0,14.8,1.74,1.96,660.0,794.0,"6/26/2014",[]],["O10",4,2,"1/4\" clear rod",2,"49 44 41 122 (1.3 0.7 0.4 0.36 0.32 10)","5 2 0 max",172.0,16.7,16.1,1.61,2.1,94.0,287.0,"7/22/2014",[]],["O11",4,2,"1/4\" black rod",2,"ign 5 0.36 0.32 0.31 0.305 blowoff 6.0","5 down then blowoff",271.0,15.4,14.8,0.27,0.72,2.0,290.0,"7/8/2014",["Air-display column notes blowoff."]],["O12",4,2,"3/8\" clear rod",2,"pots 1.4 3 0.9 0.7","no ign at any flow",52.0,13.6,13.5,1.72,1.71,null,null,"7/8/2014",[]],["O13a",4,2,"1/2\" clear PMMA rod",2,"1.3 0.7 0.45 0.36 0.32 0.31","49 44 42 41 41 40.5 (5 2 0)",199.0,15.9,14.6,0.91,1.85,389.0,950.0,"7/21/2014",[]],["O13b",4,2,"1/2\" clear PMMA rod",2,"1.3 0.9","7 4? (49 ?)",6.0,14.6,14.4,1.85,2.09,950.0,null,"7/21/2014",[]],["O14",4,2,"1/4\" black rod",1,"52 and down","5 down to ext",279.0,16.3,15.3,0.29,0.86,4.0,352.0,"8/1/2014",["Air-display column notes extinction."]],["O15a",4,2,"3/8\" clear rod",2,"57.5 47 42 41 (2.3 1.0 0.5 0.35 0.32)","5 0",124.0,17.1,16.7,0.27,0.62,0.0,176.0,"7/28/2014",[]],["O15b",4,2,"3/8\" clear rod",2,"57.5 42 41 40 (2.3 0.5 0.35 0.34 0.33 0.32 0.31 0.30 0.29 0.28 0.27)","5 0",316.0,16.7,15.6,0.62,1.63,176.0,751.0,"7/28/2014",[]],["O16",4,2,"3/8\"clear rod",2,"60 (2.6)","5",null,14.5,14.5,0.27,0.32,2.0,33.0,"7/29/2014",[]],["O17",4,2,"1/4\" clear rod",2,"49 46.5 44 42 41 72 decr (1.3 1.0 0.7 0.5 0.4 4.0 decr )","3 0 11",174.0,15.1,14.3,0.31,0.9,2.0,377.0,"7/22/2014",[]],["O18",4,2,"1/4\" clear rod",2,"57 51 47 72 51 72 51 47 (2.3 1.5 1.0 4.0 1.5 4.0 1.5 1.0)","5 2 0 11 2 11 2 0",176.0,15.2,14.5,1.45,1.94,523.0,816.0,"7/28/2014",[]],["O19",4,2,"1/4\" clear rod",1,"52 and down","5 down to ext",266.0,15.3,14.6,0.86,1.51,352.0,686.0,"8/1/2014",["Air-display column notes extinction."]],["O20",4,2,"1/4\" clear rod",0,"49 (1.3 pot) pots 7 8 9 10","5 8 incr to max 38.5",null,16.5,15.9,0.2,0.57,-3.0,57.0,"2/26/2016",[]],["O21",4,2,"3/8\" clear rod",0,"46 (pot 0.8) pot 7 10","incr to 28",null,15.9,15.4,0.53,0.95,52.0,187.0,"2/26/2016",[]],["O22",4,2,"1/2\" clear rod",0,"49 (pot 1.1) blowoff pot 5 out at fan 87","4 incr to 26.5",null,15.4,14.9,0.92,1.33,185.0,322.0,"2/26/2016",[]],["P1",2,2,"1/4\" black rod",2,"","5 2 slow decr to ext",307.0,17.7,17.5,0.27,0.44,1.0,14.0,"6/16/2014",["Air-display column notes extinction."]],["P2",2,2,"1/4\" black rod",2,"","5 2.5 2 (pot .9 .5 .35. .33)",303.0,17.4,17.2,0.44,0.66,14.0,26.0,"6/16/2014",[]],["P3a",2,2,"1/4\" clear rod",2,"","5 2.5 (1.15 .5 .35 .33. .32 .315 .31 .3)",304.0,17.7,17.4,0.27,0.51,2.0,33.0,"6/16/2014",[]],["P3b",2,2,"1/4 clear rod",2,"","5 very low (0.85 0.32 0.31 0.305 0.30 0.295)",303.0,17.4,16.8,0.51,null,33.0,79.0,"6/16/2014",[]],["P4",2,2,"3/8\" black rod",2,"48 41","5 pots 0.4 0.36 0.32 0.308 .3 off",297.0,18.5,17.1,0.62,1.8,64.0,493.0,"7/3/2014",[]],["P5",2,2,"0.5\" black rod",2,"Fan pot 1.5 (5cm/s) 0.9 0.4 0.36 0.32 0.308 0.3 0.29 0.28 0 ext","5 down to ext",313.0,19.3,17.6,0.32,1.67,0.0,525.0,"7/14/2014",["Air-display column notes extinction."]],["P6",2,2,"1/4\" black rod",2,"48 41","5 pots 0.4 0.36 0.32 0.31 off",162.0,18.9,18.5,0.3,0.62,0.0,64.0,"7/3/2014",[]],["P8",2,2,"3/8\" black rod",2,"48 62 75","5 would not stay lit 10 15 ibid",66.0,16.4,16.3,0.72,0.81,44.0,69.0,"7/3/2014",[]],["P9",2,2,"0.5\" black rod",2,"Fan pot 1.5 (5cm/s) 0.9 0.4 0.36 0.32 0.3 0.28 ext","5 down to ext",148.0,17.6,17.1,1.67,2.1,525.0,535.0,"7/14/2014",["Air-display column notes extinction."]],["P10",2,2,"1/4\" black rod",2,"48 41","5 pots 0.4 0.36 0.32 0.31 0.30 extinguished",221.0,17.0,16.4,0.29,0.72,2.0,44.0,"7/3/2014",[]],["P12",2,2,"3/8\" black rod",2,"60 52 48 44.5 42 41.5 41 (2.6 1.6 1.2 .75 .5 .4 .36 0.34)","5 3 2 1 0.5 lower",273.0,17.5,16.8,0.29,0.95,2.0,57.0,"7/29/2014",[]],["P13a",2,2,"0.5\" black rod",2,"Fan pot 1.1 (5cm/s) 0.4 0.36 0.32 0.3 0.28 0.26 0 ext","5 down to ext",255.0,20.7,19.1,0.36,1.63,38.0,450.0,"7/14/2014",["Air-display column notes extinction."]],["P13b",2,2,"0.5\" black rod",2,"Fan pot 1.3 (5cm/s) 0.4 0.36 0.32 ext","5 down to ext",94.0,20.6,20.2,0.41,0.62,5.0,72.0,"7/14/2014",["Air-display column notes extinction."]],["P14",2,2,"1/4 blac rod",2,"46 41","5 low (.85 .4 .32)",162.0,18.4,18.0,0.34,0.62,3.0,90.0,"6/23/2014",[]],["P15",2,2,"1/4 black rod",2,"46 41","5 (0.36)",170.0,18.0,17.5,0.62,1.11,90.0,108.0,"6/23/2014",[]],["P16",2,2,"1/4\" black rod",2,"49 62 44 41.5 41 (pots 1.3 2.8 0.7 0.4 0.36 0.32)","5 8 2 low",129.0,18.2,17.4,0.3,0.92,0.0,56.0,"7/22/2014",[]],["P17",2,2,"1/4\" black rod",2,"60 52 48 233 48 41 (2.6 1.6 1.2 10 1.2 0.36 0.34)","5 3 2 22 2 low",186.0,16.8,16.5,0.95,1.34,57.0,68.0,"7/29/2014",[]],["P18",2,2,"1/4\" black rod",2,"55 47 etc (pot 1 2 1 2 etc)","2 0 2 0 etc",280.0,20.0,19.0,0.34,1.2,1.0,26.0,"7/30/2014",[]],["P19",2,2,"1/4\" black rod",2,"49 62 44 41.5 122 41 (pots 1.3 2.8 0.7 0.4 0.36 10. 0.32)","5 8 2 max 0",279.0,17.5,16.7,0.9,1.61,54.0,94.0,"7/22/2014",[]],["P20",2,2,"1/4\" black rod",2,"55 47 etc (pot 1 2 1 2 etc)","2 0 2 0 etc",311.0,19.0,18.2,0.34,1.05,2.0,78.0,"7/30/2014",[]],["P21a",2,2,"1/4 black rod",2,"46","5",57.0,16.3,16.3,0.96,1.0,86.0,94.0,"6/23/2014",[]],["P21b",2,2,"1/4\" black rod",2,"46","5",14.0,16.3,16.3,1.0,1.03,94.0,98.0,"6/23/2014",[]],["P22a",2,2,"3/8\" black rod",2,"5 0.36 0.32 ext after some time","5 down to ext",83.0,20.8,null,0.32,null,4.0,null,"7/8/2014",["Final O₂ reading of 0.6% looks like a sensor or entry error, so it is excluded from drawdown.","Air-display column notes extinction."]],["P22b",2,2,"3/8\" black rod",2,"5 p.36 0.34 0.33 0.32 0.31 ext","5 down to ext",155.0,20.0,null,null,1.09,null,239.0,"7/8/2014",["Final O₂ reading of 39.1% looks like a sensor or entry error, so it is excluded from drawdown.","Air-display column notes extinction."]],["P23",2,2,"3/8\" black rod",2,"55 47 etc (pot 1 2 1 2 etc)","2 0 2 0 etc",242.0,18.2,17.0,1.05,2.08,78.0,159.0,"7/30/2014",[]],["P24",2,2,"3/8\" black rod",2,"55 47 etc (pot 1 2 1 2 etc)","2 0 2 0 etc",308.0,19.0,17.5,1.2,2.24,26.0,260.0,"7/30/2014",[]],["P25",2,2,"3/8\" clear rod",2,"5 p.36 0.34 0.33 0.32 0.31 ext","5 down to ext",246.0,20.9,20.2,0.38,1.0,43.0,205.0,"7/8/2014",["Air-display column notes extinction."]],["T1",5,3,"2 cm SIBAL",2,"80","10",85.0,18.5,18.5,0.35,0.41,0.0,40.0,"2/14/2014",[]],["T2",5,3,"2 cm SIBAL",2,"80 59 55","9 5 4",100.0,18.5,18.5,0.41,0.45,40.0,78.0,"2/14/2014",[]],["T3",5,5,"4 cm spherical section",2,"63","10",166.0,17.2,16.8,0.42,0.7,45.0,113.0,"6/27/2014",[]],["T4",5,3,"2 cm SIBAL",2,"80 46","9 1",97.0,18.7,18.7,0.44,0.45,59.0,72.0,"2/14/2014",[]],["T5",5,3,"2 cm SIBAL",2,"2.72 0.50 0.42","10 2 1",100.0,18.8,18.9,0.2,0.25,2.0,41.0,"4/10/2014",[]],["T6",5,3,"2 cm SIBAL",2,"","5 2 1 <1",117.0,18.8,18.8,0.24,0.28,39.0,77.0,"4/10/2014",[]],["T7",5,5,"4 cm spherical section",2,"3.4 67","10 5 3 1 decr",299.0,17.3,17.1,0.32,0.59,49.0,140.0,"7/9/2014",[]],["T9",5,3,"2 cm SIBAL",2,"pot 2.5","10",48.0,16.4,16.4,0.3,0.31,0.0,9.0,"6/24/2018",[]],["T10",5,3,"2 cm SIBAL",2,"pot 1.1","5",43.0,16.4,16.5,0.31,0.33,9.0,14.0,"6/24/2014",[]],["T11",5,3,"2 cm SIBAL",2,"48","5",109.0,17.1,17.0,0.35,0.39,1.0,45.0,"6/27/2014",[]],["T12",5,3,"2 cm SIBAL",2,"pot 1.1","5",39.0,16.8,16.9,0.7,0.7,113.0,117.0,"6/27/2014",[]],["T13",5,3,"2 cm SIBAL",2,"","5 1",55.0,17.5,17.6,0.19,0.2,2.0,12.0,"4/10/2014",[]],["T14",5,3,"2 cm SIBAL",2,"","5 3",119.0,16.9,16.9,0.7,0.72,117.0,152.0,"6/27/2014",[]],["T15",5,3,"2 cm SIBAL",0,"80122","9 29",46.0,18.7,18.7,0.45,0.51,72.0,102.0,"2/14/2014",[]],["T16",5,3,"2 cm SIBAL",2,"","5 3",100.0,17.6,17.5,0.21,0.21,17.0,41.0,"4/10/2014",[]],["T17",5,3,"2 cm SIBAL",0,"","6 53",83.0,16.9,16.9,0.72,0.75,152.0,190.0,"6/27/2014",[]],["T18",5,3,"2 cm SIBAL",2,"","5 2",49.0,17.4,17.4,0.36,0.38,2.0,22.0,"6/24/2018",[]],["T19",5,3,"1 cm SIBAL",2,"68.5 pot 3.6","11",73.0,17.2,17.2,0.29,0.31,1.0,20.0,"7/9/2014",[]],["T20",5,3,"1 cm SIBAL",2,"3.6 0.9","11 3",117.0,17.2,17.2,0.31,0.31,20.0,34.0,"7/9/2014",[]],["T21",5,3,"1 cm SIBAL",0,"1.6 pot 52","11 max(47)",151.0,17.2,17.2,0.31,0.32,34.0,45.0,"7/9/2014",[]],["T22",5,3,"1 cm SIBAL",2,"3.4 1.7","10 5",38.0,17.1,17.0,0.59,0.62,140.0,162.0,"7/9/2014",[]],["T23",5,3,"2 cm Sibal moved igniter",2,"3.3 66","10",203.0,17.2,17.3,0.32,0.32,45.0,49.0,"7/9/2014",[]],["T24",5,3,"1 cm SIBAL top side ign",2,"3.3 66","10",130.0,18.2,18.2,0.51,0.53,85.0,107.0,"7/9/2014",[]],["T25",5,3,"2 cm SIBAL",1,"53 45","5 2.5",75.0,20.8,20.7,0.36,0.39,-1.0,17.0,"8/4/2014",[]],["T26",5,3,"2 cm SIBAL",1,"53 45","5 2.5",87.0,20.8,20.7,0.36,0.43,-1.0,24.0,"8/4/2014",[]],["T27",5,3,"1 cm SIBAL",1,"53 45","5 2",58.0,20.7,20.6,0.41,0.42,-1.0,9.0,"8/4/2014",[]],["T28a",5,3,"1 cm SIBAL",1,"53","5",19.0,20.7,null,0.41,null,-1.0,null,"8/4/2014",["Final O₂ reading of 0.9% looks like a sensor or entry error, so it is excluded from drawdown."]],["T28b",5,3,"1 cm SIBAL",1,"53","5",27.0,20.7,null,null,0.42,null,2.0,"8/4/2014",["Final O₂ reading of 40.4% looks like a sensor or entry error, so it is excluded from drawdown."]],["T29",5,3,"1 cm SIBAL",1,"53 43","5 2(?)",60.0,20.7,20.5,0.41,0.44,-1.0,10.0,"8/4/2014",[]]],"f":["PMMA film","PMMA slab","Rod (clear or black)","SIBAL fabric","Nomex","Spherical section","Candle"],"p":["Bhattacharjee","Ferkul","Fernandez-Pello","Miller","Olson","T'ien"]};
+
 const T=DATA.t.map(a=>({id:a[0],pi:a[1],fam:a[2],s:a[3],flow:a[4],fan:a[5],air:a[6],fr:a[7],oi:a[8],of:a[9],ci:a[10],cf:a[11],ki:a[12],kf:a[13],date:a[14],fl:a[15]}));
-T.forEach(t=>{t.dco=t.ki!=null&&t.kf!=null?t.kf-t.ki:null;t.dox=t.oi!=null&&t.of!=null?+(t.oi-t.of).toFixed(2):null});
+const FN=DATA.f,PN=DATA.p;
+function evOf(t){const s=((t.fan||"")+" | "+(t.air||"")).toLowerCase(),e=[];
+ if(/blow\s?off/.test(s))e.push("blowoff");
+ if(/ext|\bout\b|(^|\s)off$/.test(s))e.push("extinction");
+ if(/no ign|not stay lit/.test(s))e.push("no-ignition");return e}
+T.forEach(t=>{
+ t.dco=t.ki!=null&&t.kf!=null?t.kf-t.ki:null;
+ t.dox=t.oi!=null&&t.of!=null?+(t.oi-t.of).toFixed(2):null;
+ t.dco2=t.ci!=null&&t.cf!=null?+(t.cf-t.ci).toFixed(2):null;
+ const m=t.id.match(/^([A-Z])(\d+)([ab]?)$/);t.ik=m[1].charCodeAt(0)*10000+(+m[2])*10+(m[3]?m[3].charCodeAt(0)-96:0);
+ const d=t.date.split("/").map(Number);t.dt=new Date(d[2],d[0]-1,d[1]);t.yr=d[2];t.ev=evOf(t)});
+const maxO=Math.max(...T.map(t=>t.oi)),minO=Math.min(...T.map(t=>t.oi));
+
+/* ================= ANALYST ENGINE (pure JS, no network, no AI service) ================= */
+const Analyst=(()=>{
+ const mem={last:null};
+ const med=a=>{a=a.filter(z=>z!=null&&!isNaN(z)).sort((p,q)=>p-q);if(!a.length)return null;const m=a.length>>1;return a.length%2?a[m]:(a[m-1]+a[m])/2};
+ const n1=(v,d=1)=>v==null||isNaN(v)?"n/a":String(+(+v).toFixed(d));
+ const sg=(v,u="")=>v==null?"n/a":(v>0?"+":"")+n1(v,2)+u;
+ const pl=(n,w,p)=>n+" "+(n==1?w:(p||w+"s"));
+ const ch=(a,max=8)=>a.slice(0,max).map(t=>`[[${t.id}]]`).join(" ")+(a.length>max?` and ${a.length-max} more`:"");
+ const topN=(ts,k,n,desc=true)=>ts.filter(t=>t[k]!=null).sort((a,b)=>desc?b[k]-a[k]:a[k]-b[k]).slice(0,n);
+ const BANDS=[12,14,16,18,20,22];
+ const bandRows=ts=>BANDS.map(b=>[`${b}–${b+2}%`,ts.filter(t=>t.oi>=b&&t.oi<b+2).length,null]);
+ const range=ts=>{const v=ts.map(t=>t.oi);return n1(Math.min(...v))+"–"+n1(Math.max(...v))+"%"};
+ const PIRE=[[/bhattacharjee|bhatt/,0],[/ferkul/,1],[/fernandez|pello/,2],[/miller/,3],[/olson/,4],[/t'?ien\b|\btien\b/,5]];
+ const SPEC=[[/\bfilms?\b/,0],[/\bslabs?\b/,1],[/\brods?\b|cylinder/,2],[/sibal|fabric|cloth|cotton|fiberglass/,3],[/nomex|aramid/,4],[/spher/,5],[/candle|wax/,6]];
+
+ function ents(q,cx){
+  cx=cx||{};
+  const L=q.toLowerCase().replace(/co₂/g,"co2").replace(/o₂/g,"o2").replace(/\(clear or black\)/g,""),e={q,L,ids:[],fams:[],pis:[],o2:null,range:null,attr:null,cx,dial:false};
+  const seen=new Set();
+  for(const m of q.matchAll(/\b([bfmopt]\d{1,2}[ab]?)\b/gi)){
+   const id=m[1][0].toUpperCase()+m[1].slice(1).toLowerCase();
+   if(id==="O2"&&!(/test\s+o2\b/i.test(q)||q.trim().toLowerCase()==="o2"))continue;
+   let hit=T.filter(t=>t.id===id);
+   if(!hit.length)hit=T.filter(t=>t.id.startsWith(id)&&/^[ab]$/.test(t.id.slice(id.length)));
+   hit.forEach(t=>{if(!seen.has(t.id)){seen.add(t.id);e.ids.push(t)}})}
+  if(!e.ids.length&&cx.sel&&/\b(this|selected|current|open)\s+(test|one|run|row)\b|\bthis one\b/.test(L)){const t=T.find(x=>x.id===cx.sel);if(t)e.ids.push(t)}
+  if(/\b(dial|my setting|where i set|current setting|current oxygen)\b/.test(L))e.dial=true;
+  let m=L.match(/between\s+(\d+(?:\.\d+)?)\s*(?:%|o2|oxygen)?\s*(?:and|to|-|–)\s*(\d+(?:\.\d+)?)/)||L.match(/(\d+(?:\.\d+)?)\s*(?:%|percent)?\s*(?:to|-|–)\s*(\d+(?:\.\d+)?)\s*(?:%|percent)/);
+  if(m){const a=+m[1],b=+m[2];if(a>=5&&b<=100&&a<b)e.range=[a,b]}
+  if(!e.range){m=L.match(/(\d+(?:\.\d+)?)\s*(?:%|percent|per cent)/)||L.match(/\b(?:at|near|around|about|above|over|under|below|than)\s+(\d{2}(?:\.\d+)?)\b/);if(m&&+m[1]>=5&&+m[1]<=100)e.o2=+m[1]}
+  if(e.o2==null&&!e.range&&/earth('s)? air|normal air|ordinary air|sea level|room air/.test(L))e.o2=20.9;
+  const found=[];SPEC.forEach(([re,f])=>{const x=L.match(re);if(x)found.push([x.index,f])});
+  if(!found.length){const x=L.match(/pmma|plexi|acrylic/);if(x)found.push([x.index,0],[x.index+1,1])}
+  found.sort((a,b)=>a[0]-b[0]);e.fams=[...new Set(found.map(x=>x[1]))];
+  if(/\bblack\b/.test(L))e.attr="black";else if(/\bclear\b/.test(L))e.attr="clear";
+  PIRE.forEach(([re,i])=>{if(re.test(L))e.pis.push(i)});
+  return e}
+
+ function scope(e){let ts=T;const lab=[];
+  if(e.fams.length){ts=ts.filter(t=>e.fams.includes(t.fam));lab.push(e.fams.map(f=>FN[f]).join(" + "))}
+  if(e.attr&&(e.fams.length==0||e.fams.includes(2))){ts=ts.filter(t=>t.s.toLowerCase().includes(e.attr));lab.push(e.attr+" only")}
+  if(e.pis.length){ts=ts.filter(t=>e.pis.includes(t.pi));lab.push("run by "+e.pis.map(p=>PN[p]).join(" + "))}
+  return{ts,label:lab.join(", ")||"all "+T.length+" tests"}}
+ const filtered=e=>e.fams.length||e.attr||e.pis.length;
+
+ const H={};
+ H.greet=()=>({md:`Hi! I’m the data analyst for this page. I’ve read all ${T.length} BASS-II rows and I answer only from them. Ask about fuels, oxygen, CO, or a test by name like **B13** or **T21**.`,follow:["Is there any test near Moon base air?","Which fuel had the biggest CO rise?","Give me an overview of the data"]});
+ H.thanks=()=>({md:"Anytime. Ask another, or open a test chip to see its full record.",follow:["Which tests mention blowoff or extinction?","Which researcher ran the most tests?"]});
+ H.help=()=>({md:`Here’s what I can do, all from the table:\n\n• Look up any test (**B13**, **O5a**, **T21**) or compare two or three\n• Summarise a fuel group, or compare groups (SIBAL fabric vs PMMA film)\n• Rank tests by CO rise, CO₂ rise, oxygen drawdown or frame count\n• Show how much evidence sits near any oxygen level, like 18% or Moon base air\n• Filter by researcher, rod colour (black or clear), or date\n• List data-quality flags and notes that mention extinction or blowoff\n\nI can’t tell you outcomes (burned out, blew off, never ignited) because the table has no such column.`,follow:["Compare B13 with B15","Which tests are near 18% oxygen?","What are the data quality flags?"]});
+
+ H.lookup=e=>{
+  if(e.ids.length>1)return H.cmpTests(e);
+  const t=e.ids[0];
+  let s=`**${t.id}** is ${t.s} (${FN[t.fam]}), run by ${PN[t.pi]} on ${t.date}.\n\n`;
+  s+=`• Oxygen: started at **${n1(t.oi)}%**${t.of!=null?`, ended at ${n1(t.of)}% (drawdown ${n1(t.dox,2)} points)`:", end reading not usable"}\n`;
+  s+=`• Carbon monoxide: ${t.ki!=null&&t.kf!=null?`${n1(t.ki)} → ${n1(t.kf)} ppm (${sg(t.dco," ppm")})`:t.ki!=null?`started at ${n1(t.ki)} ppm, end not recorded`:t.kf!=null?`ended at ${n1(t.kf)} ppm, start not recorded`:"not recorded"}\n`;
+  s+=`• Carbon dioxide: ${t.ci!=null&&t.cf!=null?`${n1(t.ci,2)}% → ${n1(t.cf,2)}% (${sg(t.dco2," pts")})`:"partly recorded"}\n`;
+  s+=`• Frames shot: ${n1(t.fr,0)}, flow restrictor ${t.flow}\n`;
+  if(t.air)s+=`• Air display note: “${t.air}”\n`;
+  t.fl.forEach(f=>s+=`• Flag: ${f}\n`);
+  s+=`\nThe table doesn’t record whether ${t.id} burned out, blew off or never ignited.`;
+  if(t.ev.length)s+=` Its display columns do mention ${t.ev.join(" and ")}, which is a hint, not a result.`;
+  const sim=T.filter(x=>x!==t&&Math.abs(x.oi-t.oi)<=.3).sort((a,b)=>(a.fam==t.fam?0:1)-(b.fam==t.fam?0:1));
+  if(sim.length)s+=`\n\nTests at nearly the same oxygen: ${ch(sim,6)}`;
+  const other=sim[0]||T[(T.indexOf(t)+1)%T.length];
+  return{md:s,follow:[`Compare ${t.id} with ${other.id}`,`Which tests are near ${n1(t.oi)}% oxygen?`,`Tell me about ${FN[t.fam]}`]}};
+
+ H.cmpTests=e=>{
+  const ts=e.ids.slice(0,3);
+  const cell=(f)=>ts.map(f);
+  const rows=[["Fuel group",...cell(t=>FN[t.fam])],["Sample",...cell(t=>t.s)],["Researcher",...cell(t=>PN[t.pi])],["Date",...cell(t=>t.date)],
+   ["Start O₂",...cell(t=>n1(t.oi)+"%")],["End O₂",...cell(t=>t.of==null?"n/a":n1(t.of)+"%")],["O₂ drawdown",...cell(t=>t.dox==null?"n/a":n1(t.dox,2)+" pts")],
+   ["CO rise",...cell(t=>t.dco==null?"n/a":sg(t.dco," ppm"))],["CO₂ rise",...cell(t=>t.dco2==null?"n/a":sg(t.dco2," pts"))],["Frames",...cell(t=>n1(t.fr,0))]];
+  let s=`Side by side: ${ts.map(t=>`[[${t.id}]]`).join(", ")}.\n\n`;
+  const hiO=topN(ts,"oi",1)[0],hiCO=topN(ts,"dco",1)[0];
+  if(ts.every(t=>t.oi===ts[0].oi))s+=`• All started at the same oxygen, ${n1(ts[0].oi)}%.\n`;else s+=`• Richest oxygen at the start: **${hiO.id}** (${n1(hiO.oi)}%).\n`;
+  if(hiCO)s+=`• Biggest CO rise: **${hiCO.id}** (${sg(hiCO.dco," ppm")}).\n`;
+  s+=`\nDifferent fuels, geometries and run times make single-number comparisons rough, so treat these as context, not a ranking.`;
+  if(e.ids.length>3)s+=` (Showing the first 3 of ${e.ids.length}.)`;
+  return{md:s,viz:{type:"table",head:["",...ts.map(t=>t.id)],rows},follow:[`Tell me about ${ts[0].id}`,"What are the data quality flags?","Is there any test near Moon base air?"]}};
+
+ H.cmpFuels=e=>{
+  const fs=e.fams.slice(0,4);
+  const info=fs.map(f=>{const a=T.filter(t=>t.fam==f&&(e.pis.length==0||e.pis.includes(t.pi)));return{f,a,n:a.length,rg:a.length?range(a):"n/a",mc:med(a.map(t=>t.dco)),xc:a.length?Math.max(...a.map(t=>t.dco==null?-1e9:t.dco)):null,md:med(a.map(t=>t.dox))}});
+  const rows=info.map(i=>[FN[i.f],i.n,i.rg,i.mc==null?"n/a":sg(i.mc," ppm"),i.xc==null||i.xc<-1e8?"n/a":sg(i.xc," ppm"),i.md==null?"n/a":n1(i.md,2)+" pts"]);
+  const withC=info.filter(i=>i.mc!=null).sort((a,b)=>b.mc-a.mc);
+  let s=`Comparing **${info.map(i=>FN[i.f]).join("** and **")}**:\n\n`;
+  info.forEach(i=>s+=`• **${FN[i.f]}**: ${pl(i.n,"test")}, starting oxygen ${i.rg}\n`);
+  if(withC.length>1)s+=`\nBy median CO rise, **${FN[withC[0].f]}** is higher (${sg(withC[0].mc," ppm")} vs ${sg(withC[1].mc," ppm")} for ${FN[withC[1].f]}).`;
+  s+=`\n\nThese groups were tested at different oxygen levels, flows and burn lengths, so this isn’t a like-for-like fuel ranking.`;
+  return{md:s,viz:{type:"table",head:["Group","Tests","Start O₂","Median CO rise","Max CO rise","Median O₂ drawdown"],rows},follow:[`Tell me about ${FN[info[0].f]}`,"Which fuel had the biggest CO rise?","Is there any test near Moon base air?"]}};
+
+ H.fuel=e=>{
+  const{ts,label}=scope(e);
+  if(!ts.length)return{md:`I found no tests for **${label}**. Try a fuel group like PMMA film, PMMA slab, rod, SIBAL fabric, Nomex, spherical section or candle.`,follow:["Give me an overview of the data"]};
+  mem.last="fuel";
+  const pis=[...new Set(ts.map(t=>PN[t.pi]))],ds=ts.filter(t=>t.dco!=null),big=topN(ts,"dco",1)[0],samp=[...new Set(ts.map(t=>t.s))];
+  let s=`**${label}**: ${pl(ts.length,"test")}, run by ${pis.join(" and ")}.\n\n`;
+  s+=`• Starting oxygen ${range(ts)} (median ${n1(med(ts.map(t=>t.oi)))}%)\n`;
+  if(ds.length)s+=`• CO rose a median of ${sg(med(ds.map(t=>t.dco))," ppm")}, most in [[${big.id}]] (${sg(big.dco," ppm")})\n`;
+  s+=`• ${samp.length} distinct sample descriptions, e.g. “${samp[0]}”\n`;
+  s+=`• None at Moon base oxygen: the richest ${label==="all "+T.length+" tests"?"":"in this group "}starts at ${n1(Math.max(...ts.map(t=>t.oi)))}%\n\n`;
+  s+=`Tests: ${ch(ts,10)}`;
+  const f0=e.fams.length==1?FN[e.fams[0]]:null;
+  return{md:s,viz:{type:"bars",unit:" tests",rows:bandRows(ts)},follow:[f0?`${f0} CO rise`:"Which fuel had the biggest CO rise?",f0?`Which ${f0} tests mention extinction?`:"Which tests mention blowoff or extinction?","Is there any test near Moon base air?"]}};
+
+ const gas=(e,k)=>{
+  const key=k=="co"?"dco":"dco2",u=k=="co"?" ppm":" pts",nm=k=="co"?"CO":"CO₂",{ts,label}=scope(e),has=ts.filter(t=>t[key]!=null);
+  mem.last=k;
+  if(!has.length)return{md:`I have no usable ${nm} readings for **${label}**.`};
+  const tops=topN(has,key,5);let s,viz;
+  if(!filtered(e)){
+   const per=FN.map((n,f)=>{const a=has.filter(t=>t.fam==f);return a.length?{f,n,mx:Math.max(...a.map(t=>t[key])),md:med(a.map(t=>t[key]))}:null}).filter(Boolean);
+   const bm=per.slice().sort((a,b)=>b.mx-a.mx)[0],bd=per.slice().sort((a,b)=>b.md-a.md)[0],bt=has.find(t=>t.fam==bm.f&&t[key]==bm.mx);
+   s=`**${bm.n}** had the single biggest ${nm} rise: ${sg(bm.mx,u)} in [[${bt.id}]]. By median, **${bd.n}** leads at ${sg(bd.md,u)}.\n\nTop 5 individual tests: ${tops.map(t=>`[[${t.id}]] ${sg(t[key],u)}`).join(", ")}.`;
+   viz={type:"bars",unit:u,rows:per.sort((a,b)=>b.mx-a.mx).map(p=>[p.n,p.mx,p.f])}
+  }else{
+   s=`In **${label}**, ${nm} rose by a median of ${sg(med(has.map(t=>t[key])),u)} across ${pl(has.length,"test")}.\n\nBiggest rises: ${tops.map(t=>`[[${t.id}]] ${sg(t[key],u)}`).join(", ")}.`;
+   viz={type:"bars",unit:u,rows:tops.map(t=>[t.id,t[key],t.fam])}}
+  s+=`\n\nRises are final minus initial readings, so they depend on burn time, oxygen and chamber setup as much as on the fuel.`+(k=="co2"?" CO₂ values are in percentage points.":"");
+  return{md:s,viz,follow:[k=="co"?"Show CO₂ rise by fuel":"Which fuel had the biggest CO rise?","Which tests used the most oxygen?","Is there any test near Moon base air?"]}};
+ H.co=e=>gas(e,"co");H.co2=e=>gas(e,"co2");
+
+ H.dd=e=>{
+  const{ts,label}=scope(e),has=ts.filter(t=>t.dox!=null),tops=topN(has,"dox",5);mem.last="dd";
+  if(!has.length)return{md:`No usable oxygen drawdown values for **${label}**.`};
+  let s=`Oxygen drawdown is start minus end oxygen, in percentage points. For **${label}**, the median is **${n1(med(has.map(t=>t.dox)),2)} points** across ${pl(has.length,"test")}.\n\nLargest drawdowns: ${tops.map(t=>`[[${t.id}]] ${n1(t.dox,2)} pts (${FN[t.fam]})`).join(", ")}.\n\n`;
+  const bad=ts.filter(t=>t.fl.some(f=>/sensor|entry error/.test(f)));
+  s+=`${bad.length?`${pl(bad.length,"test")} (${ch(bad,6)}) had a suspect end reading and ${bad.length==1?"is":"are"} left out. `:""}Drawdown depends on how long the sample burned and the chamber volume, so it isn’t a pure fuel property.`;
+  return{md:s,viz:{type:"bars",unit:" pts",rows:tops.map(t=>[t.id,t.dox,t.fam])},follow:["Which fuel had the biggest CO rise?","What are the data quality flags?","Give me an overview of the data"]}};
+
+ H.moon=e=>{
+  const tg=e.o2!=null&&e.o2>=25?e.o2:30,top=T.filter(t=>t.oi===maxO),gap=+(tg-maxO).toFixed(1),above=T.filter(t=>t.oi>20.9).length,grp=[...new Set(top.map(t=>FN[t.fam]))];
+  let s=`**No test comes close.** The richest atmosphere in the table is **${maxO}%** oxygen, so a ${n1(tg)}% habitat sits **${gap} points** beyond anything tested.\n\n`;
+  s+=`• ${pl(top.length,"test")} reached ${maxO}%: ${ch(top,6)} (${grp.join(", ")})\n• ${above} of ${T.length} started above Earth air (20.9%), none above ${maxO}%\n• Tests at ${n1(tg)}% or more: **0**\n\n`;
+  s+=`So this table can’t say how any of these fuels would behave in Moon base air. Background (not from the table): richer oxygen generally makes materials ignite more easily and flames spread faster, which is why that gap matters.`;
+  const rows=bandRows(T);rows.push([`${n1(tg)}%+`,0,null,"moon"]);
+  return{md:s,viz:{type:"bars",unit:" tests",rows},follow:["Which fuel groups have data above Earth air?","What is the highest oxygen tested?","Which tests are near 22% oxygen?"]}};
+
+ H.dir=e=>{
+  const o=e.o2,up=/\b(above|over|higher than|greater than|more than|exceed\w*|richer than)\b/.test(e.L),{ts,label}=scope(e),hit=ts.filter(t=>up?t.oi>o:t.oi<o),word=up?"above":"below";
+  if(!hit.length)return{md:`**No test** in ${label} starts ${word} ${n1(o)}% oxygen.`,follow:["Give me an overview of the data","Is there any test near Moon base air?"]};
+  const rows=FN.map((n,f)=>[n,hit.filter(t=>t.fam==f).length,f]).filter(r=>r[1]);
+  const ext=up?`none higher than ${n1(Math.max(...hit.map(t=>t.oi)))}%`:`down to ${n1(Math.min(...hit.map(t=>t.oi)))}%`;
+  return{md:`**${hit.length} of ${ts.length} tests** start ${word} ${n1(o)}% oxygen (${ext}).\n\nFuel groups: ${rows.map(r=>`${r[0]} (${r[1]})`).join(", ")}.\n\n${ch(hit,12)}`,viz:{type:"bars",unit:" tests",rows},follow:["Is there any test near Moon base air?","Give me an overview of the data","Which fuel had the biggest CO rise?"]}};
+
+ H.near=e=>{
+  if(e.range)return H.range(e);
+  const o=e.o2!=null?e.o2:e.cx.cab!=null?e.cx.cab:20.9;
+  if(o>=maxO+3)return H.moon({...e,o2:o});
+  const{ts,label}=scope(e),w=ts.slice().sort((a,b)=>Math.abs(a.oi-o)-Math.abs(b.oi-o)),c1=ts.filter(t=>Math.abs(t.oi-o)<=1),c2=ts.filter(t=>Math.abs(t.oi-o)<=2),fg=[...new Set(c1.map(t=>FN[t.fam]))];
+  if(!w.length)return{md:`No tests match **${label}**.`};
+  let s=c1.length?`**${pl(c1.length,"test")}** start within 1 point of ${n1(o)}% oxygen (${c2.length} within 2)${label.startsWith("all")?"":" in "+label}. Fuel groups represented: ${fg.join(", ")}.\n\n`:`**No test starts within 1 point of ${n1(o)}% oxygen**${label.startsWith("all")?"":" for "+label}. The nearest is ${n1(Math.abs(w[0].oi-o))} points away.\n\n`;
+  s+=`Closest:\n`+w.slice(0,6).map(t=>`• [[${t.id}]] ${FN[t.fam]}, ${n1(t.oi)}% (${n1(Math.abs(t.oi-o))} away)`).join("\n");
+  if(e.cx.dial&&e.o2==null)s+=`\n\n(Using the dial’s current setting, ${n1(o)}%.)`;
+  return{md:s,follow:[o<22?"Is there any test near Moon base air?":"Which tests are near Earth air?",`Which tests are between ${n1(o-1)} and ${n1(o+1)}%?`,"Give me an overview of the data"]}};
+
+ H.range=e=>{
+  const[a,b]=e.range,{ts,label}=scope(e),hit=ts.filter(t=>t.oi>=a&&t.oi<=b);
+  if(!hit.length)return{md:`No tests in **${label}** start between ${a}% and ${b}% oxygen.`,follow:["Give me an overview of the data"]};
+  const fg=[...new Set(hit.map(t=>FN[t.fam]))];
+  return{md:`**${pl(hit.length,"test")}** start between ${a}% and ${b}% oxygen${label.startsWith("all")?"":" ("+label+")"}. Fuel groups: ${fg.join(", ")}.\n\n${ch(hit,14)}`,viz:{type:"bars",unit:" tests",rows:FN.map((n,f)=>[n,hit.filter(t=>t.fam==f).length,f]).filter(r=>r[1])},follow:["Give me an overview of the data","Is there any test near Moon base air?"]}};
+
+ H.o2=e=>{
+  if(e.range)return H.range(e);
+  const lo=T.filter(t=>t.oi===minO),hi=T.filter(t=>t.oi===maxO),above=T.filter(t=>t.oi>20.9).length,at=T.filter(t=>Math.abs(t.oi-20.9)<=1).length;
+  let s=`Starting oxygen runs from **${minO}%** (${ch(lo,4)}) to **${maxO}%** (${pl(hi.length,"test")}: ${ch(hi,5)}). The median start is ${n1(med(T.map(t=>t.oi)))}%.\n\n`;
+  s+=`• ${at} tests sit within a point of Earth air (20.9%)\n• ${above} started above Earth air, all at or below ${maxO}%\n• 0 reached the Moon base level of 30%\n\nMost evidence is in the 16–18% band, which is lean air, not rich air.`;
+  const rows=bandRows(T);rows.push(["30%+",0,null,"moon"]);
+  return{md:s,viz:{type:"bars",unit:" tests",rows},follow:["Is there any test near Moon base air?","Which tests are between 17 and 19%?","Which fuel had the biggest CO rise?"]}};
+
+ H.events=e=>{
+  const{ts,label}=scope(e),bl=ts.filter(t=>t.ev.includes("blowoff")),ex=ts.filter(t=>t.ev.includes("extinction")),ni=ts.filter(t=>t.ev.includes("no-ignition"));mem.last="events";
+  let s=`The table has **no outcome column**, so I can’t say which tests burned out, blew off or never ignited. What it does have is free-text notes in the fan and air display columns. In **${label}**:\n\n`;
+  s+=`• ${pl(ex.length,"test")} mention extinction: ${ex.length?ch(ex,10):"none"}\n• ${pl(bl.length,"test")} mention blowoff: ${bl.length?ch(bl,10):"none"}\n• ${pl(ni.length,"test")} note a failure to ignite or stay lit: ${ni.length?ch(ni,6):"none"}\n\n`;
+  s+=`Treat these as hints about what the operators wrote down, not as confirmed results. NASA’s full reports are the place for outcomes.`;
+  return{md:s,viz:{type:"bars",unit:" tests",rows:[["Extinction",ex.length,null],["Blowoff",bl.length,null],["No ignition",ni.length,null]]},follow:["What are the data quality flags?","Is there any test near Moon base air?","Which fuel had the biggest CO rise?"]}};
+
+ H.res=e=>{
+  if(e.pis.length&&e.fams.length)return H.fuel(e);
+  if(e.pis.length){
+   const s=e.pis.map(p=>{const a=T.filter(t=>t.pi==p),fg=FN.map((n,f)=>[n,a.filter(t=>t.fam==f).length]).filter(x=>x[1]).map(x=>`${x[0]} (${x[1]})`),dts=a.map(t=>t.dt).sort((x,y)=>x-y);
+    return`**${PN[p]}** ran ${pl(a.length,"test")} (IDs starting ${a[0].id[0]}), ${range(a)} starting oxygen, dated ${a[0].date===a[a.length-1].date?a[0].date:dts[0].toLocaleDateString("en-US")+" to "+dts[dts.length-1].toLocaleDateString("en-US")}. Fuels: ${fg.join(", ")}.`});
+   return{md:s.join("\n\n"),follow:["Which researcher ran the most tests?","Give me an overview of the data"]}}
+  const rows=PN.map((n,p)=>[n,T.filter(t=>t.pi==p).length,null]).sort((a,b)=>b[1]-a[1]);
+  return{md:`**${rows[0][0]}** ran the most tests (${rows[0][1]}), followed by ${rows[1][0]} (${rows[1][1]}). Six researchers contributed in all. Each test ID starts with a letter that matches the researcher: B, F, P, M, O or T.`,viz:{type:"bars",unit:" tests",rows},follow:[`What did ${rows[0][0]} test?`,`What did ${rows[rows.length-1][0]} test?`,"Give me an overview of the data"]}};
+
+ H.frames=e=>{
+  const{ts,label}=scope(e),tops=topN(ts,"fr",5),lows=topN(ts,"fr",3,false);
+  return{md:`Frame counts in **${label}** have a median of ${n1(med(ts.map(t=>t.fr)),0)}. Most frames: ${tops.map(t=>`[[${t.id}]] ${n1(t.fr,0)}`).join(", ")}. Fewest: ${lows.map(t=>`[[${t.id}]] ${n1(t.fr,0)}`).join(", ")}.\n\n${ts.filter(t=>t.fr==null).length} test(s) have no frame count. Frames show how much imaging a test produced, not how it ended.`,viz:{type:"bars",unit:"",rows:tops.map(t=>[t.id,t.fr,t.fam])},follow:["Give me an overview of the data","Which fuel had the biggest CO rise?"]}};
+
+ H.dates=e=>{
+  const ds=T.slice().sort((a,b)=>a.dt-b.dt),yrs=[...new Set(T.map(t=>t.yr))].sort(),f=ds[0],l=ds[ds.length-1];
+  const odd=T.filter(t=>t.yr!==2014);
+  return{md:`Tests are dated from **${f.date}** ([[${f.id}]]) to **${l.date}** ([[${l.id}]]), as recorded. Almost everything ran in 2014; ${odd.length} rows carry other years: ${ch(odd,8)}. Those stand apart from the 2014 campaign and are shown as the table has them.`,viz:{type:"bars",unit:" tests",rows:yrs.map(y=>[String(y),T.filter(t=>t.yr==y).length,null])},follow:["Which researcher ran the most tests?","What are the data quality flags?"]}};
+
+ H.cols=e=>{
+  const fc=[0,1,2].map(v=>[`Flow restrictor ${v}`,T.filter(t=>t.flow===v).length,null]),bf=T.filter(t=>!t.fan).length,ba=T.filter(t=>!t.air).length;
+  return{md:`The flow restrictor column holds a code of 0, 1 or 2 for every test. The fan and air display columns are free-text instrument notes copied as recorded (${bf} blank fan cells, ${ba} blank air cells), so they’re messy: numbers, “pot”, “ext”, “blowoff” and so on. I don’t interpret the codes beyond what the table says.\n\nOpen any test to see its notes exactly as stored.`,viz:{type:"bars",unit:" tests",rows:fc},follow:["Which tests mention blowoff or extinction?","What are the data quality flags?"]}};
+
+ H.quality=e=>{
+  const bad=T.filter(t=>t.fl.some(f=>/sensor|entry error/.test(f))),noCO=T.filter(t=>t.dco==null),noO=T.filter(t=>t.of==null);
+  return{md:`Data-quality notes from the table:\n\n• **${pl(bad.length,"test")}** have an end oxygen reading that looks like a sensor or entry error and is left out of drawdown: ${ch(bad,10)}\n• ${noO.length} tests have no usable end oxygen\n• ${noCO.length} tests lack a full CO start and end pair: ${ch(noCO,8)}\n• There is no outcome column, so burn-out, blowoff and non-ignition aren’t recorded\n• Fuel groups are assigned by this page’s team from the sample description\n\nEverything else is shown as recorded.`,follow:["Which tests mention blowoff or extinction?","Give me an overview of the data"]}};
+
+ H.about=e=>{const L=e.L;
+  const A=[[/sibal/,"SIBAL is a cotton-fibreglass fabric used in NASA flammability work. Background, not from the table: it was designed to study how flames spread over a thin fabric at low flow speeds."],
+   [/bass/,"BASS-II was a fire experiment on the International Space Station that burned small solid samples in a flow duct in microgravity. Background, not from the table: the name stands for Burning and Suppression of Solids II."],
+   [/psi|database|where.*data|source/,"The numbers come from NASA’s Physical Sciences Informatics database, investigation PSI-25, the BASS-II experimental table. Every figure here is read from that table."],
+   [/saffire/,"Saffire experiments are larger spacecraft fire tests flown on cargo vehicles. They are not in this table. Background: they’re a good next source for fire behaviour at scale."],
+   [/microgravity|freefall|gravity|buoyan|flame (shape|look)/,"Background, not from the table: without gravity there’s no buoyant flow, so flames are rounder, dimmer and can stay lit in slow airflow where they would go out on Earth. That is why ground results can’t simply be reused."],
+   [/why.*(oxygen|30|moon)|higher oxygen|oxygen.*(higher|rich)/,"Background, not from the table: lower-pressure, oxygen-richer cabins are being considered for exploration habitats because they help with suit and airlock logistics, but richer oxygen makes materials easier to ignite. This page shows how little test evidence sits near those levels."],
+   [/space apps|who made|who built|about this|this (page|site|dashboard)/,"This page was built for the 2026 NASA Space Apps Challenge, “Flame in Freefall.” It’s not an official NASA product."]];
+  const hit=A.find(a=>a[0].test(L));
+  return hit?{md:hit[1],follow:["Is there any test near Moon base air?","Give me an overview of the data","Which tests mention blowoff or extinction?"]}:null};
+
+ H.overview=e=>{
+  const rows=FN.map((n,f)=>[n,T.filter(t=>t.fam==f).length,f]),flagged=T.filter(t=>t.fl.length).length;
+  return{md:`**${T.length} tests**, six researchers, seven fuel groups. Starting oxygen runs ${minO}–${maxO}%, and none reaches Moon base air (30%+).\n\n• Biggest group: **${rows.slice().sort((a,b)=>b[1]-a[1])[0][0]}** (${rows.slice().sort((a,b)=>b[1]-a[1])[0][1]} tests)\n• ${flagged} tests carry data notes\n• No outcomes are recorded\n• Dates run ${T.slice().sort((a,b)=>a.dt-b.dt)[0].date} to ${T.slice().sort((a,b)=>b.dt-a.dt)[0].date}`,viz:{type:"bars",unit:" tests",rows},follow:["Is there any test near Moon base air?","Which fuel had the biggest CO rise?","Which researcher ran the most tests?"]}};
+
+ H.fallback=e=>{
+  const stopw=new Set("the a an and or of in on at to for is are was were be been do does did what which who how why when where any all show me tell about give list find with from that this these those it its i you your my our can could would should have has had than then there their they them test tests data table".split(" "));
+  const toks=e.L.replace(/[^a-z0-9/".' -]/g," ").split(/\s+/).filter(w=>w.length>2&&!stopw.has(w));
+  if(toks.length){
+   const hit=T.filter(t=>{const h=(t.id+" "+t.s+" "+t.fan+" "+t.air+" "+FN[t.fam]+" "+PN[t.pi]).toLowerCase();return toks.every(w=>h.includes(w))});
+   if(hit.length&&hit.length<T.length)return{md:`I’m not sure what you’re asking, but ${pl(hit.length,"test")} have records mentioning “${toks.join(" ")}”: ${ch(hit,12)}.\n\nOpen any chip for the full row, or ask a more specific question.`,follow:["Give me an overview of the data","What can you do?"]}}
+  return{md:`I couldn’t match that to anything in the table. I can only answer from the ${T.length} BASS-II rows, so I’d rather say so than guess.\n\nTry a question about a fuel, an oxygen level, CO, a researcher, or a test ID like **B13**.`,follow:["Give me an overview of the data","Is there any test near Moon base air?","What can you do?"]}};
+
+ const R=[
+  ["greet",e=>/^\s*(hi|hello|hey|yo|howdy)\b/.test(e.L)&&e.L.length<30],
+  ["thanks",e=>/^\s*(thanks|thank you|thx|cool|great|nice|awesome|ok|okay)\b/.test(e.L)&&e.L.length<40],
+  ["help",e=>/\b(help|what can you|what do you do|how do i use|what should i ask|examples)\b/.test(e.L)],
+  ["lookup",e=>e.ids.length>0],
+  ["follow",e=>/^\s*(and |what about|how about|same (for|with)|now |also )/.test(e.L)&&mem.last&&(e.fams.length||e.pis.length)],
+  ["why",e=>/\bwhy\b.*(oxygen|30|moon|higher|rich)/.test(e.L)],
+  ["moon",e=>/\b(moon|lunar|habitat|artemis|mars|exploration)\b/.test(e.L)||(e.o2!=null&&e.o2>=25)],
+  ["cmpFuels",e=>e.fams.length>=2],
+  ["events",e=>/blow\s?off|extingu|\bext\b|burn(ed|t)? out|never ignit|not ignit|no ignition|outcome|stay lit|flame out|went out|survive/.test(e.L)],
+  ["co2",e=>/\bco2\b|carbon dioxide/.test(e.L)],
+  ["co",e=>/\bco\b|carbon monoxide|toxic|poison|smoke|\bppm\b/.test(e.L)],
+  ["dd",e=>/drawdown|draw down|consum|used up|oxygen (drop|loss|used|depletion)|o2 (drop|loss|used)|deplet/.test(e.L)],
+  ["dir",e=>e.o2!=null&&!e.range&&/\b(above|over|higher than|greater than|more than|exceed\w*|richer than|below|under|lower than|less than|leaner than)\b/.test(e.L)],
+  ["near",e=>e.o2!=null||e.range||e.dial],
+  ["dates",e=>/\b(when|dates?|year|month|2014|2016|2018|oldest|newest|earliest|latest|timeline)\b/.test(e.L)],
+  ["frames",e=>/frame|video|camera|footage|imaging/.test(e.L)],
+  ["res",e=>e.pis.length>0||/who (ran|did|tested|performed)|researcher|investigator|scientist|\bpi\b/.test(e.L)],
+  ["cols",e=>/flow restrictor|restrictor|\bfan\b|air display|display column|airflow|\bflow\b/.test(e.L)],
+  ["quality",e=>/\bflags?\b|\berror|sensor|missing|suspect|exclude|reliab|trust|data quality|caveat|limitation|\blimits\b/.test(e.L)],
+  ["o2",e=>/highest|lowest|maximum|minimum|\bmax\b|\bmin\b|oxygen|\bo2\b|percent|distribution|spread|atmosphere/.test(e.L)&&!e.fams.length],
+  ["about",e=>/\b(what is|what's|what are|explain|why|how does|how do)\b|bass|psi-?25|saffire|microgravity|freefall|gravity|space station|\biss\b|nasa|space apps|who made|who built|about this/.test(e.L)],
+  ["fuel",e=>e.fams.length>=1||!!e.attr],
+  ["overview",e=>/how many|count|total|summary|overview|dataset|everything|rows|big is|tell me about the data/.test(e.L)]
+ ];
+
+ function answer(q,cx){
+  q=String(q||"").trim().slice(0,400);
+  if(!q)return H.help();
+  const e=ents(q,cx);
+  for(const[name,test]of R){
+   if(!test(e))continue;
+   const a=name=="follow"?H[mem.last](e):name=="why"?H.about(e):H[name](e);
+   if(a){if(["co","co2","dd","events","fuel"].includes(name))mem.last=name;return a}}
+  return H.fallback(e)}
+
+ /* ---- Briefing analysis: deterministic, written from the numbers ---- */
+ function analysis(r,v){
+  v=v||0;const o=r.o,tot=FN.length,c=r.near[0],cov=r.cov.length,dCO=med(r.near.map(t=>t.dco)),foc=r.fi!==""?FN[r.fi]:null;
+  const P=[];
+  if(r.gap>0)P.push(v?`For ${r.hn} at ${n1(o)}% oxygen, the table runs out before your target does. Its richest atmosphere is ${maxO}%, which is ${n1(r.gap)} points short, and nothing here was burned in air like yours.`:`The plain reading: ${r.hn} at ${n1(o)}% oxygen sits ${n1(r.gap)} points above the richest atmosphere in BASS-II (${maxO}%). The table holds zero tests at or near your target.`);
+  else P.push(r.n1?(v?`Good news for ${r.hn} at ${n1(o)}% oxygen: the table is dense here, with ${pl(r.n1,"test")} within a point and ${r.n2} within two.`:`At ${n1(o)}% oxygen the table has real depth: ${pl(r.n1,"test")} within one point and ${r.n2} within two.`):`Even though ${n1(o)}% is inside the table’s ${minO}–${maxO}% span, no test starts within a point of it, so the evidence is thin right where you are.`);
+  let p2=`The closest evidence is ${c.id} (${FN[c.fam]}, ${n1(c.oi)}%). `;
+  p2+=`Within two points there are ${pl(r.n2,"test")}, covering ${cov} of ${tot} fuel groups`+(r.mis.length?`; ${r.mis.join(", ")} ${r.mis.length>1?"have":"has"} nothing nearby.`:`, so every group has something nearby.`);
+  if(dCO!=null)p2+=` In the ${r.near.length} nearest tests, CO rose a median of ${sg(dCO," ppm")}, which describes those runs, not a safe or unsafe level.`;
+  if(foc)p2+=` Filtering to ${foc}, those are the closest rows available.`;
+  P.push(p2);
+  const role={student:v?"To learn from this, open the closest tests in the explorer and compare their CO and oxygen drawdown. Then notice what you can’t see: outcomes. That blank is part of the science.":"A good exercise: open the closest tests in the explorer, compare their CO and drawdown, and write down one question the table can’t answer. The missing outcome column is a great place to start.",
+   researcher:v?"Anchor any model on the nearest rows and treat everything beyond the table’s range as extrapolation. CO and drawdown trends can inform direction, but not magnitude, at richer oxygen.":"Use the nearest rows as anchors and label anything beyond the measured range as extrapolation. The CO and drawdown columns give a qualitative trend, and the missing outcomes mean ignition and spread limits must come from other datasets.",
+   engineer:v?"This table alone can’t qualify a material or design for this atmosphere. Treat the gap as a flag and check other NASA experiments, such as the Saffire series, before relying on it.":"Treat this table as screening evidence, not qualification data. Where the gap is large, plan for testing or other NASA sources such as Saffire, and don’t assume results transfer across oxygen levels.",
+   curious:v?"In plain terms: scientists burned small samples on the space station, but not in air as rich as the Moon base will have.":"In everyday words: the experiments tell us a lot about fire in space air, and very little about fire in oxygen-rich air."}[r.role];
+  P.push(role);
+  P.push("Limits: this is the NASA PSI-25 BASS-II table. It has no burn-out, blowoff or ignition outcomes and no partial-gravity tests, so it describes conditions, not results.");
+  return P.join("\n\n")}
+
+ return{answer,analysis,n1,sg}
+})();
+</script>
+
+<script id="ui">
 const FC=["#ff8a5c","#ffd166","#c792ff","#6fd3ff","#5eead4","#ff6b9a","#a9a3c9"];
-const $=id=>document.getElementById(id),NS="http://www.w3.org/2000/svg";
-const st={fam:new Set(DATA.f.keys()),pi:new Set(DATA.p.keys()),sel:null,y:"fuel",cab:20.9,sort:"id",dir:1};
+const $=id=>document.getElementById(id),NS="http://www.w3.org/2000/svg",RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const st={fam:new Set(FN.keys()),pi:new Set(PN.keys()),sel:null,y:"fuel",cab:20.9,sort:"ik",dir:1,q:"",cell:null};
 const X0=12,X1=34,L=64,R=24,Tp=26,B=48,W=1000,H=440;
 const x=v=>L+(v-X0)/(X1-X0)*(W-L-R);
 const mk=(n,a,p)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
-const maxO=Math.max(...T.map(t=>t.oi)),minO=Math.min(...T.map(t=>t.oi));
-$("h1").textContent=`Every test burned at ${maxO}% oxygen or less.`;$("hs").innerHTML=`<div><b id="s1"></b>tests</div><div><b id="s2"></b>researchers</div><div><b><span id="s3"></span> to <span id="s4"></span>%</b>starting oxygen</div><div><b id="s5"></b>tests at 30% or more</div>`;setTimeout(()=>{roll($("s1"),T.length);roll($("s2"),DATA.p.length);roll($("s3"),minO.toFixed(1));roll($("s4"),maxO.toFixed(1));roll($("s5"),0)},350);
+const esc=z=>String(z).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const md=z=>esc(z).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/\[\[(\w+)\]\]/g,'<button class="tc" data-id="$1">$1</button>').replace(/\n/g,"<br>");
+const fmt=(v,u="")=>v==null?"not recorded":v+u;
+const clampC=v=>Math.min(34,Math.max(12,Math.round(v*10)/10));
+let boost=0;
+
+$("h1").textContent=`Every test burned at ${maxO}% oxygen or less.`;
+$("hs").innerHTML=`<div><b id="s1"></b>tests</div><div><b id="s2"></b>researchers</div><div><b><span id="s3"></span> to <span id="s4"></span>%</b>starting oxygen</div><div><b id="s5"></b>tests at 30% or more</div>`;
+$("afind").innerHTML=`Every test started at <b>${maxO}% oxygen or lower</b>. None came near Moon base air. The table also records no outcomes (burned out, blew off, never ignited), so those still have to come from NASA’s reports.`;
 function hash(s){let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))%997;return h/997}
-function vis(){return T.filter(t=>st.fam.has(t.fam)&&st.pi.has(t.pi))}
+
+/* ---------- toast ---------- */
+let tt;function toast(msg,lab,fn){const t=$("toast");t.innerHTML="";const s=document.createElement("span");s.textContent=msg;t.append(s);
+ if(lab){const b=document.createElement("button");b.textContent=lab;b.onclick=()=>{fn();t.classList.remove("on")};t.append(b)}
+ t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),4200)}
+
+/* ---------- filtering ---------- */
+function vis(nc){const q=st.q.trim().toLowerCase();
+ return T.filter(t=>st.fam.has(t.fam)&&st.pi.has(t.pi)&&(nc||!st.cell||(t.fam==st.cell.f&&t.oi>=st.cell.b&&t.oi<st.cell.b+2))&&(!q||(t.id+" "+t.s+" "+FN[t.fam]+" "+PN[t.pi]).toLowerCase().includes(q)))}
+function cmp(a,b){const k=st.sort,g=(t)=>k=="pi"?PN[t.pi]:k=="fam"?FN[t.fam]:t[k],p=g(a),q=g(b);if(p==null)return 1;if(q==null)return-1;return(p>q?1:p<q?-1:0)*st.dir}
+const list=()=>vis().sort(cmp);
+function filtersOn(){return st.fam.size<FN.length||st.pi.size<PN.length||st.q||st.cell}
+
 function yinfo(){
- if(st.y=="fuel")return{lab:"Fuel type",f:t=>{const lanes=DATA.f.length;return Tp+((t.fam+.5)/lanes+(hash(t.id)-.5)*.1)*(H-Tp-B)},ticks:DATA.f.map((n,i)=>[Tp+(i+.5)/DATA.f.length*(H-Tp-B),n])};
+ if(st.y=="fuel")return{lab:"Fuel type",f:t=>Tp+((t.fam+.5)/FN.length+(hash(t.id)-.5)*.1)*(H-Tp-B),ticks:FN.map((n,i)=>[Tp+(i+.5)/FN.length*(H-Tp-B),n])};
  const k=st.y=="co"?"dco":"dox",vals=T.map(t=>t[k]).filter(v=>v!=null),lo=Math.min(0,Math.min(...vals)),hi=Math.max(...vals);
  const sc=v=>H-B-(v-lo)/(hi-lo)*(H-B-Tp-10),step=(hi-lo)>100?50:.5,ticks=[];for(let v=Math.ceil(lo/step)*step;v<=hi;v+=step)ticks.push([sc(v),v]);
  return{lab:st.y=="co"?"CO rise during test (ppm)":"Oxygen drawdown (% points)",f:t=>t[k]==null?null:sc(t[k]),ticks}}
@@ -128,120 +504,186 @@ function draw(){dial();
  mk("line",{x1:x(st.cab),x2:x(st.cab),y1:Tp,y2:H-B,stroke:"#6fd3ff","stroke-width":2},s);
  let miss=0;
  vis().forEach(t=>{const y=Y.f(t);if(y==null){miss++;return}
-  const c=mk("circle",{cx:x(t.oi),cy:y,r:6,fill:FC[t.fam],"fill-opacity":.82,stroke:st.sel==t.id?"#fff":"#0b0a1a","stroke-width":st.sel==t.id?3:1,class:"dot",tabindex:0,"aria-label":"Test "+t.id},s);
-  c.onmouseenter=e=>tip(t,c);c.onmouseleave=()=>$("tip").style.opacity=0;c.onclick=()=>pick(t.id);c.onkeydown=e=>{if(e.key=="Enter")pick(t.id)}});
- if(miss){mk("text",{x:W-R,y:12,"text-anchor":"end"},s).textContent=miss+" tests have no value for this measure"}}
-function tip(t,c){const b=c.getBoundingClientRect(),p=$("ch").parentElement.getBoundingClientRect(),e=$("tip");e.style.left=b.left-p.left+b.width/2+"px";e.style.top=b.top-p.top+"px";e.innerHTML=`<b>${t.id}</b> · ${DATA.f[t.fam]} · ${t.oi}% O₂`;e.style.opacity=1}
-function fmt(v,u=""){return v==null?"not recorded":v+u}
-function pick(id){st.sel=id;draw();rows();const t=T.find(q=>q.id==id);
- $("dt").innerHTML=`<h3>${t.id}</h3><div style="color:var(--mu)">${DATA.p[t.pi]} · ${t.date}</div>
- <dl class="kv"><dt>Fuel sample</dt><dd>${t.s}</dd><dt>Fuel group</dt><dd>${DATA.f[t.fam]}</dd><dt>Oxygen</dt><dd>${fmt(t.oi,"%")} at start, ${fmt(t.of,"%")} at end</dd><dt>Carbon dioxide</dt><dd>${fmt(t.ci,"%")} to ${fmt(t.cf,"%")}</dd><dt>Carbon monoxide</dt><dd>${fmt(t.ki," ppm")} to ${fmt(t.kf," ppm")}</dd><dt>Flow restrictor</dt><dd>${t.flow}</dd><dt>Fan display</dt><dd>${t.fan||"blank"}</dd><dt>Air display</dt><dd>${t.air||"blank"}</dd><dt>Frames shot</dt><dd>${fmt(t.fr)}</dd></dl>
- ${t.fl.map(f=>`<div class="note">${f}</div>`).join("")}<div class="note" style="color:var(--mu)">Outcome (burned out, blew off, never ignited): not in the PSI table.</div>
- <div class="src">Source: NASA PSI-25 BASS-II experimental table, row ${t.id}. Values shown as recorded.</div>`;}
-function rows(){setTimeout(heat,0);const v=vis();$("cnt").textContent=`(${v.length} of ${T.length})`;
- const cols=[["id","Test"],["pi","Researcher"],["fam","Fuel"],["oi","Start O₂"],["dco","CO rise"]];
- $("th").innerHTML=cols.map(c=>`<th data-k="${c[0]}">${c[1]}${st.sort==c[0]?(st.dir>0?" ▲":" ▼"):""}</th>`).join("");
- v.sort((a,b)=>{const p=a[st.sort],q=b[st.sort];if(p==null)return 1;if(q==null)return -1;return(p>q?1:p<q?-1:0)*st.dir});
- $("tb").innerHTML=v.map(t=>`<tr class="r ${st.sel==t.id?"s":""}" data-i="${t.id}"><td>${t.id}</td><td>${DATA.p[t.pi]}</td><td><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${FC[t.fam]};margin-right:7px"></i>${DATA.f[t.fam]}</td><td>${t.oi}%</td><td>${t.dco==null?"–":t.dco+" ppm"}</td></tr>`).join("");
+  const c=mk("circle",{cx:x(t.oi),cy:y,r:6,fill:FC[t.fam],"fill-opacity":.82,stroke:st.sel==t.id?"#fff":"#0b0a1a","stroke-width":st.sel==t.id?3:1,class:"dot",tabindex:0,role:"button","aria-label":`Test ${t.id}, ${FN[t.fam]}, ${t.oi}% oxygen`},s);
+  c.onmouseenter=()=>tip(t,c);c.onfocus=()=>tip(t,c);c.onmouseleave=c.onblur=()=>$("tip").style.opacity=0;c.onclick=()=>pick(t.id);c.onkeydown=e=>{if(e.key=="Enter"||e.key==" "){e.preventDefault();pick(t.id)}}});
+ if(miss)mk("text",{x:W-R,y:12,"text-anchor":"end"},s).textContent=miss+" tests have no value for this measure"}
+function tip(t,c){const b=c.getBoundingClientRect(),p=$("ch").parentElement.getBoundingClientRect(),e=$("tip");e.style.left=b.left-p.left+b.width/2+"px";e.style.top=b.top-p.top+"px";e.innerHTML=`<b>${t.id}</b> · ${FN[t.fam]} · ${t.oi}% O₂`;e.style.opacity=1}
+
+/* ---------- detail ---------- */
+function pick(id,scroll){st.sel=id;draw();rows();const t=T.find(q=>q.id==id),ls=list(),i=ls.findIndex(q=>q.id==id),pv=ls[i-1],nx=ls[i+1];
+ const p=v=>((Math.min(34,Math.max(12,v))-12)/22*100).toFixed(1);
+ $("dt").innerHTML=`<h3>${t.id}</h3><div style="color:var(--mu)">${PN[t.pi]} · ${t.date}</div>
+ <div class="sc" aria-hidden="true"><i class="mz" style="left:${p(30)}%;right:0"></i><i class="mk" style="left:${p(t.oi)}%"></i></div><div class="scl"><span>12%</span><span>Earth 20.9%</span><span>Moon 30%+</span></div>
+ <dl class="kv"><dt>Fuel sample</dt><dd>${esc(t.s)}</dd><dt>Fuel group</dt><dd>${FN[t.fam]}</dd><dt>Oxygen</dt><dd>${fmt(t.oi,"%")} at start, ${fmt(t.of,"%")} at end</dd><dt>Carbon dioxide</dt><dd>${fmt(t.ci,"%")} to ${fmt(t.cf,"%")}</dd><dt>Carbon monoxide</dt><dd>${fmt(t.ki," ppm")} to ${fmt(t.kf," ppm")}</dd><dt>Flow restrictor</dt><dd>${t.flow}</dd><dt>Fan display</dt><dd>${esc(t.fan||"blank")}</dd><dt>Air display</dt><dd>${esc(t.air||"blank")}</dd><dt>Frames shot</dt><dd>${fmt(t.fr)}</dd></dl>
+ ${t.fl.map(f=>`<div class="note">${esc(f)}</div>`).join("")}<div class="note" style="color:var(--mu)">Outcome (burned out, blew off, never ignited): not in the PSI table.</div>
+ <div class="dnav"><button class="btn g sm" id="dp" ${pv?"":"disabled"}>← ${pv?pv.id:""}</button><button class="btn g sm" id="dn" ${nx?"":"disabled"}>${nx?nx.id:""} →</button><button class="btn sm" id="da">Ask the analyst</button></div>
+ <div class="src">Source: NASA PSI-25 BASS-II experimental table, row ${t.id}. Values shown as recorded.</div>`;
+ if(pv)$("dp").onclick=()=>pick(pv.id);if(nx)$("dn").onclick=()=>pick(nx.id);$("da").onclick=()=>askAbout("Tell me about "+t.id);
+ const r=document.querySelector(`tr[data-i="${id}"]`),w=$("tw");if(r){const rt=r.offsetTop,h=r.offsetHeight;if(rt<w.scrollTop+34)w.scrollTop=rt-40;else if(rt+h>w.scrollTop+w.clientHeight)w.scrollTop=rt+h-w.clientHeight+4}
+ if(scroll)$("dt").scrollIntoView({behavior:"smooth",block:"center"})}
+function openTest(id){pick(id);toast(id+" opened",RM?null:"View details",()=>$("dt").scrollIntoView({behavior:"smooth",block:"center"}))}
+
+/* ---------- table ---------- */
+function rows(){setTimeout(heat,0);syncAct();const v=list();$("cnt").textContent=`(${v.length} of ${T.length})`;
+ const cols=[["ik","Test"],["pi","Researcher"],["fam","Fuel"],["oi","Start O₂"],["dco","CO rise"]];
+ $("th").innerHTML=cols.map(c=>`<th data-k="${c[0]}" aria-sort="${st.sort==c[0]?(st.dir>0?"ascending":"descending"):"none"}">${c[1]}${st.sort==c[0]?(st.dir>0?" ▲":" ▼"):""}</th>`).join("");
+ $("tb").innerHTML=v.length?v.map(t=>`<tr class="r ${st.sel==t.id?"s":""}" data-i="${t.id}" tabindex="0"><td>${t.id}</td><td>${PN[t.pi]}</td><td><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${FC[t.fam]};margin-right:7px"></i>${FN[t.fam]}</td><td>${t.oi}%</td><td>${t.dco==null?"–":t.dco+" ppm"}</td></tr>`).join(""):`<tr><td colspan="5" class="empty">No tests match these filters. <button class="btn g sm" id="rst2">Reset filters</button></td></tr>`;
+ const r2=$("rst2");if(r2)r2.onclick=resetF;
  const med=a=>{a=a.filter(z=>z!=null).sort((p,q)=>p-q);return a.length?a[Math.floor(a.length/2)]:null};
  const os=v.map(t=>t.oi);
  $("stat").innerHTML=`<div><b>${v.length}</b><span>tests shown</span></div><div><b>${os.length?Math.min(...os)+" to "+Math.max(...os)+"%":"none"}</b><span>starting oxygen range</span></div><div><b>${med(v.map(t=>t.dco))??"–"} ppm</b><span>median CO rise</span></div>`;
- const near=v.filter(t=>Math.abs(t.oi-st.cab)<=1),f=[...new Set(near.map(t=>DATA.f[t.fam]))];
+ const near=v.filter(t=>Math.abs(t.oi-st.cab)<=1),f=[...new Set(near.map(t=>FN[t.fam]))];
  roll($("rn"),near.length);$("rt").innerHTML=` test${near.length==1?"":"s"} within ±1 point of ${(+st.cab).toFixed(1)}%${near.length?"<br>"+f.join(", "):"<br>No flammability data at this atmosphere"}`}
-$("th").onclick=e=>{const k=e.target.dataset.k;if(!k)return;st.dir=st.sort==k?-st.dir:1;st.sort=k;rows()};
-$("tb").onclick=e=>{const r=e.target.closest("tr");if(r)pick(r.dataset.i)};
-$("fams").innerHTML=DATA.f.map((n,i)=>`<button class="chip" aria-pressed="true" data-f="${i}"><i style="background:${FC[i]}"></i>${n}</button>`).join("");
-$("pis").innerHTML=DATA.p.map((n,i)=>`<button class="chip" aria-pressed="true" data-p="${i}">${n}</button>`).join("");
-$("ym").innerHTML=[["fuel","Fuel type"],["co","CO rise"],["ox","O₂ drawdown"]].map(a=>`<button class="chip seg" aria-pressed="${a[0]==st.y}" data-y="${a[0]}">${a[1]}</button>`).join("");
-document.addEventListener("click",e=>{const b=e.target.closest("button.chip");if(!b)return;
+$("th").onclick=e=>{const k=e.target.closest("th")?.dataset.k;if(!k)return;st.dir=st.sort==k?-st.dir:1;st.sort=k;rows()};
+$("tb").onclick=e=>{const r=e.target.closest("tr.r");if(r)pick(r.dataset.i)};
+$("tb").onkeydown=e=>{if(e.key=="Enter"||e.key==" "){const r=e.target.closest("tr.r");if(r){e.preventDefault();pick(r.dataset.i);r.focus()}}};
+
+/* ---------- filter controls ---------- */
+function chips(){
+ $("fams").innerHTML=FN.map((n,i)=>`<button class="chip" aria-pressed="${st.fam.has(i)}" data-f="${i}"><i style="background:${FC[i]}"></i>${n} <em>${T.filter(t=>t.fam==i).length}</em></button>`).join("");
+ $("pis").innerHTML=PN.map((n,i)=>`<button class="chip" aria-pressed="${st.pi.has(i)}" data-p="${i}">${n}</button>`).join("");
+ $("ym").innerHTML=[["fuel","Fuel type"],["co","CO rise"],["ox","O₂ drawdown"]].map(a=>`<button class="chip seg" aria-pressed="${a[0]==st.y}" data-y="${a[0]}">${a[1]}</button>`).join("")}
+function syncAct(){const p=$("cellpill");if(st.cell){p.classList.add("on");p.textContent=`${FN[st.cell.f]} · ${st.cell.b}–${st.cell.b+2}% ✕`}else p.classList.remove("on");$("rst").style.opacity=filtersOn()?1:.45}
+function resetF(){st.fam=new Set(FN.keys());st.pi=new Set(PN.keys());st.q="";st.cell=null;$("sq").value="";chips();draw();rows()}
+$("rst").onclick=resetF;$("cellpill").onclick=()=>{st.cell=null;draw();rows()};
+$("sq").oninput=e=>{st.q=e.target.value;draw();rows()};
+document.addEventListener("click",e=>{
+ const tc=e.target.closest(".tc");if(tc){openTest(tc.dataset.id);return}
+ const b=e.target.closest("button.chip");if(!b||b.id=="cellpill")return;
  const tg=(S,k)=>{S.has(k)?S.delete(k):S.add(k);b.setAttribute("aria-pressed",S.has(k))};
  if(b.dataset.f!==undefined)tg(st.fam,+b.dataset.f);else if(b.dataset.p!==undefined)tg(st.pi,+b.dataset.p);
  else if(b.dataset.y){st.y=b.dataset.y;document.querySelectorAll("[data-y]").forEach(q=>q.setAttribute("aria-pressed",q==b))}
  draw();rows()});
-$("cab").oninput=e=>{boost=8;st.cab=+e.target.value;draw();rows()};
+$("csv").onclick=()=>{const q=v=>`"${String(v==null?"":v).replace(/"/g,'""')}"`,h=["id","researcher","fuel_group","sample","start_o2","end_o2","co_start_ppm","co_end_ppm","co2_start_pct","co2_end_pct","frames","date"];
+ const d=[h.join(","),...list().map(t=>[t.id,PN[t.pi],FN[t.fam],t.s,t.oi,t.of,t.ki,t.kf,t.ci,t.cf,t.fr,t.date].map(q).join(","))].join("\n");
+ save("bass-ii-tests.csv",d,"text/csv");toast(`Downloaded ${list().length} tests`)};
+function save(name,data,type){const u=URL.createObjectURL(new Blob([data],{type})),a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000)}
 
+/* ---------- dial ---------- */
 const CX=300,CY=300,R0=150,ang=v=>Math.PI*(1-(Math.min(34,Math.max(12,v))-12)/22),pt=(r,v)=>[CX+r*Math.cos(ang(v)),CY-r*Math.sin(ang(v))];
 const arc=(r,a,b)=>{const[x1,y1]=pt(r,a),[x2,y2]=pt(r,b);return`M${x1} ${y1}A${r} ${r} 0 0 1 ${x2} ${y2}`};
-function dial(){const s=$("dl");s.innerHTML="";const tr={fill:"none","stroke-width":14,"stroke-linecap":"round"};
+function dial(){const s=$("dl");s.innerHTML="";const tr={fill:"none","stroke-width":14,"stroke-linecap":"round"};s.setAttribute("aria-valuenow",st.cab);
  mk("path",{...tr,d:arc(R0,12,34),stroke:"rgba(255,255,255,.1)"},s);mk("path",{...tr,d:arc(R0,30,34),stroke:"#ff6a3d"},s);
  mk("path",{...tr,d:arc(R0,Math.max(12,st.cab-1),Math.min(34,st.cab+1)),stroke:"#6fd3ff"},s);
  for(let v=12;v<=34;v+=2){const[a,b]=pt(R0-24,v);mk("text",{x:a,y:b+4,"text-anchor":"middle"},s).textContent=v}
  const[mx,my]=pt(R0-52,32);mk("text",{x:mx,y:my,"text-anchor":"middle",style:"fill:#ff8a5c;font-weight:700"},s).textContent="Moon base";
  const[ex,ey]=pt(R0-52,20.9);mk("text",{x:ex,y:ey,"text-anchor":"middle"},s).textContent="Earth air";
- const c={};vis().forEach(t=>{const k=Math.round(t.oi*2),n=c[k]=(c[k]||0)+1,[a,b]=pt(R0+18+(n-1)*8,t.oi);(()=>{const e=mk("circle",{cx:a,cy:b,r:t.id==st.sel?5.6:3.8,fill:FC[t.fam],"fill-opacity":.95,class:"dd",stroke:t.id==st.sel?"#fff":"none","stroke-width":2},s);e.onpointerenter=()=>dtp(t,e);e.onpointerleave=()=>$("dtip").style.opacity=0;e.onclick=()=>dpick(t)})()});
+ const c={};vis().forEach(t=>{const k=Math.round(t.oi*2),n=c[k]=(c[k]||0)+1,[a,b]=pt(R0+18+(n-1)*8,t.oi);
+  const e=mk("circle",{cx:a,cy:b,r:t.id==st.sel?5.6:3.8,fill:FC[t.fam],"fill-opacity":.95,class:"dd",stroke:t.id==st.sel?"#fff":"none","stroke-width":2},s);
+  e.onpointerenter=()=>dtp(t,e);e.onpointerleave=()=>$("dtip").style.opacity=0;e.onclick=()=>dpick(t)});
  const[nx,ny]=pt(R0-6,st.cab);mk("line",{x1:CX,y1:CY,x2:nx,y2:ny,stroke:"#6fd3ff","stroke-width":3,"stroke-linecap":"round"},s);mk("circle",{cx:CX,cy:CY,r:8,fill:"#6fd3ff"},s);
  mk("text",{x:CX,y:352,"text-anchor":"middle",style:"font-size:46px;font-weight:800;fill:#f6f3ff;letter-spacing:-1px"},s).textContent=(+st.cab).toFixed(1)+"%"}
-document.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{st.cab=+b.dataset.c;$("cab").value=st.cab;draw();rows()});
-draw();rows();pick(T[0].id);
+function dtp(t,e){const b=e.getBoundingClientRect(),q=$("dl").parentElement.getBoundingClientRect(),d=$("dtip");d.style.left=b.left-q.left+b.width/2+"px";d.style.top=b.top-q.top+"px";d.innerHTML=`<b>${t.id}</b> · ${FN[t.fam]} · ${t.oi}% O₂`;d.style.opacity=1}
+function dpick(t){pick(t.id);$("dsel").innerHTML=`<b>${t.id}</b> · ${FN[t.fam]} · ${t.oi}% O₂ · <a href="#explore">see details below</a>`}
+function setCab(v,b){st.cab=clampC(v);$("cab").value=st.cab;boost=Math.min(8,boost+(b||1.2));draw();rows()}
+$("cab").oninput=e=>setCab(e.target.value,8);
+document.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>setCab(+b.dataset.c,4));
+$("pmax").onclick=()=>setCab(maxO,4);
+(function(){const dl=$("dl");let down=false,q=false;
+ function set(e){const r=dl.getBoundingClientRect(),k=600/r.width,px=(e.clientX-r.left)*k-CX,py=CY-(e.clientY-r.top)*k;let a=Math.atan2(py,px);if(a<0)a=px<0?Math.PI:0;
+  st.cab=clampC(12+22*(1-a/Math.PI));if(q)return;q=true;requestAnimationFrame(()=>{q=false;$("cab").value=st.cab;boost=Math.min(8,boost+1.2);draw();rows()})}
+ dl.addEventListener("pointerdown",e=>{if(e.target.classList.contains("dd"))return;down=true;dl.setPointerCapture(e.pointerId);set(e)});
+ dl.addEventListener("pointermove",e=>{if(down)set(e)});dl.addEventListener("pointerup",()=>down=false);dl.addEventListener("pointercancel",()=>down=false);
+ dl.addEventListener("keydown",e=>{const s=e.shiftKey?1:.1;let d=0;if(e.key=="ArrowLeft"||e.key=="ArrowDown")d=-s;else if(e.key=="ArrowRight"||e.key=="ArrowUp")d=s;else if(e.key=="Home")return(e.preventDefault(),setCab(12));else if(e.key=="End")return(e.preventDefault(),setCab(34));if(d){e.preventDefault();setCab(st.cab+d,3)}})})();
 
-var boost=0;
-$("afind").innerHTML=`Every test started at <b>${maxO}% oxygen or lower</b>. None came near Moon base air. The table also records no outcomes (burned out, blew off, never ignited), so those still have to come from NASA’s reports.`;
-(function(){const c=$("sky"),g=c.getContext("2d"),rm=matchMedia("(prefers-reduced-motion: reduce)").matches;let w,h,S=[],sh=[],mx=0,my=0;
-function rs(){w=c.width=innerWidth;h=c.height=innerHeight;S=Array.from({length:Math.round(w*h/6500)},()=>({x:Math.random()*w,y:Math.random()*h,z:Math.random()*.9+.1,t:Math.random()*6}))}
-addEventListener("resize",rs);rs();addEventListener("pointermove",e=>{mx=e.clientX/w-.5;my=e.clientY/h-.5});
-function f(ts){g.clearRect(0,0,w,h);const sp=1+boost;boost*=.94;c.style.opacity=Math.max(.35,1-scrollY/900);
- S.forEach(s=>{if(!rm){s.x-=s.z*.25*sp;s.y+=s.z*.08*sp;if(s.x<0)s.x=w;if(s.y>h)s.y=0}
-  const px=s.x+mx*s.z*30,py=s.y+my*s.z*30,a=.35+.65*Math.abs(Math.sin(ts/1200+s.t));g.fillStyle=`rgba(255,255,255,${a*s.z})`;
-  if(boost>1.2)g.fillRect(px,py,s.z*boost*2.2,s.z*1.2);else g.fillRect(px,py,s.z*1.8,s.z*1.8)});
- if(!rm&&Math.random()<.008)sh.push({x:Math.random()*w,y:Math.random()*h*.5,l:0});
- sh=sh.filter(q=>{q.x-=14;q.y+=6;q.l++;const gr=g.createLinearGradient(q.x,q.y,q.x+90,q.y-38);gr.addColorStop(0,"rgba(255,255,255,.9)");gr.addColorStop(1,"rgba(255,255,255,0)");g.strokeStyle=gr;g.lineWidth=1.5;g.beginPath();g.moveTo(q.x,q.y);g.lineTo(q.x+90,q.y-38);g.stroke();return q.l<60});
- requestAnimationFrame(f)}requestAnimationFrame(f)})();
-function heat(){const v=vis(),bins=[];for(let b=12;b<34;b+=2)bins.push(b);const cnt=(f,b)=>v.filter(t=>t.fam==f&&t.oi>=b&&t.oi<b+2).length;let m=1;
- DATA.f.forEach((n,f)=>bins.forEach(b=>m=Math.max(m,cnt(f,b))));
- let h=`<div class="hm" style="grid-template-columns:150px repeat(${bins.length},1fr)"><span></span>`+bins.map(b=>`<span class="hl ${b>=30?"mo":""}">${b}</span>`).join("");
- DATA.f.forEach((n,f)=>{h+=`<span class="hr">${n}</span>`+bins.map(b=>{const c=cnt(f,b);return`<span class="hc ${b>=30?"mo":""}" style="background:${c?`rgba(111,211,255,${.18+.82*c/m})`:""};color:${c/m>.5?"#07060f":"var(--mu)"}" title="${n}, ${b} to ${b+2}% O₂: ${c} tests">${c||""}</span>`}).join("")});
- $("hm").innerHTML=h+"</div>"}
-DATA.f.forEach((n,i)=>$("rf").insertAdjacentHTML("beforeend",`<option value="${i}">${n}</option>`));
-$("rh").onchange=()=>$("rcw").style.display=$("rh").value=="cust"?"block":"none";
-const esc=z=>String(z).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
-const md=z=>esc(z).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/\n/g,"<br>");
-let REP=null,AIT="";
-function mkRep(){const hab=$("rh").value,o=hab=="orbit"?20.9:hab=="moon"?30:(+$("ro").value||21),role=$("rr").value,fi=$("rf").value,hn={orbit:"an orbiting spacecraft",moon:"a Moon base or pressurized rover",cust:"a custom atmosphere"}[hab];
- const pool=T.filter(t=>fi===""||t.fam==+fi).sort((a,b)=>Math.abs(a.oi-o)-Math.abs(b.oi-o)),n1=T.filter(t=>Math.abs(t.oi-o)<=1).length,n2=T.filter(t=>Math.abs(t.oi-o)<=2).length,near=pool.slice(0,6),gap=+(o-maxO).toFixed(1);
- const cov=DATA.f.filter((f,i)=>T.some(t=>t.fam==i&&Math.abs(t.oi-o)<=2)),mis=DATA.f.filter(f=>!cov.includes(f));
- const rt={student:"Start with the closest tests below and open each one in the explorer to see its fuel and flow settings.",researcher:"Anything beyond the table’s oxygen range is extrapolation, so the closest tests are where to anchor a model. The CO and oxygen drawdown columns give extra signal.",engineer:"This table alone cannot qualify a material or design for this atmosphere. Treat the gap as a flag and check other NASA experiments, such as the Saffire series.",curious:"In plain terms: scientists burned small samples on the space station, but not in air like the Moon base will have."}[role];
- return{hab,o,hn,role,fi,near,n1,n2,gap,cov,mis,rt,x:(o/20.9).toFixed(2)}}
-function repBody(r){const head=r.n1?`${r.n1} BASS-II test${r.n1>1?"s":""} sit within one point of ${r.o}% oxygen.`:`No BASS-II test came within a point of ${r.o}% oxygen.`;
- return`<div class="big">${head}</div><p>Scenario: ${r.hn}, at ${r.o}% oxygen (${r.x}× the oxygen in Earth air).${r.gap>0?` The highest test in the table started at ${maxO}%, which is ${r.gap} points below your target.`:""}</p>
- <h4>Evidence within ±2 points: ${r.n2} tests</h4><p>Fuel groups with data nearby: ${r.cov.join(", ")||"none"}.<br>Fuel groups with no data nearby: ${r.mis.join(", ")||"none"}.</p>
- <h4>Closest tests${r.fi!==""?" ("+DATA.f[r.fi]+")":""}</h4><table><tr><th>Test</th><th>Fuel</th><th>Start O₂</th><th>Distance</th><th>CO rise</th></tr>${r.near.map(t=>`<tr><td>${t.id}</td><td>${DATA.f[t.fam]}</td><td>${t.oi}%</td><td>${Math.abs(t.oi-r.o).toFixed(1)} pts</td><td>${t.dco==null?"–":t.dco+" ppm"}</td></tr>`).join("")}</table>
- <h4>What this means for you</h4><p>${esc(r.rt)}</p><h4>Limits of this data</h4><p>Source: NASA PSI-25 BASS-II table. It has no burn-out, blowoff or ignition outcomes, and no partial-gravity tests.</p>`}
-$("rb").onclick=()=>{REP=mkRep();AIT="";$("rp").innerHTML=`<h3>Your fire-safety briefing</h3>${repBody(REP)}<div id="ai"></div><div class="ra"><button class="btn g" id="rai">Add AI analysis</button><button class="btn g" id="rdl">Download briefing</button><button class="btn g" onclick="print()">Print</button></div>`;
- $("rai").onclick=aiRep;$("rdl").onclick=dlRep;$("rp").scrollIntoView({behavior:"smooth",block:"nearest"})};
-let SM=null,DL=null;
-try{claude.use("sample").then(x=>SM=x);claude.use("downloads").then(x=>DL=x)}catch(e){}
-async function aiRep(){if(!SM){$("ai").textContent="AI analysis is available when this page is opened on claude.ai.";return}
- const r=REP,b=$("rai");b.disabled=true;b.textContent="Writing…";
- const ctx=`Scenario: ${r.hn} at ${r.o}% O2. Reader: ${r.role}. Tests within 1 pt: ${r.n1}; within 2 pts: ${r.n2}. Highest test start O2 in table: ${maxO}%. Fuel groups with nearby data: ${r.cov.join(", ")||"none"}; without: ${r.mis.join(", ")||"none"}. Closest tests: ${r.near.map(t=>t.id+" "+DATA.f[t.fam]+" "+t.oi+"%").join("; ")}.`;
- try{const o=await SM(`You are writing a short analysis paragraph in a fire-safety briefing based on NASA BASS-II microgravity flammability tests (PSI-25). Use ONLY these facts. The table has no outcomes (burned out, blew off, never ignited), so never claim how any material behaved. Be honest about gaps, plain and specific, 110 to 160 words, no headings, no markdown.\n\n${ctx}`,{cache:false,onText:({text})=>{AIT=text;$("ai").textContent=text}});AIT=o.text;$("ai").textContent=AIT}
- catch(e){$("ai").textContent=e.code=="not_granted"?"AI analysis was declined.":"Couldn’t generate the analysis right now. Try again in a moment."}b.disabled=false;b.textContent="Regenerate AI analysis"}
-async function dlRep(){if(!DL){alert("Downloads are available when this page is opened on claude.ai. Use Print instead.");return}
- const doc=`<!DOCTYPE html><html lang="en"><meta charset="utf-8"><title>Fire-safety briefing</title><style>body{font:16px/1.55 system-ui,sans-serif;max-width:760px;margin:40px auto;padding:0 20px;color:#16141f}table{border-collapse:collapse}td,th{border-bottom:1px solid #ddd;padding:6px 12px;text-align:left}.big{font-size:26px;font-weight:800}</style><h1>Fire-safety briefing</h1>${repBody(REP)}${AIT?`<h4>AI analysis</h4><p>${esc(AIT)}</p>`:""}<p style="color:#666;font-size:13px">Oxygen Runway · data from NASA PSI-25 (BASS-II). Not an official NASA product.</p></html>`;
- try{await DL.save({filename:"fire-safety-briefing.html",data:doc})}catch(e){}}
-const CTX=T.map(t=>[t.id,DATA.p[t.pi],DATA.f[t.fam],t.s,"O2 "+t.oi+"->"+(t.of??"n/a"),"CO "+(t.ki??"n/a")+"->"+(t.kf??"n/a")+"ppm","CO2 "+(t.ci??"n/a")+"->"+(t.cf??"n/a")+"%","flow "+t.flow,"fan "+(t.fan||"-"),"air "+(t.air||"-"),"frames "+(t.fr??"n/a"),t.date,t.fl.join(" ")].join(" | ")).join("\n");
-const hist=[];
-function addM(c,t){const d=document.createElement("div");d.className="m "+c;d.innerHTML=md(t);$("cl").appendChild(d);$("cl").scrollTop=1e9;return d}
-addM("a","Hi. I’ve read all 129 BASS-II tests. Ask me about fuels, oxygen levels, CO, or any test by name (like B13 or T21).");
-["Is there any test near Moon base air?","Which fuel had the biggest CO rise?","Which tests mention blowoff or extinction?","Compare SIBAL fabric and PMMA film"].forEach(q=>{const b=document.createElement("button");b.className="pill";b.textContent=q;b.onclick=()=>{$("cq").value=q;ask()};$("cc").appendChild(b)});
-async function ask(){const q=$("cq").value.trim();if(!q)return;if(!SM){addM("u",q);addM("a","The assistant works when this page is opened on claude.ai.");$("cq").value="";return}
- $("cq").value="";addM("u",q);const el=addM("a","Thinking…");$("cs").disabled=true;
- const ui=`Viewer is currently looking at: dial set to ${(+st.cab).toFixed(1)}% oxygen${st.sel?`, test ${st.sel} selected`:""}.`;
- const prompt=`You are the assistant inside "Oxygen Runway", a dashboard of NASA's BASS-II microgravity flammability experiment (PSI-25, 129 tests on the ISS). Answer ONLY from the table below. Rules: cite test IDs; the table has NO outcomes (burned out, blew off, never ignited) and no partial-gravity tests, so say so if asked; max starting O2 is ${maxO}% so nothing covers 30% Moon base air; CO rise = final minus initial ppm; flagged rows are noted in the last column; fuel groups were assigned by the dashboard team from the sample description. For general background (e.g. why Moon base O2 is higher) you may use widely known facts but label them as background, not from the table. Be concise (under 150 words unless asked), use plain language, no tables.\n\nTABLE (id | researcher | fuel group | sample | oxygen % start->end | CO | CO2 | flow restrictor | fan | air | frames | date | notes)\n${CTX}\n\n${ui}\n\nConversation:\n${hist.slice(-8).map(m=>(m.r=="u"?"User: ":"Assistant: ")+m.t).join("\n")}\nUser: ${q}\nAssistant:`;
- try{const o=await SM(prompt,{cache:false,onText:({text})=>{el.innerHTML=md(text);$("cl").scrollTop=1e9}});hist.push({r:"u",t:q},{r:"a",t:o.text});el.innerHTML=md(o.text)}
- catch(e){el.textContent=e.code=="not_granted"?"You declined access, so I can’t answer. Reload to try again.":e.code=="rate_limited"?"Slow down a little and try again in a moment.":"Something went wrong. Please try again."}
- $("cs").disabled=false}
-$("cs").onclick=ask;$("cq").onkeydown=e=>{if(e.key=="Enter")ask()};
-heat();
+/* ---------- number roll ---------- */
 function roll(el,str){str=String(str);const dg=c=>/\d/.test(c);
  if(!el._s||el._s.length!=str.length||[...str].some((c,i)=>dg(c)!=dg(el._s[i]))){el.innerHTML=[...str].map(c=>dg(c)?`<span class="od"><span class="oc">${[0,1,2,3,4,5,6,7,8,9].map(d=>`<i>${d}</i>`).join("")}</span></span>`:`<span>${c}</span>`).join("");el._c=[...el.querySelectorAll(".oc")];el.offsetWidth}
  let k=0;[...str].forEach(c=>{if(dg(c)){const col=el._c[k];col.style.transitionDelay=(k*80)+"ms";col.style.transform=`translateY(-${c}em)`;k++}});el._s=str}
-function dtp(t,e){const b=e.getBoundingClientRect(),q=$("dl").parentElement.getBoundingClientRect(),d=$("dtip");d.style.left=b.left-q.left+b.width/2+"px";d.style.top=b.top-q.top+"px";d.innerHTML=`<b>${t.id}</b> · ${DATA.f[t.fam]} · ${t.oi}% O₂`;d.style.opacity=1}
-function dpick(t){pick(t.id);$("dsel").innerHTML=`<b>${t.id}</b> · ${DATA.f[t.fam]} · ${t.oi}% O₂ · <a href="#explore">see details below</a>`}
-(function(){const dl=$("dl");let down=false,q=false;
- function set(e){const r=dl.getBoundingClientRect(),k=600/r.width,x=(e.clientX-r.left)*k-CX,y=CY-(e.clientY-r.top)*k;let a=Math.atan2(y,x);if(a<0)a=x<0?Math.PI:0;
-  st.cab=Math.min(34,Math.max(12,Math.round((12+22*(1-a/Math.PI))*10)/10));if(q)return;q=true;requestAnimationFrame(()=>{q=false;$("cab").value=st.cab;boost=Math.min(8,boost+1.2);draw();rows()})}
- dl.addEventListener("pointerdown",e=>{if(e.target.classList.contains("dd"))return;down=true;dl.setPointerCapture(e.pointerId);set(e)});
- dl.addEventListener("pointermove",e=>{if(down)set(e)});dl.addEventListener("pointerup",()=>down=false);dl.addEventListener("pointercancel",()=>down=false)})();
+setTimeout(()=>{roll($("s1"),T.length);roll($("s2"),PN.length);roll($("s3"),minO.toFixed(1));roll($("s4"),maxO.toFixed(1));roll($("s5"),T.filter(t=>t.oi>=30).length)},350);
+
+/* ---------- heatmap (clickable) ---------- */
+function heat(){const v=vis(true),bins=[];for(let b=12;b<34;b+=2)bins.push(b);const cnt=(f,b)=>v.filter(t=>t.fam==f&&t.oi>=b&&t.oi<b+2).length;let m=1;
+ FN.forEach((n,f)=>bins.forEach(b=>m=Math.max(m,cnt(f,b))));
+ let h=`<div class="hm" style="grid-template-columns:150px repeat(${bins.length},1fr)"><span></span>`+bins.map(b=>`<span class="hl ${b>=30?"mo":""}">${b}</span>`).join("");
+ FN.forEach((n,f)=>{h+=`<span class="hr">${n}</span>`+bins.map(b=>{const c=cnt(f,b),act=st.cell&&st.cell.f==f&&st.cell.b==b;
+  return c?`<button class="hc f ${b>=30?"mo":""} ${act?"act":""}" data-f="${f}" data-b="${b}" style="background:rgba(111,211,255,${.18+.82*c/m});color:${c/m>.5?"#07060f":"var(--mu)"}" title="${n}, ${b} to ${b+2}% O₂: ${c} tests. Click to filter." aria-label="${n}, ${b} to ${b+2} percent oxygen, ${c} tests. Click to filter.">${c}</button>`:`<span class="hc ${b>=30?"mo":""}" title="${n}, ${b} to ${b+2}% O₂: 0 tests"></span>`}).join("")});
+ $("hm").innerHTML=h+"</div>"}
+$("hm").onclick=e=>{const b=e.target.closest(".hc.f");if(!b)return;const f=+b.dataset.f,bb=+b.dataset.b;
+ if(st.cell&&st.cell.f==f&&st.cell.b==bb)st.cell=null;else{st.cell={f,b:bb};toast(`Filtered to ${FN[f]} at ${bb}–${bb+2}%`,"See tests",()=>$("explore").scrollIntoView({behavior:"smooth"}))}
+ draw();rows()};
+
+/* ---------- briefing ---------- */
+DATA.f.forEach((n,i)=>$("rf").insertAdjacentHTML("beforeend",`<option value="${i}">${n}</option>`));
+$("rh").onchange=()=>$("rcw").style.display=$("rh").value=="cust"?"block":"none";
+let REP=null,AIT="",AIV=0,typing=0;
+function mkRep(){const hab=$("rh").value,o=hab=="orbit"?20.9:hab=="moon"?30:(+$("ro").value||21),role=$("rr").value,fi=$("rf").value,hn={orbit:"an orbiting spacecraft",moon:"a Moon base or pressurized rover",cust:"a custom atmosphere"}[hab];
+ const pool=T.filter(t=>fi===""||t.fam==+fi).sort((a,b)=>Math.abs(a.oi-o)-Math.abs(b.oi-o)),n1=T.filter(t=>Math.abs(t.oi-o)<=1).length,n2=T.filter(t=>Math.abs(t.oi-o)<=2).length,near=pool.slice(0,6),gap=+(o-maxO).toFixed(1);
+ const cov=FN.filter((f,i)=>T.some(t=>t.fam==i&&Math.abs(t.oi-o)<=2)),mis=FN.filter(f=>!cov.includes(f));
+ const rt={student:"Start with the closest tests below and open each one in the explorer to see its fuel and flow settings.",researcher:"Anything beyond the table’s oxygen range is extrapolation, so the closest tests are where to anchor a model. The CO and oxygen drawdown columns give extra signal.",engineer:"This table alone cannot qualify a material or design for this atmosphere. Treat the gap as a flag and check other NASA experiments, such as the Saffire series.",curious:"In plain terms: scientists burned small samples on the space station, but not in air like the Moon base will have."}[role];
+ return{hab,o,hn,role,fi,near,n1,n2,gap,cov,mis,rt,x:(o/20.9).toFixed(2)}}
+function meter(r){const lo=10,hi=Math.max(40,Math.ceil(r.o)+4),p=v=>+((v-lo)/(hi-lo)*100).toFixed(1);
+ return`<div class="sc big" aria-hidden="true"><i class="rg" style="left:${p(minO)}%;width:${p(maxO)-p(minO)}%"></i><i class="mk t" style="left:${p(Math.min(r.o,hi))}%"></i></div><div class="ml"><span>Tested: ${minO}–${maxO}%</span><span>Your target: ${r.o}%</span></div>`}
+function repBody(r){const head=r.n1?`${r.n1} BASS-II test${r.n1>1?"s":""} sit within one point of ${r.o}% oxygen.`:`No BASS-II test came within a point of ${r.o}% oxygen.`;
+ return`<div class="big">${head}</div><p>Scenario: ${r.hn}, at ${r.o}% oxygen (${r.x}× the oxygen in Earth air).${r.gap>0?` The highest test in the table started at ${maxO}%, which is ${r.gap} points below your target.`:""}</p>
+ ${meter(r)}<div class="kp"><div><b>${r.n1}</b><span>tests within ±1 point</span></div><div><b>${r.n2}</b><span>tests within ±2 points</span></div><div><b>${r.cov.length}/${FN.length}</b><span>fuel groups nearby</span></div></div>
+ <p>Fuel groups with data nearby: ${r.cov.join(", ")||"none"}.<br>Fuel groups with no data nearby: ${r.mis.join(", ")||"none"}.</p>
+ <h4>Closest tests${r.fi!==""?" ("+FN[r.fi]+")":""}</h4><div class="tw" style="max-height:none"><table><tr><th>Test</th><th>Fuel</th><th>Start O₂</th><th>Distance</th><th>CO rise</th></tr>${r.near.map(t=>`<tr><td>${t.id}</td><td>${FN[t.fam]}</td><td>${t.oi}%</td><td>${Math.abs(t.oi-r.o).toFixed(1)} pts</td><td>${t.dco==null?"–":t.dco+" ppm"}</td></tr>`).join("")}</table></div>
+ <h4>What this means for you</h4><p>${esc(r.rt)}</p><h4>Limits of this data</h4><p>Source: NASA PSI-25 BASS-II table. It has no burn-out, blowoff or ignition outcomes, and no partial-gravity tests.</p>`}
+const paras=t=>t.split("\n\n").map(p=>`<p>${esc(p)}</p>`).join("");
+function runAnalysis(first){
+ if(!REP)return;const id=++typing,el=$("ai"),b=$("rai");AIT=Analyst.analysis(REP,AIV);b.disabled=true;
+ if(RM){el.innerHTML=paras(AIT);b.disabled=false;b.textContent="Rewrite analysis";return}
+ const w=AIT.split(/(\s+)/);let i=0;const k=Math.ceil(w.length/70);
+ (function s(){if(id!=typing)return;i=Math.min(w.length,i+k);el.innerHTML=paras(w.slice(0,i).join(""));if(i<w.length)setTimeout(s,22);else{b.disabled=false;b.textContent="Rewrite analysis"}})()}
+$("rb").onclick=()=>{REP=mkRep();AIV=0;AIT="";typing++;
+ $("rp").innerHTML=`<h3>Your fire-safety briefing</h3>${repBody(REP)}<h4>Analyst summary</h4><div class="ai" id="ai" aria-live="polite"></div><div class="ra"><button class="btn g" id="rai">Rewrite analysis</button><button class="btn g" id="rdl">Download briefing</button><button class="btn g" id="rpr">Print</button><button class="btn g" id="rask">Ask the analyst</button></div>`;
+ $("rai").onclick=()=>{AIV=(AIV+1)%2;runAnalysis()};$("rdl").onclick=dlRep;$("rpr").onclick=()=>print();
+ $("rask").onclick=()=>askAbout(`Which tests are near ${REP.o}% oxygen?`);
+ $("rp").scrollIntoView({behavior:"smooth",block:"nearest"});runAnalysis(true)};
+function dlRep(){if(!REP)return;
+ const doc=`<!DOCTYPE html><html lang="en"><meta charset="utf-8"><title>Fire-safety briefing</title><style>body{font:16px/1.55 system-ui,sans-serif;max-width:760px;margin:40px auto;padding:0 20px;color:#16141f}table{border-collapse:collapse}td,th{border-bottom:1px solid #ddd;padding:6px 12px;text-align:left}.big{font-size:26px;font-weight:800}.sc,.kp{display:none}</style><h1>Fire-safety briefing</h1>${repBody(REP)}${AIT?`<h4>Analyst summary</h4>${paras(AIT)}`:""}<p style="color:#666;font-size:13px">Oxygen Runway · data from NASA PSI-25 (BASS-II). Not an official NASA product.</p></html>`;
+ save("fire-safety-briefing.html",doc,"text/html");toast("Briefing downloaded")}
+
+/* ---------- chat (local analyst) ---------- */
+const cl=$("cl");let busy=false,hist=[],hi=-1;
+const near_=()=>cl.scrollHeight-cl.scrollTop-cl.clientHeight<90;
+const endScroll=()=>{cl.scrollTop=cl.scrollHeight};
+function addU(t){const d=document.createElement("div");d.className="m u";d.textContent=t;cl.appendChild(d);endScroll()}
+function addA(){const d=document.createElement("div");d.className="m a";d.innerHTML='<div class="who">Analyst</div><div class="mb"><span class="dots"><i></i><i></i><i></i></span></div>';cl.appendChild(d);endScroll();return d}
+function vizEl(v){const d=document.createElement("div");d.className="viz";
+ if(v.type=="bars"){const mx=Math.max(1,...v.rows.map(r=>Math.abs(r[1])));
+  d.innerHTML=v.rows.map(r=>`<div class="vb"><span>${esc(r[0])}</span><div class="vt"><div class="vf" data-w="${Math.max(2,Math.abs(r[1])/mx*100).toFixed(1)}" style="background:${r[3]=="moon"?"#ff6a3d":r[2]!=null?FC[r[2]]:"#6fd3ff"}"></div></div><span>${Analyst.n1(r[1],2)}${v.unit}</span></div>`).join("");
+  requestAnimationFrame(()=>requestAnimationFrame(()=>d.querySelectorAll(".vf").forEach(f=>f.style.width=f.dataset.w+"%")))}
+ else{d.innerHTML=`<div class="vx"><table><tr>${v.head.map(h=>`<th>${esc(h)}</th>`).join("")}</tr>${v.rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</table></div>`}
+ return d}
+function reveal(el,a,done){const mb=el.querySelector(".mb"),w=a.md.split(/(\s+)/),stick=true;let i=0;const k=Math.max(1,Math.ceil(w.length/45));
+ const fin=()=>{mb.innerHTML=md(a.md);if(a.viz)el.appendChild(vizEl(a.viz));
+  if(a.follow&&a.follow.length){const f=document.createElement("div");f.className="fu";a.follow.slice(0,3).forEach(q=>{const b=document.createElement("button");b.className="pill";b.textContent=q;b.onclick=()=>ask(q);f.appendChild(b)});el.appendChild(f)}
+  endScroll();done()};
+ if(RM)return fin();
+ (function s(){i=Math.min(w.length,i+k);let t=w.slice(0,i).join("");if((t.match(/\*\*/g)||[]).length%2)t+="**";mb.innerHTML=md(t);if(near_())endScroll();if(i<w.length)setTimeout(s,24);else fin()})()}
+function ask(q){q=(q||"").trim();if(!q||busy)return;busy=true;$("cs").disabled=true;$("cq").value="";hist.push(q);hi=hist.length;$("cc").classList.add("hide");
+ addU(q);const el=addA();
+ setTimeout(()=>{let a;try{a=Analyst.answer(q,{sel:st.sel,cab:st.cab})}catch(err){a={md:"Something went wrong while reading the table. Please rephrase and try again."}}
+  reveal(el,a,()=>{busy=false;$("cs").disabled=false;$("cq").focus({preventScroll:true})})},RM?0:260+Math.min(300,q.length*5))}
+function greet(){cl.innerHTML="";const el=addA();el.querySelector(".mb").innerHTML=md(`Hi. I’ve read all ${T.length} BASS-II tests and I run right here in your browser. Ask me about fuels, oxygen levels, CO, or any test by name (like **B13** or **T21**). If the table can’t answer, I’ll say so.`);$("cc").classList.remove("hide")}
+function askAbout(q){$("ask").scrollIntoView({behavior:"smooth"});setTimeout(()=>ask(q),RM?0:450)}
+$("cs").onclick=()=>ask($("cq").value);
+$("cq").onkeydown=e=>{if(e.key=="Enter")ask($("cq").value);else if(e.key=="ArrowUp"&&hist.length){e.preventDefault();hi=Math.max(0,hi-1);$("cq").value=hist[hi]}else if(e.key=="ArrowDown"&&hist.length){e.preventDefault();hi=Math.min(hist.length,hi+1);$("cq").value=hist[hi]||""}};
+$("clr").onclick=()=>{if(busy)return;greet()};
+["Is there any test near Moon base air?","Which fuel had the biggest CO rise?","Which tests mention blowoff or extinction?","Compare SIBAL fabric and PMMA film","Tell me about B13"].forEach(q=>{const b=document.createElement("button");b.className="pill";b.textContent=q;b.onclick=()=>ask(q);$("cc").appendChild(b)});
+addEventListener("keydown",e=>{if(e.key=="/"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();$("cq").focus();$("ask").scrollIntoView({behavior:"smooth"})}});
+
+/* ---------- nav, progress, reveal ---------- */
+(function(){const ids=["about","dial-s","explore","coverage","briefing","ask"],links=[...document.querySelectorAll("nav a")];
+ function on(id){links.forEach(a=>a.classList.toggle("on",a.dataset.s==id));const a=links.find(a=>a.dataset.s==id);if(a&&innerWidth<=640)a.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"})}
+ if("IntersectionObserver"in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)on(e.target.id)}),{rootMargin:"-35% 0px -60% 0px"});ids.forEach(i=>io.observe($(i)));
+  const rv=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");rv.unobserve(e.target)}}),{rootMargin:"0px 0px -8% 0px"});
+  document.querySelectorAll("h2,.sub,.panel,.ag>div").forEach(n=>{n.classList.add("rv");rv.observe(n)})}
+ const pr=()=>{const h=document.documentElement;$("prog").style.width=(scrollY/Math.max(1,h.scrollHeight-innerHeight)*100)+"%"};addEventListener("scroll",pr,{passive:true});pr()})();
+
+/* ---------- starfield + flame ---------- */
+(function(){const c=$("sky"),g=c.getContext("2d");let w,h,S=[],sh=[],mx=0,my=0;
+ function rs(){w=c.width=innerWidth;h=c.height=innerHeight;S=Array.from({length:Math.round(w*h/6500)},()=>({x:Math.random()*w,y:Math.random()*h,z:Math.random()*.9+.1,t:Math.random()*6}))}
+ addEventListener("resize",rs);rs();addEventListener("pointermove",e=>{mx=e.clientX/w-.5;my=e.clientY/h-.5});
+ function f(ts){g.clearRect(0,0,w,h);const sp=1+boost;boost*=.94;c.style.opacity=Math.max(.35,1-scrollY/900);
+  S.forEach(s=>{if(!RM){s.x-=s.z*.25*sp;s.y+=s.z*.08*sp;if(s.x<0)s.x=w;if(s.y>h)s.y=0}
+   const px=s.x+mx*s.z*30,py=s.y+my*s.z*30,a=.35+.65*Math.abs(Math.sin(ts/1200+s.t));g.fillStyle=`rgba(255,255,255,${a*s.z})`;
+   if(boost>1.2)g.fillRect(px,py,s.z*boost*2.2,s.z*1.2);else g.fillRect(px,py,s.z*1.8,s.z*1.8)});
+  if(!RM&&Math.random()<.008)sh.push({x:Math.random()*w,y:Math.random()*h*.5,l:0});
+  sh=sh.filter(q=>{q.x-=14;q.y+=6;q.l++;const gr=g.createLinearGradient(q.x,q.y,q.x+90,q.y-38);gr.addColorStop(0,"rgba(255,255,255,.9)");gr.addColorStop(1,"rgba(255,255,255,0)");g.strokeStyle=gr;g.lineWidth=1.5;g.beginPath();g.moveTo(q.x,q.y);g.lineTo(q.x+90,q.y-38);g.stroke();return q.l<60});
+  requestAnimationFrame(f)}requestAnimationFrame(f)})();
 (function(){const c=$("fl"),g=c.getContext("2d");let P=[];
  function f(ts){g.clearRect(0,0,440,440);const o=Math.min(1,Math.max(0,(st.cab-12)/22)),hot=Math.min(1,Math.max(0,(st.cab-21)/10)),R=34+o*50,hue=212-hot*188,fl=1+.07*Math.sin(ts/85)+.04*Math.sin(ts/37);
   for(let i=0;i<4+Math.round(o*12);i++){const a=Math.random()*6.283,r=R*fl*(.55+Math.random()*.45);P.push({x:220+Math.cos(a)*r,y:220+Math.sin(a)*r*.95,vx:Math.cos(a)*(.35+hot*.5),vy:Math.sin(a)*.35-.15-hot*.5,l:1})}
@@ -250,4 +692,9 @@ function dpick(t){pick(t.id);$("dsel").innerHTML=`<b>${t.id}</b> · ${DATA.f[t.f
   P=P.filter(p=>{p.x+=p.vx;p.y+=p.vy;p.l-=.028;if(p.l<=0)return false;const sz=(14+o*18)*(.35+p.l),gr=g.createRadialGradient(p.x,p.y,0,p.x,p.y,sz);
    gr.addColorStop(0,`hsla(${hue+(1-p.l)*14},100%,${58+p.l*16}%,${.2*p.l+.04})`);gr.addColorStop(1,`hsla(${hue},100%,50%,0)`);g.fillStyle=gr;g.fillRect(p.x-sz,p.y-sz,sz*2,sz*2);return true});
   if(P.length>600)P.splice(0,P.length-600);requestAnimationFrame(f)}requestAnimationFrame(f)})();
-</script></body></html>
+
+/* ---------- boot ---------- */
+chips();draw();rows();pick(T[0].id);greet();
+</script>
+<noscript><p style="padding:24px;color:#f6f3ff">Oxygen Runway needs JavaScript to draw the dial, charts and tables.</p></noscript>
+</body></html>
